@@ -467,6 +467,31 @@
       from { opacity:0; transform:translateY(14px); }
       to   { opacity:1; transform:translateY(0); }
     }
+
+    /* ══ FULL-HEIGHT LAYOUT — cada slide ocupa 100% vertical ══ */
+    .sb { display:flex; flex-direction:column; height:100%; gap:22px; }
+
+    /* Áreas de contenido crecen para llenar el espacio disponible */
+    .sb > .two-col,
+    .sb > .three-col,
+    .sb > .risk-cols,
+    .sb > .plan-cols  { flex:1; min-height:0; }
+    .sb > .url-grid   { flex:1; min-height:0; align-items:center; }
+    .sb > .tl-wrap    { flex:1; min-height:0; display:flex; flex-direction:column; gap:18px; }
+    .sb > .chklist    { flex:1; min-height:0; display:flex; flex-direction:column; }
+
+    /* Tarjetas ocupan todo el alto de su celda */
+    .pillar, .feat, .risk-card, .plan-card { height:100%; box-sizing:border-box; }
+
+    /* Timeline detail crece */
+    .tl-detail { flex:1; min-height:100px; display:flex; align-items:center; }
+    .tl-detail p { margin:0 !important; }
+
+    /* Checklist items se distribuyen equitativamente */
+    .chk-item { flex:1; }
+
+    /* Eliminar margin-top inline cuando estamos en sb */
+    .sb > * { margin-top: 0 !important; }
   </style>
 </head>
 <body>
@@ -521,11 +546,11 @@
          02 · DOS GRANDES CAMBIOS
     ═══════════════════════════════════════════ -->
     <section>
+     <div class="sb">
       <span class="eyebrow">El panorama completo</span>
       <h2 style="font-size:48px">Dos migraciones, <span class="grad">una sola meta</span></h2>
       <div class="divider"></div>
       <p style="font-size:17px;max-width:620px">La UADY avanza hacia una identidad digital unificada con dos procesos paralelos que impactan a toda la comunidad.</p>
-
       <div class="two-col">
         <div class="pillar blue fragment">
           <div class="pillar-icon">🎓</div>
@@ -547,6 +572,7 @@
           </div>
         </div>
       </div>
+     </div>
       <aside class="notes">Son procesos distintos pero complementarios. Virtual = plataforma de cursos. Correo = identidad digital de cada persona.</aside>
     </section>
 
@@ -554,10 +580,10 @@
          03 · UADY VIRTUAL — ¿QUÉ CAMBIA?
     ═══════════════════════════════════════════ -->
     <section>
+     <div class="sb">
       <span class="eyebrow">Nueva plataforma educativa</span>
       <h2 style="font-size:48px">UADY Virtual <span class="grad">2026</span></h2>
       <div class="divider"></div>
-
       <div class="three-col">
         <div class="feat blue fragment">
           <div class="feat-icon">🌐</div>
@@ -579,6 +605,7 @@
           <p>Los docentes deben <strong style="color:#fcd34d">migrar cursos de agosto a diciembre 2026</strong> para garantizar continuidad académica.</p>
         </div>
       </div>
+     </div>
       <aside class="notes">La IA es un punto de atracción para los docentes. Enfatizar que preparar cursos es responsabilidad de cada docente.</aside>
     </section>
 
@@ -586,10 +613,10 @@
          04 · NUEVAS URLs
     ═══════════════════════════════════════════ -->
     <section>
+     <div class="sb">
       <span class="eyebrow">Cambio de dominio</span>
       <h2 style="font-size:48px">Las nuevas <span class="grad">direcciones</span></h2>
       <div class="divider"></div>
-
       <div class="url-grid">
         <div class="url-box old">
           <div class="url-lbl">Plataformas actuales</div>
@@ -604,11 +631,11 @@
           <div class="url-status" style="color:rgba(16,185,129,.7)">Activo · Agosto 2026</div>
         </div>
       </div>
-
       <div class="url-note fragment">
         <span style="font-size:20px">⚠️</span>
         <span>En agosto 2026 las plataformas actuales pasan a <strong>modo histórico sin acceso</strong>. Todos los cursos deben estar migrados antes.</span>
       </div>
+     </div>
       <aside class="notes">No hay coexistencia paralela: en agosto, la vieja desaparece. Los cursos sin migrar quedarán inaccesibles.</aside>
     </section>
 
@@ -616,10 +643,10 @@
          05 · TIMELINE UADY VIRTUAL (interactivo)
     ═══════════════════════════════════════════ -->
     <section id="s-tl-virtual">
+     <div class="sb">
       <span class="eyebrow">Cronograma</span>
       <h2 style="font-size:48px">Línea de tiempo <span class="grad">UADY Virtual</span></h2>
       <div class="divider"></div>
-
       <div class="tl-wrap">
         <div class="tl-track" id="tl-virtual"></div>
         <div class="tl-detail" id="tl-virtual-detail">
@@ -627,6 +654,7 @@
         </div>
         <div class="tl-hint">↑ Haz clic en cualquier etapa para ver más detalles</div>
       </div>
+     </div>
       <aside class="notes">Cortes de mayo ya pasaron. Corte del 17 de junio está próximo. Agosto es la fecha crítica de producción.</aside>
     </section>
 
@@ -634,10 +662,10 @@
          06 · @correo.uady.mx
     ═══════════════════════════════════════════ -->
     <section>
+     <div class="sb">
       <span class="eyebrow">Identidad digital institucional</span>
       <h2 style="font-size:48px">Una sola <span class="grad-cyan">cuenta para todo</span></h2>
       <div class="divider divider-cyan"></div>
-
       <div class="three-col">
         <div class="feat green fragment">
           <div class="feat-icon">✅</div>
@@ -658,6 +686,7 @@
           <p style="color:rgba(252,165,165,.65)!important">El <strong style="color:#f87171">26 de octubre de 2026</strong>, las cuentas @virtual y @alumnos serán eliminadas sin posibilidad de recuperación.</p>
         </div>
       </div>
+     </div>
       <aside class="notes">Esto afecta TODO: correo, OneDrive, Teams, SharePoint. No solo el correo electrónico.</aside>
     </section>
 
@@ -665,9 +694,9 @@
          07 · COUNTDOWN + TIMELINE @correo
     ═══════════════════════════════════════════ -->
     <section id="s-countdown">
+     <div class="sb">
       <span class="eyebrow" style="color:rgba(239,68,68,.85)">⏱ Tiempo restante — 26 octubre 2026</span>
       <h2 style="font-size:44px">La cuenta <span class="grad-red">regresiva</span></h2>
-
       <div class="cd-row">
         <div class="cd-unit"><span class="cd-n" id="cd-d">—</span><span class="cd-l">días</span></div>
         <div class="cd-sep">:</div>
@@ -678,14 +707,14 @@
         <div class="cd-unit"><span class="cd-n" id="cd-s">—</span><span class="cd-l">seg</span></div>
       </div>
       <div class="cd-target">Para la eliminación de @virtual.uady.mx y @alumnos.uady.mx</div>
-
-      <div class="tl-wrap" style="margin-top:18px">
+      <div class="tl-wrap">
         <div class="tl-track" id="tl-correo"></div>
         <div class="tl-detail" id="tl-correo-detail" style="padding:16px 22px">
           <p id="tl-correo-txt">Toca cualquier etapa para ver el detalle.</p>
         </div>
         <div class="tl-hint">↑ Haz clic en cualquier etapa para ver más detalles</div>
       </div>
+     </div>
       <aside class="notes">Dejar que el contador corra unos segundos en silencio. El impacto habla solo. Luego recorrer el timeline.</aside>
     </section>
 
@@ -693,12 +722,12 @@
          08 · RIESGOS
     ═══════════════════════════════════════════ -->
     <section id="s-risk">
+     <div class="sb">
       <div class="risk-badge">
         <span>⚠</span> Nivel de riesgo: ALTO — Acción inmediata requerida
       </div>
       <h2 style="font-size:48px">Riesgos <span class="grad-red">críticos</span></h2>
       <div class="divider divider-red"></div>
-
       <div class="risk-cols">
         <div class="risk-card fragment">
           <div class="r-icon">🗑️</div>
@@ -711,7 +740,6 @@
           <p>Cursos sin migrar, materiales inaccesibles y comunicación interrumpida afectarán directamente el proceso educativo del siguiente semestre.</p>
         </div>
       </div>
-
       <div class="gauge-wrap fragment">
         <div class="gauge-head">
           <span>Nivel de urgencia acumulada</span>
@@ -721,6 +749,7 @@
           <div class="gauge-fill" id="g-fill"></div>
         </div>
       </div>
+     </div>
       <aside class="notes">Sin acción, la pérdida es 100% irreversible. El respaldo es la única forma de proteger el trabajo acumulado.</aside>
     </section>
 
@@ -728,11 +757,11 @@
          09 · PLAN DE ACOMPAÑAMIENTO
     ═══════════════════════════════════════════ -->
     <section>
+     <div class="sb">
       <span class="eyebrow" style="color:rgba(16,185,129,.85)">Nuestra respuesta</span>
       <h2 style="font-size:48px">Plan de <span class="grad-green">acompañamiento</span></h2>
       <div class="divider divider-green"></div>
       <p style="font-size:16px;max-width:580px">El Departamento de Tecnología e Innovación estará presente en cada etapa del proceso.</p>
-
       <div class="plan-cols">
         <div class="plan-card fragment">
           <div class="plan-n">01</div>
@@ -750,6 +779,7 @@
           <p>Orientar a los docentes para usar @correo.uady.mx en Office 365 a partir del próximo semestre.</p>
         </div>
       </div>
+     </div>
       <aside class="notes">Transición de problema a solución. El TI no deja solos a los docentes. Generar confianza.</aside>
     </section>
 
@@ -757,10 +787,10 @@
          10 · PRÓXIMOS PASOS
     ═══════════════════════════════════════════ -->
     <section>
+     <div class="sb">
       <span class="eyebrow">Acciones inmediatas</span>
       <h2 style="font-size:48px">Próximos <span class="grad">pasos</span></h2>
       <div class="divider"></div>
-
       <ul class="chklist">
         <li class="chk-item fragment"><span class="chk-icon">📢</span>Difundir las <strong style="color:var(--text)">fechas clave</strong> de ambas migraciones a todo el personal docente.</li>
         <li class="chk-item fragment"><span class="chk-icon">💾</span>Coordinar con TI los <strong style="color:var(--text)">respaldos de cursos Moodle</strong> antes de agosto 2026.</li>
@@ -768,6 +798,7 @@
         <li class="chk-item fragment"><span class="chk-icon">🎓</span>Verificar acceso de <strong style="color:var(--text)">alumnos de nuevo ingreso</strong> en junio 2026 e inducción a la plataforma.</li>
         <li class="chk-item fragment"><span class="chk-icon">📊</span>Monitorear el proceso de migración docente de <strong style="color:var(--text)">agosto a diciembre 2026</strong>.</li>
       </ul>
+     </div>
       <aside class="notes">Abrir espacio para preguntas antes de pasar al cierre. ¿Qué dudas hay sobre los pasos a seguir?</aside>
     </section>
 
