@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UADY · Eje 2 — Mockups de presentación</title>
+<title>UADY · Eje 2 — Investigación con impacto social</title>
+<meta name="author" content="Marco Cervera (marco.cervera@correo.uady.mx)">
+<!-- Documento de trabajo · Elaborado por Marco Cervera · marco.cervera@correo.uady.mx · versión preliminar -->
 <style>
   :root{
     /* paleta institucional UADY */
@@ -31,6 +33,7 @@
   .switch button:hover{border-color:var(--azul-3);color:var(--azul)}
   .switch button.on{background:var(--azul);border-color:var(--azul);color:#fff;box-shadow:0 4px 12px rgba(25,46,76,.3)}
 
+  .vchip{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#9A7B1E;background:#FBF3DD;border:1px solid #E8D9A8;padding:3px 8px;border-radius:5px;white-space:nowrap}
   .stage{display:none;animation:fade .4s ease}
   .stage.on{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -119,7 +122,8 @@
 <div class="switch">
   <div class="brand">
     <img src="uady-logo.png" alt="UADY">
-    <div><b>EJE 2</b><small>Investigación con impacto social · Mockups</small></div>
+    <div><b>Eje 2 · Investigación con impacto social</b><small>Corte 2025 · marco.cervera@correo.uady.mx</small></div>
+    <span class="vchip">Versión preliminar</span>
   </div>
   <button class="on" onclick="show(0,this)">① Resumen ejecutivo</button>
   <button onclick="show(1,this)">② Tablero analítico</button>
