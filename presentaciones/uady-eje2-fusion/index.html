@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UADY · Eje 2 — Fusión (subcategorías + tendencias)</title>
+<style>
+  :root{
+    --azul:#192E4C; --azul-2:#2E4A73; --azul-3:#41618C; --azul-suave:#EAEEF4;
+    --dorado:#C89211; --dorado-claro:#E0B23E; --dorado-suave:#FBF3DD;
+    --antracita:#1B2433; --gris:#4A5159; --gris-claro:#8B939C;
+    --fondo:#EFF2F5; --card:#FFFFFF; --linea:#E1E6EC;
+    --verde:#1F9D6B; --rojo:#C0392B;
+    --sombra:0 1px 3px rgba(20,30,45,.08),0 8px 26px rgba(20,30,45,.08);
+    --sans:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--fondo);color:var(--antracita);-webkit-font-smoothing:antialiased}
+
+  .switch{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--linea);
+    display:flex;align-items:center;gap:14px;padding:11px 26px;box-shadow:0 2px 10px rgba(0,0,0,.04);flex-wrap:wrap}
+  .switch .brand{display:flex;align-items:center;gap:12px;margin-right:auto}
+  .switch .brand img{height:34px}
+  .switch .brand b{font-weight:700;letter-spacing:.5px;color:var(--azul);font-size:14px}
+  .switch .brand small{color:var(--gris-claro);font-weight:500;display:block;font-size:11.5px}
+  .switch button{border:1px solid var(--linea);background:#fff;color:var(--gris);padding:8px 16px;border-radius:999px;
+    font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+  .switch button:hover{border-color:var(--azul-3);color:var(--azul)}
+  .switch button.on{background:var(--azul);border-color:var(--azul);color:#fff;box-shadow:0 4px 12px rgba(25,46,76,.3)}
+
+  .stage{display:none;animation:fade .4s ease}
+  .stage.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .screen{max-width:1180px;margin:22px auto;background:var(--card);border-radius:18px;box-shadow:var(--sombra);overflow:hidden}
+  .scr-head{background:linear-gradient(100deg,var(--azul),var(--azul-2));color:#fff;padding:16px 30px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .scr-head .eyebrow{font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dorado-claro)}
+  .scr-head h1{font-size:22px;font-weight:700;margin-top:2px}
+  .scr-head .corte{font-size:12px;color:#B9C4D4;margin-top:2px}
+  .scr-head img{height:42px;background:#fff;border-radius:8px;padding:5px 8px}
+  .scr-body{padding:18px 30px 24px}
+
+  .cmp{display:inline-flex;align-items:center;gap:9px;font-size:12px;margin-bottom:16px}
+  .cmp .cmp-lbl{color:var(--gris-claro);font-weight:600}
+  .cmp .seg{display:inline-flex;background:#fff;border:1px solid var(--linea);border-radius:999px;padding:3px;box-shadow:var(--sombra)}
+  .cmp .seg button{border:none;background:none;padding:5px 14px;border-radius:999px;font-family:inherit;font-size:12px;font-weight:700;color:var(--gris);cursor:pointer;transition:.15s}
+  .cmp .seg button:hover{color:var(--azul)}
+  .cmp .seg button.on{background:var(--azul);color:#fff}
+
+  .delta{font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;gap:3px}
+  .up{color:var(--verde)} .down{color:var(--rojo)} .flat{color:var(--gris-claro)}
+  .muted{color:var(--gris-claro)}
+
+  /* KPIs mini */
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+  .kmini{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:13px 16px;box-shadow:var(--sombra);position:relative;overflow:hidden}
+  .kmini.acc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--dorado)}
+  .kmini .kn{font-size:30px;font-weight:800;color:var(--azul);letter-spacing:-1px;line-height:1}
+  .kmini .kl{font-size:12px;color:var(--gris);font-weight:600;margin-top:5px;line-height:1.25}
+  .kmini .ks{font-size:11px;color:var(--gris-claro);margin-top:2px}
+  .kmini .delta{margin-top:6px}
+
+  /* panel + chart */
+  .panel{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:14px 18px;box-shadow:var(--sombra)}
+  .panel .ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .panel .pt{font-size:13px;font-weight:700;color:var(--azul)}
+  .chips{display:inline-flex;gap:6px;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--linea);background:#fff;color:var(--gris);
+    padding:4px 11px;border-radius:999px;font:inherit;font-size:11.5px;font-weight:600;cursor:pointer;transition:.15s}
+  .chip i{width:9px;height:9px;border-radius:3px;display:inline-block;opacity:.35}
+  .chip.on{border-color:var(--azul);color:var(--azul);background:var(--azul-suave)}
+  .chip.on i{opacity:1}
+
+  .meta-card{background:linear-gradient(135deg,#fff,var(--dorado-suave));border:1px solid var(--linea);border-radius:12px;padding:16px 18px;box-shadow:var(--sombra)}
+  .meta-card .ml{font-size:12px;font-weight:700;color:var(--azul)}
+  .meta-card .mv{font-size:30px;font-weight:800;color:var(--azul);margin-top:6px}
+  .meta-card .mg{font-size:12px;color:var(--dorado);font-weight:700;margin-top:2px}
+  .bar{height:9px;background:var(--linea);border-radius:999px;position:relative;overflow:hidden;margin-top:12px}
+  .bar > i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,var(--dorado-claro),var(--dorado))}
+  .bar .mk{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--azul)}
+
+  /* leyendas compactas */
+  .notas{margin-top:14px;background:var(--azul-suave);border-left:4px solid var(--dorado);border-radius:10px;padding:11px 16px;
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .nota{display:flex;gap:8px;align-items:flex-start}
+  .nbadge{flex-shrink:0;background:var(--azul);color:#fff;font-size:9.5px;font-weight:700;padding:3px 7px;border-radius:5px;letter-spacing:.4px}
+  .nota p{font-size:11px;line-height:1.4;color:var(--gris)}
+
+  /* CA niveles */
+  .lvl{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--linea)}
+  .lvl:last-child{border-bottom:none}
+  .lvdot{width:12px;height:12px;border-radius:4px;flex-shrink:0}
+  .lvn{font-size:18px;font-weight:800;color:var(--azul)} .lvn small{font-size:12px;color:var(--gris-claro);font-weight:600}
+  .lvl-l{font-size:11.5px;color:var(--gris);font-weight:600}
+  .lvl .delta{margin-left:auto}
+
+  .footer{max-width:1180px;margin:0 auto;padding:4px 26px 36px;font-size:11.5px;color:var(--gris-claro)}
+</style>
+</head>
+<body>
+
+<div class="switch">
+  <div class="brand">
+    <img src="uady-logo.png" alt="UADY">
+    <div><b>EJE 2 · Fusión</b><small>Subcategorías + tendencias · Corte 2025</small></div>
+  </div>
+  <button class="on" onclick="show(0,this)">① Profesorado (PTC)</button>
+  <button onclick="show(1,this)">② Cuerpos Académicos</button>
+  <button onclick="show(2,this)">③ Proyectos y estancias</button>
+</div>
+
+<!-- ===== PÁGINA 1: PTC ===== -->
+<section class="stage on" id="s0">
+  <div class="screen">
+    <div class="scr-head">
+      <div><div class="eyebrow">Eje 2 · Pantalla 1 de 3</div><h1>Profesorado de Tiempo Completo</h1><div class="corte">Cifras al cierre de 2025</div></div>
+      <img src="uady-logo.png" alt="UADY">
+    </div>
+    <div class="scr-body">
+      <div class="cmp" data-cmp><span class="cmp-lbl">Comparar 2025 con:</span>
+        <div class="seg"><button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">vs 2023</button><button class="cmp-btn" data-base="2024" onclick="setBase(2024)">vs 2024</button></div></div>
+      <div class="kpis" id="kpis1"></div>
+      <div style="display:grid;grid-template-columns:1.55fr .9fr;gap:14px">
+        <div class="panel">
+          <div class="ph"><span class="pt">Tendencia 2023–2025</span>
+            <span class="chips" id="chips1">
+              <button class="chip on" data-k="ptc" onclick="toggle1('ptc')"><i style="background:#192E4C"></i>PTC</button>
+              <button class="chip" data-k="snii" onclick="toggle1('snii')"><i style="background:#C89211"></i>SNII</button>
+              <button class="chip" data-k="prodep" onclick="toggle1('prodep')"><i style="background:#41618C"></i>PRODEP</button>
+            </span></div>
+          <div id="trend1"></div>
+        </div>
+        <div class="meta-card">
+          <div class="ml">Meta PDI 2030 · % PTC en SNII</div>
+          <div class="mv">58%</div>
+          <div class="mg">Meta 2030: 70%</div>
+          <div class="bar"><i style="width:82.8%"></i><span class="mk" style="left:100%"></span></div>
+          <div class="muted" style="font-size:10.5px;margin-top:6px">82.8% del avance hacia la meta</div>
+        </div>
+      </div>
+      <div class="notas">
+        <div class="nota"><span class="nbadge">PTC</span><p>En 2023-2025 se observa una ligera disminución en el número de PTC, en gran medida por jubilaciones y fallecimientos.</p></div>
+        <div class="nota"><span class="nbadge">PRODEP</span><p>El porcentaje de PTC con PRODEP se mantuvo estable en 74%, reflejo del compromiso sostenido con la calidad académica.</p></div>
+        <div class="nota"><span class="nbadge">SNII</span><p>El número de PTC con SNII creció 13.3% de 2023 a 2025, señal de un fortalecimiento progresivo de la investigación.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Fusión: estructura del departamento + tendencias y comparador · Paleta UADY · Eje 2</div>
+</section>
+
+<!-- ===== PÁGINA 2: CUERPOS ACADÉMICOS ===== -->
+<section class="stage" id="s1">
+  <div class="screen">
+    <div class="scr-head">
+      <div><div class="eyebrow">Eje 2 · Pantalla 2 de 3</div><h1>Cuerpos Académicos</h1><div class="corte">Composición y evolución · Corte 2025</div></div>
+      <img src="uady-logo.png" alt="UADY">
+    </div>
+    <div class="scr-body">
+      <div class="cmp" data-cmp><span class="cmp-lbl">Comparar 2025 con:</span>
+        <div class="seg"><button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">vs 2023</button><button class="cmp-btn" data-base="2024" onclick="setBase(2024)">vs 2024</button></div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.2fr;gap:18px;align-items:center">
+        <div style="display:flex;flex-direction:column;align-items:center" id="p2donut"></div>
+        <div id="p2cards"></div>
+      </div>
+      <div class="panel" style="margin-top:14px">
+        <div class="ph"><span class="pt">Evolución por nivel 2023 → 2025</span><span class="muted" style="font-size:11px">el total se mantiene ~79; los niveles "gradúan" hacia Consolidado</span></div>
+        <div id="trend2"></div>
+        <div class="chips" style="margin-top:4px">
+          <span class="chip on" style="cursor:default"><i style="background:#192E4C"></i>Consolidado</span>
+          <span class="chip on" style="cursor:default"><i style="background:#C89211"></i>En consolidación</span>
+          <span class="chip on" style="cursor:default"><i style="background:#8B939C"></i>En formación</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">El delta de cada nivel compara contra el año seleccionado · Eje 2</div>
+</section>
+
+<!-- ===== PÁGINA 3: PROYECTOS, PUBLICACIONES Y ESTANCIAS ===== -->
+<section class="stage" id="s2">
+  <div class="screen">
+    <div class="scr-head">
+      <div><div class="eyebrow">Eje 2 · Pantalla 3 de 3</div><h1>Proyectos, Publicaciones y Estancias</h1><div class="corte">Cifras al cierre de 2025</div></div>
+      <img src="uady-logo.png" alt="UADY">
+    </div>
+    <div class="scr-body">
+      <div class="cmp" data-cmp><span class="cmp-lbl">Comparar 2025 con:</span>
+        <div class="seg"><button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">vs 2023</button><button class="cmp-btn" data-base="2024" onclick="setBase(2024)">vs 2024</button></div></div>
+      <div class="kpis" id="kpis3"></div>
+      <div class="panel">
+        <div class="ph"><span class="pt">Tendencia 2023–2025</span>
+          <span class="chips" id="chips3">
+            <button class="chip on" data-k="proy" onclick="set3('proy')"><i style="background:#C89211"></i>Proyectos (con meta)</button>
+            <button class="chip" data-k="wos" onclick="set3('wos')"><i style="background:#192E4C"></i>Web of Science</button>
+            <button class="chip" data-k="posdoc" onclick="set3('posdoc')"><i style="background:#41618C"></i>Estancias</button>
+          </span></div>
+        <div id="trend3"></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Una tendencia a la vez (escalas distintas) · Proyectos muestra trayectoria a la Meta PDI 2030 · Eje 2</div>
+</section>
+
+<script>
+const AZUL='#192E4C', DORADO='#C89211', AZUL3='#41618C', GRIS='#8B939C';
+const D={
+  ptc:[685,669,649], prodepN:[500,485,479], ptcSnii:[330,359,374],
+  caCons:[36,38,52], caEnCons:[37,38,25], caForm:[5,5,2], caTotal:[78,81,79],
+  proy:[93,80,86], wos:[276,298,354], posdoc:[45,58,68],
+  metaProy:{2026:87,2027:90,2028:90,2029:92,2030:95}
+};
+let BASE=2023; const CUR=2025; const yIdx={2023:0,2024:1,2025:2};
+function pctChange(arr){const a=arr[yIdx[CUR]],b=arr[yIdx[BASE]];return (a-b)/b*100;}
+function deltaHTML(arr){const v=pctChange(arr),up=v>=0,a=up?'▲':'▼',s=up?'+':'−';
+  return `<span class="delta ${v>0?'up':v<0?'down':'flat'}">${a} ${s}${Math.abs(v).toFixed(1)}% vs ${BASE}</span>`;}
+
+/* ---- line chart ---- */
+function lineChart(series,opts){
+  const w=opts.w||900,h=opts.h||200,padL=40,padR=18,padT=14,padB=24,labels=opts.labels;
+  const vis=series.filter(s=>s.data.length);const allV=vis.flatMap(s=>s.data.map(d=>d.v));
+  if(!allV.length) return '<div class="muted" style="padding:60px;text-align:center">Selecciona un indicador</div>';
+  let mn=Math.min(...allV),mx=Math.max(...allV);const r=(mx-mn)||1;mn=Math.max(0,mn-r*.18);mx=mx+r*.18;
+  const X=i=>padL+i/(labels.length-1)*(w-padL-padR), Y=v=>h-padB-((v-mn)/(mx-mn))*(h-padT-padB);
+  let g='';
+  for(let k=0;k<=3;k++){const yy=padT+k/3*(h-padT-padB);g+=`<line x1="${padL}" y1="${yy}" x2="${w-padR}" y2="${yy}" stroke="#E3E8ED"/>`;}
+  labels.forEach((lb,i)=>g+=`<text x="${X(i)}" y="${h-7}" font-size="10.5" fill="#8B939C" text-anchor="middle">${lb}</text>`);
+  vis.forEach(s=>{
+    const pts=s.data.map(d=>[X(d.i),Y(d.v)]);
+    const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+    g+=`<path d="${path}" fill="none" stroke="${s.color}" stroke-width="2.6" ${s.dash?'stroke-dasharray="5 4"':''} stroke-linecap="round" stroke-linejoin="round"/>`;
+    pts.forEach(p=>g+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="${s.color}"/>`);
+    const lp=pts[pts.length-1];
+    if(s.tag)g+=`<text x="${(lp[0]-3).toFixed(1)}" y="${(lp[1]-8).toFixed(1)}" font-size="10.5" font-weight="700" fill="${s.color}" text-anchor="end">${s.tag}</text>`;
+  });
+  return `<svg width="100%" viewBox="0 0 ${w} ${h}" style="display:block">${g}</svg>`;
+}
+/* ---- donut ---- */
+function donut(parts,size=170){
+  const tot=parts.reduce((a,p)=>a+p.v,0);let acc=0;const R=size/2,r=R*.6;let g='';
+  parts.forEach(p=>{const a0=acc/tot*2*Math.PI-Math.PI/2;acc+=p.v;const a1=acc/tot*2*Math.PI-Math.PI/2;
+    const lg=(a1-a0)>Math.PI?1:0;
+    const x0=R+R*Math.cos(a0),y0=R+R*Math.sin(a0),x1=R+R*Math.cos(a1),y1=R+R*Math.sin(a1);
+    const xi1=R+r*Math.cos(a1),yi1=R+r*Math.sin(a1),xi0=R+r*Math.cos(a0),yi0=R+r*Math.sin(a0);
+    g+=`<path d="M${x0} ${y0} A${R} ${R} 0 ${lg} 1 ${x1} ${y1} L${xi1} ${yi1} A${r} ${r} 0 ${lg} 0 ${xi0} ${yi0} Z" fill="${p.c}"/>`;});
+  g+=`<text x="${R}" y="${R-3}" text-anchor="middle" font-size="34" font-weight="800" fill="${AZUL}">${tot}</text>`;
+  g+=`<text x="${R}" y="${R+16}" text-anchor="middle" font-size="11" fill="#8B939C">cuerpos acad.</text>`;
+  return `<svg width="${size}" height="${size}">${g}</svg>`;
+}
+/* ---- stacked bars ---- */
+function stacked(){
+  const w=900,h=175,padL=40,padB=24;const tot=D.caTotal.map((_,i)=>D.caCons[i]+D.caEnCons[i]+D.caForm[i]);
+  const mx=Math.max(...tot)*1.18;const bw=(w-padL)/3*.46;let g='';
+  [2023,2024,2025].forEach((yr,i)=>{
+    const x=padL+i*((w-padL)/3)+((w-padL)/3-bw)/2;let yacc=h-padB;
+    [[D.caForm[i],GRIS],[D.caEnCons[i],DORADO],[D.caCons[i],AZUL]].forEach(([v,c])=>{
+      const bh=v/mx*(h-padB-16);yacc-=bh;g+=`<rect x="${x}" y="${yacc}" width="${bw}" height="${bh}" fill="${c}"/>`;});
+    g+=`<text x="${x+bw/2}" y="${h-7}" font-size="11" fill="#8B939C" text-anchor="middle">${yr}</text>`;
+    g+=`<text x="${x+bw/2}" y="${yacc-6}" font-size="12" font-weight="700" text-anchor="middle" fill="${AZUL}">${tot[i]}</text>`;});
+  return `<svg width="100%" viewBox="0 0 ${w} ${h}" style="display:block">${g}</svg>`;
+}
+
+/* ---- KPIs ---- */
+function kpiMini(num,lbl,share,arr,acc){
+  return `<div class="kmini ${acc?'acc':''}"><div class="kn">${num}</div><div class="kl">${lbl}</div>`+
+    `${share?`<div class="ks">${share}</div>`:''}<div>${deltaHTML(arr)}</div></div>`;
+}
+function renderK1(){document.getElementById('kpis1').innerHTML=
+  kpiMini('649','Profesorado de Tiempo Completo','',D.ptc,true)+
+  kpiMini('479','PTC con Perfil PRODEP','74% del PTC',D.prodepN)+
+  kpiMini('374','PTC con reconocimiento SNII','58% del PTC',D.ptcSnii);}
+function renderK3(){document.getElementById('kpis3').innerHTML=
+  kpiMini('86','Proyectos con impacto social','',D.proy,true)+
+  kpiMini('354','Producción Web of Science','',D.wos)+
+  kpiMini('68','Estancias posdoctorales','',D.posdoc);}
+function renderK2(){
+  document.getElementById('p2cards').innerHTML=
+   [['Cuerpo Académico Consolidado (CAC)','52','66%',D.caCons,AZUL],
+    ['Cuerpo Académico en Consolidación (CAEC)','25','32%',D.caEnCons,DORADO],
+    ['Cuerpo Académico en Formación (CAEF)','2','2%',D.caForm,GRIS]]
+   .map(([t,n,p,arr,c])=>`<div class="lvl"><span class="lvdot" style="background:${c}"></span>`+
+     `<div><div class="lvn">${n} <small>${p}</small></div><div class="lvl-l">${t}</div></div>${deltaHTML(arr)}</div>`).join('');
+}
+
+/* ---- trend P1 (overlay) ---- */
+const T1={ptc:{arr:D.ptc,color:AZUL,tag:'PTC'},snii:{arr:D.ptcSnii,color:DORADO,tag:'SNII'},prodep:{arr:D.prodepN,color:AZUL3,tag:'PRODEP'}};
+let sel1={ptc:true,snii:false,prodep:false};
+function renderTrend1(){
+  const series=Object.keys(sel1).filter(k=>sel1[k]).map(k=>({data:T1[k].arr.map((v,i)=>({i,v})),color:T1[k].color,tag:T1[k].tag}));
+  document.getElementById('trend1').innerHTML=lineChart(series,{labels:[2023,2024,2025]});
+  document.querySelectorAll('#chips1 .chip').forEach(c=>c.classList.toggle('on',sel1[c.dataset.k]));
+}
+function toggle1(k){sel1[k]=!sel1[k];if(!Object.keys(sel1).some(x=>sel1[x]))sel1[k]=true;renderTrend1();}
+
+/* ---- trend P3 (una a la vez) ---- */
+const T3={proy:{arr:D.proy,color:DORADO,tag:'Proyectos',meta:D.metaProy},wos:{arr:D.wos,color:AZUL,tag:'WoS'},posdoc:{arr:D.posdoc,color:AZUL3,tag:'Estancias'}};
+let sel3='proy';
+function renderTrend3(){
+  const t=T3[sel3];const series=[{data:t.arr.map((v,i)=>({i,v})),color:t.color,tag:t.tag}];
+  let labels=[2023,2024,2025];
+  if(t.meta){labels=[2023,2024,2025,2026,2027,2028,2029,2030];
+    const md=[{i:2,v:t.arr[2]}];[2026,2027,2028,2029,2030].forEach((y,j)=>md.push({i:3+j,v:t.meta[y]}));
+    series.push({data:md,color:'#9AA8BC',dash:true,tag:'Meta 2030'});}
+  document.getElementById('trend3').innerHTML=lineChart(series,{labels,w:1040,h:215});
+  document.querySelectorAll('#chips3 .chip').forEach(c=>c.classList.toggle('on',c.dataset.k===sel3));
+}
+function set3(k){sel3=k;renderTrend3();}
+
+/* ---- comparador ---- */
+function setBase(y){BASE=y;document.querySelectorAll('.cmp-btn').forEach(b=>b.classList.toggle('on',+b.dataset.base===y));
+  renderK1();renderK2();renderK3();}
+
+/* ---- init estático ---- */
+document.getElementById('p2donut').innerHTML=donut([{v:52,c:AZUL},{v:25,c:DORADO},{v:2,c:GRIS}])+
+  `<div class="muted" style="font-size:11px;margin-top:6px">Composición 2025</div>`;
+document.getElementById('trend2').innerHTML=stacked();
+renderTrend1(); renderTrend3(); setBase(2023);
+
+function show(i,btn){
+  document.querySelectorAll('.stage').forEach((s,k)=>s.classList.toggle('on',k===i));
+  document.querySelectorAll('.switch button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
