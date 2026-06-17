@@ -56,7 +56,15 @@
   .muted{color:var(--gris-claro)}
 
   /* Pantalla 1 — PTC */
-  .p1{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:stretch;flex:1}
+  .p1{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:stretch}
+
+  /* leyendas / notas para la dirección */
+  .notas{margin-top:24px;background:var(--azul-suave);border-left:4px solid var(--dorado);border-radius:12px;padding:16px 22px}
+  .notas h4{font-size:11.5px;text-transform:uppercase;letter-spacing:1.2px;color:var(--azul);margin-bottom:10px;font-weight:700}
+  .nota{display:flex;gap:12px;align-items:flex-start;padding:9px 0}
+  .nota+.nota{border-top:1px solid rgba(25,46,76,.08)}
+  .nbadge{flex-shrink:0;background:var(--azul);color:#fff;font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:6px;letter-spacing:.5px;min-width:64px;text-align:center}
+  .nota p{font-size:13px;line-height:1.55;color:var(--gris)}
   .hero{grid-row:span 1;background:linear-gradient(135deg,var(--azul),var(--azul-2));color:#fff;border-radius:16px;
     padding:30px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
   .hero .big{font-size:74px;font-weight:800;letter-spacing:-3px;line-height:1}
@@ -125,6 +133,16 @@
           <button class="cmp-btn" data-base="2024" onclick="setBase(2024)">vs 2024</button>
         </div></div>
       <div class="p1" id="p1"></div>
+
+      <div class="notas">
+        <h4>📌 Notas para la dirección — periodo 2023-2025</h4>
+        <div class="nota"><span class="nbadge">PTC</span>
+          <p>En el periodo 2023 - 2025, se observa una ligera disminución en el número de PTC. Esta tendencia responde en gran medida, a jubilaciones y fallecimientos.</p></div>
+        <div class="nota"><span class="nbadge">PRODEP</span>
+          <p>Los datos muestran que durante el periodo de 2023 a 2025, el porcentaje respecto al total de PTC con PRODEP se ha mantenido estable con el 74%. Esto es un reflejo del compromiso sostenido de la Universidad con la calidad académica del cuerpo docente.</p></div>
+        <div class="nota"><span class="nbadge">SNII</span>
+          <p>De 2023 a 2025, se presentó un crecimiento en el número de PTC con SNII, con un porcentaje de incremento del 13.3%. Estas cifras reflejan que existe un fortalecimiento progresivo de la investigación institucional y un compromiso creciente con la calidad y la excelencia académica.</p></div>
+      </div>
     </div>
   </div>
   <div class="footer">Plantilla basada en la propuesta del departamento · Paleta institucional UADY · Eje 2</div>
