@@ -399,11 +399,13 @@ function renderLectura(){
   const snii=pctChange(D.ptcSnii),wos=pctChange(D.wos),ca=pctChange(D.caCons),ptc=pctChange(D.ptc);
   const sniiBase=D.ptcSnii[yIdx[BASE]];
   document.getElementById('lectura1').innerHTML=
-    `La capacidad de investigación de la Universidad se fortalece de forma sostenida: el número de `+
-    `investigadores en el <b>SNII creció ${snii.toFixed(0)}%</b> (de ${sniiBase} a 374) y ya representan el `+
-    `<b>58% del profesorado de tiempo completo</b>; la <b>producción científica en Web of Science aumentó ${wos.toFixed(0)}%</b> `+
+    `<b>Entre ${BASE} y 2025</b>, la capacidad de investigación de la Universidad se fortaleció de forma sostenida: `+
+    `el número de investigadores en el <b>SNII creció ${snii.toFixed(0)}%</b> (de ${sniiBase} en ${BASE} a 374 en 2025) `+
+    `y al cierre de 2025 ya representan el <b>58% del profesorado de tiempo completo</b>; `+
+    `la <b>producción científica en Web of Science aumentó ${wos.toFixed(0)}%</b> `+
     `y los <b>cuerpos académicos consolidados crecieron ${ca.toFixed(0)}%</b>.`;
   document.getElementById('pills1').innerHTML=
+    `<span class="pill" style="background:var(--azul);color:#fff;border-color:var(--azul)">${BASE} → 2025</span>`+
     `<span class="pill">↑ SNII +${snii.toFixed(0)}%</span><span class="pill">↑ WoS +${wos.toFixed(0)}%</span>`+
     `<span class="pill">↑ CA Consolidados +${ca.toFixed(0)}%</span><span class="pill">↓ PTC ${ptc.toFixed(0)}%</span>`;
 }
