@@ -51,6 +51,18 @@
   .kpi .val{font-size:34px;font-weight:800;letter-spacing:-1px;margin-top:6px;color:var(--azul)}
   .kpi .delta{font-size:12.5px;font-weight:700;margin-top:2px;display:inline-flex;align-items:center;gap:4px}
   .up{color:var(--verde)} .down{color:var(--rojo)} .flat{color:var(--gris-claro)}
+
+  /* ---------- comparador (segmented) ---------- */
+  .cmp{display:inline-flex;align-items:center;gap:10px;margin-top:14px;font-size:12.5px}
+  .cmp .cmp-lbl{color:var(--gris-claro);font-weight:600}
+  .cmp .seg{display:inline-flex;background:#fff;border:1px solid var(--linea);border-radius:999px;padding:3px;box-shadow:var(--sombra)}
+  .cmp .seg button{border:none;background:none;padding:6px 16px;border-radius:999px;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--gris);cursor:pointer;transition:.15s}
+  .cmp .seg button:hover{color:var(--azul)}
+  .cmp .seg button.on{background:var(--azul);color:#fff}
+  .dark .cmp .cmp-lbl{color:#94A0B2}
+  .dark .cmp .seg{background:#16243B;border-color:#243650;box-shadow:none}
+  .dark .cmp .seg button{color:#94A0B2}
+  .dark .cmp .seg button.on{background:var(--dorado);color:#0E1A2E}
   .kpi .spark{position:absolute;right:14px;bottom:12px;opacity:.9}
   .kpi.accent::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--dorado)}
 
@@ -126,7 +138,13 @@
       <img class="logo" src="uady-logo.png" alt="UADY">
     </div>
 
-    <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:20px" id="kpis1"></div>
+    <div class="cmp"><span class="cmp-lbl">Comparar año actual (2025) con:</span>
+      <div class="seg">
+        <button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">vs 2023</button>
+        <button class="cmp-btn" data-base="2024" onclick="setBase(2024)">vs 2024</button>
+      </div></div>
+
+    <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:16px" id="kpis1"></div>
 
     <div class="grid" style="grid-template-columns:1.15fr .85fr;margin-top:18px">
       <div class="panel">
@@ -143,11 +161,8 @@
 
     <div class="msg" style="margin-top:18px">
       <h3>Lectura ejecutiva</h3>
-      <p>La capacidad de investigación de la Universidad se fortalece de forma sostenida: el número de
-      investigadores en el <b>SNII creció 13%</b> (de 330 a 374) y ya representan el <b>58% del profesorado de tiempo completo</b>;
-      la <b>producción científica en Web of Science aumentó 28%</b> y los <b>cuerpos académicos consolidados crecieron 44%</b>.</p>
-      <span class="pill">↑ SNII +13%</span><span class="pill">↑ WoS +28%</span>
-      <span class="pill">↑ CA Consolidados +44%</span><span class="pill">↓ PTC −5%</span>
+      <p id="lectura1"></p>
+      <div id="pills1" style="margin-top:2px"></div>
     </div>
   </div>
   <div class="footer">Mockup conceptual · Datos reales del Eje 2 · Colores institucionales UADY (azul #192E4C · dorado #C89211)</div>
@@ -165,7 +180,13 @@
       <img class="logo" src="uady-logo.png" alt="UADY">
     </div>
 
-    <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:18px" id="kpis2"></div>
+    <div class="cmp"><span class="cmp-lbl">Comparar año actual (2025) con:</span>
+      <div class="seg">
+        <button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">vs 2023</button>
+        <button class="cmp-btn" data-base="2024" onclick="setBase(2024)">vs 2024</button>
+      </div></div>
+
+    <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:16px" id="kpis2"></div>
 
     <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:18px">
       <div class="panel">
@@ -211,18 +232,24 @@
     <h1>La investigación de la UADY,<br>con más impacto cada año</h1>
     <p class="sub">Informe ejecutivo al Rector · Periodo 2023–2025 · Meta al 2030</p>
 
-    <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:24px">
+    <div class="cmp"><span class="cmp-lbl">Comparar año actual (2025) con:</span>
+      <div class="seg">
+        <button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">vs 2023</button>
+        <button class="cmp-btn" data-base="2024" onclick="setBase(2024)">vs 2024</button>
+      </div></div>
+
+    <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:20px">
       <div class="d-card">
         <div class="d-lbl">Investigadores SNII</div>
         <div class="d-hero">374</div>
-        <div style="color:var(--verde);font-weight:700;margin-top:6px">▲ +13.3% &nbsp;<span style="color:#7a849a">vs 2023</span></div>
+        <div id="c3d-snii" style="font-weight:700;margin-top:6px"></div>
         <div class="d-divider" style="margin-top:16px"></div>
         <div id="spark3a" style="margin-top:8px"></div>
       </div>
       <div class="d-card">
         <div class="d-lbl">Producción Web of Science</div>
         <div class="d-hero">354</div>
-        <div style="color:var(--verde);font-weight:700;margin-top:6px">▲ +28.3% &nbsp;<span style="color:#7a849a">vs 2023</span></div>
+        <div id="c3d-wos" style="font-weight:700;margin-top:6px"></div>
         <div class="d-divider" style="margin-top:16px"></div>
         <div id="spark3b" style="margin-top:8px"></div>
       </div>
@@ -247,9 +274,9 @@
           Más investigadores reconocidos, más ciencia publicada y cuerpos académicos
           <span class="d-accent">más sólidos</span>.</p>
         <div style="display:flex;gap:26px;margin-top:22px">
-          <div><div class="d-hero" style="font-size:38px">+44%</div><div style="color:#7a849a;font-size:12px">CA Consolidados</div></div>
-          <div><div class="d-hero" style="font-size:38px">+51%</div><div style="color:#7a849a;font-size:12px">Estancias posdoc</div></div>
-          <div><div class="d-hero" style="font-size:38px;color:var(--dorado-claro)">−5%</div><div style="color:#7a849a;font-size:12px">PTC total</div></div>
+          <div><div class="d-hero" id="c3-ca" style="font-size:38px">+44%</div><div style="color:#7a849a;font-size:12px">CA Consolidados</div></div>
+          <div><div class="d-hero" id="c3-posdoc" style="font-size:38px">+51%</div><div style="color:#7a849a;font-size:12px">Estancias posdoc</div></div>
+          <div><div class="d-hero" id="c3-ptc" style="font-size:38px;color:var(--dorado-claro)">−5%</div><div style="color:#7a849a;font-size:12px">PTC total</div></div>
         </div>
       </div>
     </div>
@@ -328,25 +355,79 @@ function donut(parts,size=150){
   return `<svg width="${size}" height="${size}">${g}</svg>`;
 }
 
-/* ---------- KPI builder ---------- */
-function kpiCard({lbl,val,sub,vals,cls='',accent=false,sparkColor}){
-  const sp=vals?`<div class="spark">${spark(vals,110,34,sparkColor||DORADO)}</div>`:'';
-  return `<div class="kpi ${accent?'accent':''}">
-    <div class="lbl">${lbl}</div><div class="val">${val}</div>
-    <div class="delta ${cls}">${sub}</div>${sp}</div>`;
+/* ---------- comparador dinámico ---------- */
+let BASE=2023;                       // año base de comparación (2023 ó 2024)
+const CUR=2025;                      // año actual (último dato real)
+const yIdx={2023:0,2024:1,2025:2};
+
+// % de cambio para conteos; diferencia en puntos para porcentajes
+function pctChange(arr){const a=arr[yIdx[CUR]],b=arr[yIdx[BASE]];return (a-b)/b*100;}
+function ppChange(arr){const a=arr[yIdx[CUR]],b=arr[yIdx[BASE]];return (a-b)*100;}
+function calcDelta(arr,type){
+  const v = type==='pct' ? ppChange(arr) : pctChange(arr);
+  const up=v>=0, arrow=up?'▲':'▼', sign=up?'+':'−';
+  const unidad = type==='pct' ? ' pp' : '%';
+  return {txt:`${arrow} ${sign}${Math.abs(v).toFixed(1)}${unidad} vs ${BASE}`, cls:v>0?'up':v<0?'down':'flat'};
 }
+
 const KPIS=[
-  {lbl:'Investigadores en el SNII',val:'374',sub:'▲ +13.3% vs 2023',vals:D.ptcSnii,cls:'up',accent:true},
-  {lbl:'% del PTC en el SNII',val:'58%',sub:'Meta 2030: 70%',vals:D.pctSnii.map(v=>v*100),cls:'flat'},
-  {lbl:'Producción Web of Science',val:'354',sub:'▲ +28.3% vs 2023',vals:D.wos,cls:'up'},
-  {lbl:'Cuerpos Acad. Consolidados',val:'52',sub:'▲ +44.4% vs 2023',vals:D.caCons,cls:'up'},
-  {lbl:'Estancias posdoctorales',val:'68',sub:'▲ +51.1% vs 2023',vals:D.posdoc,cls:'up'},
-  {lbl:'Profesorado de Tiempo Completo',val:'649',sub:'▼ −5.3% vs 2023',vals:D.ptc,cls:'down',accent:true,sparkColor:'#C0392B'},
-  {lbl:'Proyectos con impacto social',val:'86',sub:'Meta 2030: 95',vals:D.proy,cls:'flat'},
-  {lbl:'PTC con Perfil PRODEP',val:'74%',sub:'estable',vals:[74,72,74],cls:'flat',sparkColor:GRIS},
+  {lbl:'Investigadores en el SNII',val:'374',arr:D.ptcSnii,type:'count',accent:true},
+  {lbl:'% del PTC en el SNII',val:'58%',arr:D.pctSnii,type:'pct'},
+  {lbl:'Producción Web of Science',val:'354',arr:D.wos,type:'count'},
+  {lbl:'Cuerpos Acad. Consolidados',val:'52',arr:D.caCons,type:'count'},
+  {lbl:'Estancias posdoctorales',val:'68',arr:D.posdoc,type:'count'},
+  {lbl:'Profesorado de Tiempo Completo',val:'649',arr:D.ptc,type:'count',accent:true},
+  {lbl:'Proyectos con impacto social',val:'86',arr:D.proy,type:'count'},
+  {lbl:'PTC con Perfil PRODEP',val:'74%',arr:[.73,.724,.74],type:'pct'},
 ];
-document.getElementById('kpis1').innerHTML=KPIS.slice(0,8).map(kpiCard).join('');
-document.getElementById('kpis2').innerHTML=KPIS.slice(0,8).map(kpiCard).join('');
+function kpiCard(k){
+  const d=calcDelta(k.arr,k.type);
+  const vals=k.arr.map(v=>k.type==='pct'?v*100:v);
+  return `<div class="kpi ${k.accent?'accent':''}">
+    <div class="lbl">${k.lbl}</div><div class="val">${k.val}</div>
+    <div class="delta ${d.cls}">${d.txt}</div>
+    <div class="spark">${spark(vals,110,34,DORADO)}</div></div>`;
+}
+function renderKPIs(){
+  const html=KPIS.map(kpiCard).join('');
+  document.getElementById('kpis1').innerHTML=html;
+  document.getElementById('kpis2').innerHTML=html;
+}
+
+/* ---------- lectura ejecutiva (concepto 1) ---------- */
+function renderLectura(){
+  const snii=pctChange(D.ptcSnii),wos=pctChange(D.wos),ca=pctChange(D.caCons),ptc=pctChange(D.ptc);
+  const sniiBase=D.ptcSnii[yIdx[BASE]];
+  document.getElementById('lectura1').innerHTML=
+    `La capacidad de investigación de la Universidad se fortalece de forma sostenida: el número de `+
+    `investigadores en el <b>SNII creció ${snii.toFixed(0)}%</b> (de ${sniiBase} a 374) y ya representan el `+
+    `<b>58% del profesorado de tiempo completo</b>; la <b>producción científica en Web of Science aumentó ${wos.toFixed(0)}%</b> `+
+    `y los <b>cuerpos académicos consolidados crecieron ${ca.toFixed(0)}%</b>.`;
+  document.getElementById('pills1').innerHTML=
+    `<span class="pill">↑ SNII +${snii.toFixed(0)}%</span><span class="pill">↑ WoS +${wos.toFixed(0)}%</span>`+
+    `<span class="pill">↑ CA Consolidados +${ca.toFixed(0)}%</span><span class="pill">↓ PTC ${ptc.toFixed(0)}%</span>`;
+}
+
+/* ---------- deltas concepto 3 ---------- */
+function deltaColored(p){
+  const up=p>=0,arrow=up?'▲':'▼',sign=up?'+':'−';
+  return `<span style="color:${up?'var(--verde)':'var(--rojo)'}">${arrow} ${sign}${Math.abs(p).toFixed(1)}%</span> &nbsp;<span style="color:#7a849a">vs ${BASE}</span>`;
+}
+function renderC3(){
+  document.getElementById('c3d-snii').innerHTML=deltaColored(pctChange(D.ptcSnii));
+  document.getElementById('c3d-wos').innerHTML=deltaColored(pctChange(D.wos));
+  document.getElementById('c3-ca').textContent='+'+pctChange(D.caCons).toFixed(0)+'%';
+  document.getElementById('c3-posdoc').textContent='+'+pctChange(D.posdoc).toFixed(0)+'%';
+  const p=pctChange(D.ptc);
+  document.getElementById('c3-ptc').textContent=(p>=0?'+':'−')+Math.abs(p).toFixed(0)+'%';
+}
+
+/* ---------- cambiar base ---------- */
+function setBase(y){
+  BASE=y;
+  document.querySelectorAll('.cmp-btn').forEach(b=>b.classList.toggle('on',+b.dataset.base===y));
+  renderKPIs(); renderLectura(); renderC3();
+}
 
 /* ---------- meta progress (concepto 1) ---------- */
 function metaBar(name,actual,meta,base,fmtv){
@@ -425,6 +506,9 @@ document.getElementById('line3').innerHTML=lineChart([
   {data:[{i:0,v:93},{i:1,v:80},{i:2,v:86}],color:'#E0B23E',tag:'Real'},
   {data:[{i:2,v:86},{i:3,v:87},{i:4,v:90},{i:5,v:90},{i:6,v:92},{i:7,v:95}],color:'#5C7CA8',tag:'Meta',dash:true}
 ],{labels:[2023,2024,2025,2026,2027,2028,2029,2030],w:500,h:210,dark:true});
+
+/* ---------- init: poblar KPIs, lectura y deltas ---------- */
+setBase(2023);
 
 /* ---------- switcher ---------- */
 function show(i,btn){
