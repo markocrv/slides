@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UADY · Eje 2 — Mockups de presentación</title>
+<style>
+  :root{
+    /* paleta institucional UADY */
+    --azul:#192E4C; --azul-2:#2E4A73; --azul-3:#41618C; --azul-suave:#EAEEF4;
+    --dorado:#C89211; --dorado-claro:#E0B23E; --dorado-suave:#FBF3DD;
+    --antracita:#1B2433; --gris:#4A5159; --gris-claro:#8B939C;
+    --fondo:#EFF2F5; --card:#FFFFFF; --linea:#E1E6EC;
+    --verde:#1F9D6B; --rojo:#C0392B;
+    --sombra:0 1px 3px rgba(20,30,45,.08),0 6px 20px rgba(20,30,45,.07);
+    --radio:14px;
+    --sans:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--fondo);color:var(--antracita);-webkit-font-smoothing:antialiased}
+
+  /* ---------- switcher ---------- */
+  .switch{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--linea);
+    display:flex;align-items:center;gap:14px;padding:11px 26px;box-shadow:0 2px 10px rgba(0,0,0,.04);flex-wrap:wrap}
+  .switch .brand{display:flex;align-items:center;gap:12px;margin-right:auto}
+  .switch .brand img{height:34px}
+  .switch .brand b{font-weight:700;letter-spacing:.5px;color:var(--azul);font-size:14px}
+  .switch .brand small{color:var(--gris-claro);font-weight:500;letter-spacing:0;display:block;font-size:11.5px}
+  .switch button{border:1px solid var(--linea);background:#fff;color:var(--gris);padding:8px 16px;border-radius:999px;
+    font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+  .switch button:hover{border-color:var(--azul-3);color:var(--azul)}
+  .switch button.on{background:var(--azul);border-color:var(--azul);color:#fff;box-shadow:0 4px 12px rgba(25,46,76,.3)}
+
+  .stage{display:none;animation:fade .4s ease}
+  .stage.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:26px}
+  .hd{display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .hd .logo{height:62px}
+  .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--azul);background:var(--azul-suave);padding:5px 12px;border-radius:6px}
+  h1{font-size:27px;font-weight:700;margin:10px 0 4px;color:var(--azul)}
+  .sub{color:var(--gris);font-size:14px}
+  .muted{color:var(--gris-claro)}
+  .grid{display:grid;gap:18px}
+
+  /* ---------- KPI cards ---------- */
+  .kpi{background:var(--card);border-radius:var(--radio);padding:18px 20px;box-shadow:var(--sombra);position:relative;overflow:hidden}
+  .kpi .lbl{font-size:12.5px;color:var(--gris);font-weight:600;line-height:1.3;min-height:32px}
+  .kpi .val{font-size:34px;font-weight:800;letter-spacing:-1px;margin-top:6px;color:var(--azul)}
+  .kpi .delta{font-size:12.5px;font-weight:700;margin-top:2px;display:inline-flex;align-items:center;gap:4px}
+  .up{color:var(--verde)} .down{color:var(--rojo)} .flat{color:var(--gris-claro)}
+  .kpi .spark{position:absolute;right:14px;bottom:12px;opacity:.9}
+  .kpi.accent::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--dorado)}
+
+  .panel{background:var(--card);border-radius:var(--radio);padding:20px 22px;box-shadow:var(--sombra)}
+  .panel h3{font-size:15px;font-weight:700;margin-bottom:2px;color:var(--azul)}
+  .panel .h-sub{font-size:12px;color:var(--gris-claro);margin-bottom:14px}
+
+  /* progress vs meta */
+  .meta-row{margin:14px 0}
+  .meta-row .top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+  .meta-row .top b{font-weight:700;color:var(--azul)}
+  .bar{height:11px;background:var(--linea);border-radius:999px;position:relative;overflow:hidden}
+  .bar > i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,var(--dorado-claro),var(--dorado))}
+  .bar .meta-mark{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--azul)}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--gris);margin-top:10px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+  .msg{background:linear-gradient(135deg,#fff,var(--azul-suave));border-left:5px solid var(--dorado);
+    border-radius:var(--radio);padding:20px 24px;box-shadow:var(--sombra)}
+  .msg h3{font-size:15px;color:var(--azul);margin-bottom:8px;letter-spacing:.3px}
+  .msg p{font-size:14px;line-height:1.65;color:var(--gris)}
+  .msg b{color:var(--azul)}
+  .msg .pill{display:inline-block;background:#fff;border:1px solid var(--linea);border-radius:8px;
+    padding:3px 9px;font-size:12px;font-weight:700;margin:6px 6px 0 0;color:var(--azul)}
+
+  table.mini{width:100%;border-collapse:collapse;font-size:13px}
+  table.mini th,table.mini td{text-align:right;padding:7px 8px;border-bottom:1px solid var(--linea)}
+  table.mini th:first-child,table.mini td:first-child{text-align:left}
+  table.mini th{color:var(--gris-claro);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+  table.mini td.n{font-variant-numeric:tabular-nums;font-weight:600;color:var(--azul)}
+
+  /* ===== CONCEPTO C (oscuro · azul marino institucional) ===== */
+  .dark{background:#0E1A2E;color:#E7EAEE}
+  .dark .tag{background:rgba(200,146,17,.16);color:var(--dorado-claro)}
+  .dark h1{color:#fff}
+  .dark .sub{color:#94A0B2}
+  .dark .logo-plate{background:#fff;border-radius:10px;padding:8px 12px;display:inline-flex}
+  .dark .logo-plate img{height:46px}
+  .dark .d-card{background:#16243B;border:1px solid #243650;border-radius:var(--radio);padding:22px}
+  .dark .d-hero{font-size:60px;font-weight:800;letter-spacing:-2px;color:#fff;line-height:1}
+  .dark .d-lbl{font-size:13px;color:#94A0B2;font-weight:600;text-transform:uppercase;letter-spacing:1px}
+  .dark .d-accent{color:var(--dorado-claro)}
+  .dark .d-divider{height:1px;background:#243650;margin:8px 0}
+  .dark .bar{background:#243650}
+  .dark .legend{color:#94A0B2}
+  .footer{max-width:1180px;margin:0 auto;padding:14px 26px 40px;font-size:11.5px;color:var(--gris-claro)}
+  .dark .footer{color:#5b687d}
+</style>
+</head>
+<body>
+
+<div class="switch">
+  <div class="brand">
+    <img src="uady-logo.png" alt="UADY">
+    <div><b>EJE 2</b><small>Investigación con impacto social · Mockups</small></div>
+  </div>
+  <button class="on" onclick="show(0,this)">① Resumen ejecutivo</button>
+  <button onclick="show(1,this)">② Tablero analítico</button>
+  <button onclick="show(2,this)">③ Narrativa (azul marino)</button>
+</div>
+
+<!-- ============ CONCEPTO 1: RESUMEN EJECUTIVO ============ -->
+<section class="stage on" id="s0">
+  <div class="wrap">
+    <div class="hd">
+      <div>
+        <span class="tag">Eje estratégico 2 · PDI 2026-2040</span>
+        <h1>Investigación con impacto social</h1>
+        <p class="sub">Panorama 2023–2025 · Fuente: Informe de Gestión · Corte 2025</p>
+      </div>
+      <img class="logo" src="uady-logo.png" alt="UADY">
+    </div>
+
+    <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:20px" id="kpis1"></div>
+
+    <div class="grid" style="grid-template-columns:1.15fr .85fr;margin-top:18px">
+      <div class="panel">
+        <h3>Avance hacia la Meta PDI 2030</h3>
+        <div class="h-sub">Indicadores comprometidos en el Plan de Desarrollo Institucional</div>
+        <div id="meta1"></div>
+      </div>
+      <div class="panel">
+        <h3>Composición de Cuerpos Académicos · 2025</h3>
+        <div class="h-sub">79 cuerpos académicos registrados</div>
+        <div style="display:flex;align-items:center;gap:20px" id="donut1"></div>
+      </div>
+    </div>
+
+    <div class="msg" style="margin-top:18px">
+      <h3>Lectura ejecutiva</h3>
+      <p>La capacidad de investigación de la Universidad se fortalece de forma sostenida: el número de
+      investigadores en el <b>SNII creció 13%</b> (de 330 a 374) y ya representan el <b>58% del profesorado de tiempo completo</b>;
+      la <b>producción científica en Web of Science aumentó 28%</b> y los <b>cuerpos académicos consolidados crecieron 44%</b>.</p>
+      <span class="pill">↑ SNII +13%</span><span class="pill">↑ WoS +28%</span>
+      <span class="pill">↑ CA Consolidados +44%</span><span class="pill">↓ PTC −5%</span>
+    </div>
+  </div>
+  <div class="footer">Mockup conceptual · Datos reales del Eje 2 · Colores institucionales UADY (azul #192E4C · dorado #C89211)</div>
+</section>
+
+<!-- ============ CONCEPTO 2: TABLERO ANALÍTICO ============ -->
+<section class="stage" id="s1">
+  <div class="wrap">
+    <div class="hd">
+      <div>
+        <span class="tag">Eje 2 · Tablero analítico</span>
+        <h1>Investigación con impacto social — detalle</h1>
+        <p class="sub">Series 2023–2025 y proyección de metas 2026–2030</p>
+      </div>
+      <img class="logo" src="uady-logo.png" alt="UADY">
+    </div>
+
+    <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:18px" id="kpis2"></div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:18px">
+      <div class="panel">
+        <h3>Profesorado y SNII</h3>
+        <div class="h-sub">PTC total vs. investigadores SNII</div>
+        <div id="line2a"></div>
+      </div>
+      <div class="panel">
+        <h3>Producción científica (Web of Science)</h3>
+        <div class="h-sub">Artículos indexados por año</div>
+        <div id="bars2"></div>
+      </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1.2fr .8fr;margin-top:18px">
+      <div class="panel">
+        <h3>Tabla maestra de indicadores · Eje 2</h3>
+        <div class="h-sub">15 indicadores · valor por año (Real) y metas PDI</div>
+        <div id="table2" style="max-height:330px;overflow:auto"></div>
+      </div>
+      <div class="panel">
+        <h3>Cuerpos Académicos por nivel</h3>
+        <div class="h-sub">Evolución 2023 → 2025</div>
+        <div id="stack2"></div>
+        <div class="legend">
+          <span><i class="dot" style="background:var(--azul)"></i>Consolidados</span>
+          <span><i class="dot" style="background:var(--dorado)"></i>En consolidación</span>
+          <span><i class="dot" style="background:var(--gris-claro)"></i>En formación</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Mockup conceptual · Vista para análisis y mesas de trabajo · UADY</div>
+</section>
+
+<!-- ============ CONCEPTO 3: NARRATIVA AZUL MARINO ============ -->
+<section class="stage dark" id="s2">
+  <div class="wrap">
+    <div class="hd" style="margin-bottom:6px">
+      <span class="tag">Eje estratégico 2</span>
+      <div class="logo-plate"><img src="uady-logo.png" alt="UADY"></div>
+    </div>
+    <h1>La investigación de la UADY,<br>con más impacto cada año</h1>
+    <p class="sub">Informe ejecutivo al Rector · Periodo 2023–2025 · Meta al 2030</p>
+
+    <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:24px">
+      <div class="d-card">
+        <div class="d-lbl">Investigadores SNII</div>
+        <div class="d-hero">374</div>
+        <div style="color:var(--verde);font-weight:700;margin-top:6px">▲ +13.3% &nbsp;<span style="color:#7a849a">vs 2023</span></div>
+        <div class="d-divider" style="margin-top:16px"></div>
+        <div id="spark3a" style="margin-top:8px"></div>
+      </div>
+      <div class="d-card">
+        <div class="d-lbl">Producción Web of Science</div>
+        <div class="d-hero">354</div>
+        <div style="color:var(--verde);font-weight:700;margin-top:6px">▲ +28.3% &nbsp;<span style="color:#7a849a">vs 2023</span></div>
+        <div class="d-divider" style="margin-top:16px"></div>
+        <div id="spark3b" style="margin-top:8px"></div>
+      </div>
+      <div class="d-card">
+        <div class="d-lbl">% PTC en el SNII</div>
+        <div class="d-hero">58<span style="font-size:30px">%</span></div>
+        <div style="color:var(--dorado-claro);font-weight:700;margin-top:6px">Meta 2030: 70%</div>
+        <div class="d-divider" style="margin-top:16px"></div>
+        <div class="bar" style="margin-top:14px"><i style="width:82.8%"></i><span class="meta-mark" style="left:100%"></span></div>
+        <div style="color:#7a849a;font-size:11px;margin-top:6px">82.8% del camino a la meta</div>
+      </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:22px">
+      <div class="d-card">
+        <div class="d-lbl" style="margin-bottom:14px">Trayectoria a la meta · Proyectos con impacto social</div>
+        <div id="line3"></div>
+      </div>
+      <div class="d-card" style="display:flex;flex-direction:column;justify-content:center">
+        <div class="d-lbl">El mensaje</div>
+        <p style="font-size:19px;line-height:1.55;font-weight:600;margin-top:12px;color:#EAEDF1">
+          Más investigadores reconocidos, más ciencia publicada y cuerpos académicos
+          <span class="d-accent">más sólidos</span>.</p>
+        <div style="display:flex;gap:26px;margin-top:22px">
+          <div><div class="d-hero" style="font-size:38px">+44%</div><div style="color:#7a849a;font-size:12px">CA Consolidados</div></div>
+          <div><div class="d-hero" style="font-size:38px">+51%</div><div style="color:#7a849a;font-size:12px">Estancias posdoc</div></div>
+          <div><div class="d-hero" style="font-size:38px;color:var(--dorado-claro)">−5%</div><div style="color:#7a849a;font-size:12px">PTC total</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Mockup conceptual · Estilo para proyección en sesión de consejo · UADY</div>
+</section>
+
+<script>
+/* ---------- datos reales Eje 2 ---------- */
+const anios=[2023,2024,2025];
+const D={
+  ptc:[685,669,649], ptcSnii:[330,359,374], pctSnii:[.48,.54,.58],
+  wos:[276,298,354], posdoc:[45,58,68],
+  caCons:[36,38,52], caEnCons:[37,38,25], caForm:[5,5,2], caTotal:[78,81,79],
+  proy:[93,80,86],
+  metaPctSnii:{2026:.60,2027:.62,2028:.65,2029:.68,2030:.70},
+  metaProy:{2026:87,2027:90,2028:90,2029:92,2030:95}
+};
+const AZUL='#192E4C', DORADO='#C89211', GRIS='#8B939C';
+const fmt=n=>n.toLocaleString('es-MX');
+const pct=n=>Math.round(n*100)+'%';
+
+/* ---------- helpers SVG ---------- */
+function spark(vals,w=110,h=34,color=DORADO){
+  const mn=Math.min(...vals),mx=Math.max(...vals),r=mx-mn||1;
+  const pts=vals.map((v,i)=>[i/(vals.length-1)*w, h-((v-mn)/r)*(h-6)-3]);
+  const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const last=pts[pts.length-1];
+  return `<svg width="${w}" height="${h}"><path d="${d}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="3" fill="${color}"/></svg>`;
+}
+function lineChart(series,opts={}){
+  const w=opts.w||500,h=opts.h||220,pad=34;
+  const allX=opts.labels;
+  const allV=series.flatMap(s=>s.data.map(d=>d.v));
+  let mn=Math.min(...allV),mx=Math.max(...allV); const r=(mx-mn)||1; mn=Math.max(0,mn-r*.15);mx=mx+r*.15;
+  const X=i=>pad+ i/(allX.length-1)*(w-pad-12);
+  const Y=v=>h-26-((v-mn)/(mx-mn))*(h-50);
+  const grid=opts.dark?'#243650':'#E3E8ED', axis=opts.dark?'#7a849a':'#8B939C';
+  let g='';
+  for(let k=0;k<=3;k++){const yy=26+k/3*(h-52);g+=`<line x1="${pad}" y1="${yy}" x2="${w-12}" y2="${yy}" stroke="${grid}" stroke-width="1"/>`;}
+  allX.forEach((lb,i)=>{g+=`<text x="${X(i)}" y="${h-6}" font-size="11" fill="${axis}" text-anchor="middle">${lb}</text>`;});
+  series.forEach(s=>{
+    const pts=s.data.map((d,i)=>[X(d.i!==undefined?d.i:i),Y(d.v)]);
+    const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+    const dash=s.dash?'stroke-dasharray="5 4"':'';
+    g+=`<path d="${path}" fill="none" stroke="${s.color}" stroke-width="2.6" ${dash} stroke-linecap="round" stroke-linejoin="round"/>`;
+    pts.forEach(p=>g+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3.2" fill="${s.color}"/>`);
+    const lp=pts[pts.length-1];
+    g+=`<text x="${(lp[0]+6).toFixed(1)}" y="${(lp[1]+4).toFixed(1)}" font-size="11.5" font-weight="700" fill="${s.color}">${s.tag||''}</text>`;
+  });
+  return `<svg width="100%" viewBox="0 0 ${w} ${h}">${g}</svg>`;
+}
+function bars(vals,labels,w=480,h=200,color=AZUL){
+  const pad=30,mx=Math.max(...vals)*1.15;const bw=(w-pad)/vals.length*.55;
+  let g='';
+  vals.forEach((v,i)=>{
+    const x=pad+i*((w-pad)/vals.length)+((w-pad)/vals.length-bw)/2;
+    const bh=(v/mx)*(h-44);const y=h-26-bh;
+    g+=`<rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="5" fill="${color}"/>`;
+    g+=`<text x="${x+bw/2}" y="${y-7}" font-size="12" font-weight="700" fill="#1B2433" text-anchor="middle">${fmt(v)}</text>`;
+    g+=`<text x="${x+bw/2}" y="${h-6}" font-size="11" fill="#8B939C" text-anchor="middle">${labels[i]}</text>`;
+  });
+  return `<svg width="100%" viewBox="0 0 ${w} ${h}">${g}</svg>`;
+}
+function donut(parts,size=150){
+  const tot=parts.reduce((a,p)=>a+p.v,0);let acc=0;const R=size/2,r=R*.62;let g='';
+  parts.forEach(p=>{
+    const a0=acc/tot*2*Math.PI-Math.PI/2;acc+=p.v;const a1=acc/tot*2*Math.PI-Math.PI/2;
+    const large=(a1-a0)>Math.PI?1:0;
+    const x0=R+R*Math.cos(a0),y0=R+R*Math.sin(a0),x1=R+R*Math.cos(a1),y1=R+R*Math.sin(a1);
+    const xi1=R+r*Math.cos(a1),yi1=R+r*Math.sin(a1),xi0=R+r*Math.cos(a0),yi0=R+r*Math.sin(a0);
+    g+=`<path d="M${x0} ${y0} A${R} ${R} 0 ${large} 1 ${x1} ${y1} L${xi1} ${yi1} A${r} ${r} 0 ${large} 0 ${xi0} ${yi0} Z" fill="${p.c}"/>`;
+  });
+  g+=`<text x="${R}" y="${R-2}" text-anchor="middle" font-size="26" font-weight="800" fill="${AZUL}">${tot}</text>`;
+  g+=`<text x="${R}" y="${R+16}" text-anchor="middle" font-size="11" fill="#8B939C">total</text>`;
+  return `<svg width="${size}" height="${size}">${g}</svg>`;
+}
+
+/* ---------- KPI builder ---------- */
+function kpiCard({lbl,val,sub,vals,cls='',accent=false,sparkColor}){
+  const sp=vals?`<div class="spark">${spark(vals,110,34,sparkColor||DORADO)}</div>`:'';
+  return `<div class="kpi ${accent?'accent':''}">
+    <div class="lbl">${lbl}</div><div class="val">${val}</div>
+    <div class="delta ${cls}">${sub}</div>${sp}</div>`;
+}
+const KPIS=[
+  {lbl:'Investigadores en el SNII',val:'374',sub:'▲ +13.3% vs 2023',vals:D.ptcSnii,cls:'up',accent:true},
+  {lbl:'% del PTC en el SNII',val:'58%',sub:'Meta 2030: 70%',vals:D.pctSnii.map(v=>v*100),cls:'flat'},
+  {lbl:'Producción Web of Science',val:'354',sub:'▲ +28.3% vs 2023',vals:D.wos,cls:'up'},
+  {lbl:'Cuerpos Acad. Consolidados',val:'52',sub:'▲ +44.4% vs 2023',vals:D.caCons,cls:'up'},
+  {lbl:'Estancias posdoctorales',val:'68',sub:'▲ +51.1% vs 2023',vals:D.posdoc,cls:'up'},
+  {lbl:'Profesorado de Tiempo Completo',val:'649',sub:'▼ −5.3% vs 2023',vals:D.ptc,cls:'down',accent:true,sparkColor:'#C0392B'},
+  {lbl:'Proyectos con impacto social',val:'86',sub:'Meta 2030: 95',vals:D.proy,cls:'flat'},
+  {lbl:'PTC con Perfil PRODEP',val:'74%',sub:'estable',vals:[74,72,74],cls:'flat',sparkColor:GRIS},
+];
+document.getElementById('kpis1').innerHTML=KPIS.slice(0,8).map(kpiCard).join('');
+document.getElementById('kpis2').innerHTML=KPIS.slice(0,8).map(kpiCard).join('');
+
+/* ---------- meta progress (concepto 1) ---------- */
+function metaBar(name,actual,meta,base,fmtv){
+  const prog=Math.min(100,((actual-base)/(meta-base))*100);
+  return `<div class="meta-row">
+    <div class="top"><span>${name}</span><b>${fmtv(actual)} → meta ${fmtv(meta)}</b></div>
+    <div class="bar"><i style="width:${prog.toFixed(1)}%"></i><span class="meta-mark" style="left:100%"></span></div>
+    <div class="muted" style="font-size:11px;margin-top:5px">${prog.toFixed(0)}% del avance hacia la meta 2030</div>
+  </div>`;
+}
+document.getElementById('meta1').innerHTML=
+  metaBar('% PTC en el SNII',58,70,48,v=>v+'%')+
+  metaBar('Proyectos con impacto social',86,95,80,v=>fmt(v));
+
+/* ---------- donut CA (concepto 1) ---------- */
+document.getElementById('donut1').innerHTML=
+  donut([{v:52,c:AZUL},{v:25,c:DORADO},{v:2,c:GRIS}])+
+  `<div class="legend" style="flex-direction:column;gap:9px">
+    <span><i class="dot" style="background:${AZUL}"></i>Consolidados — <b>52</b></span>
+    <span><i class="dot" style="background:${DORADO}"></i>En consolidación — <b>25</b></span>
+    <span><i class="dot" style="background:${GRIS}"></i>En formación — <b>2</b></span></div>`;
+
+/* ---------- concepto 2 charts ---------- */
+document.getElementById('line2a').innerHTML=lineChart([
+  {data:D.ptc.map(v=>({v})),color:AZUL,tag:'PTC'},
+  {data:D.ptcSnii.map(v=>({v})),color:DORADO,tag:'SNII'}
+],{labels:anios});
+document.getElementById('bars2').innerHTML=bars(D.wos,anios);
+
+/* tabla maestra */
+const filas=[
+  ['Profesorado de Tiempo Completo',D.ptc,null],
+  ['PTC con Perfil PRODEP (núm.)',[500,485,479],null],
+  ['% PTC con Perfil PRODEP',[.73,.724,.74],null,true],
+  ['PTC con reconocimiento SNII',D.ptcSnii,null],
+  ['% PTC adscritos al SNII',D.pctSnii,D.metaPctSnii,true],
+  ['Cuerpos Académicos (total)',D.caTotal,null],
+  ['CA Consolidados',D.caCons,null],
+  ['% CA Consolidados',[.461,.469,.66],null,true],
+  ['CA en Consolidación',D.caEnCons,null],
+  ['CA en Formación',D.caForm,null],
+  ['Producción Web of Science',D.wos,null],
+  ['Proyectos con impacto social',D.proy,D.metaProy],
+  ['Estancias posdoctorales',D.posdoc,null],
+];
+let th='<table class="mini"><thead><tr><th>Indicador</th><th>2023</th><th>2024</th><th>2025</th><th>Meta 30</th></tr></thead><tbody>';
+filas.forEach(f=>{
+  const[n,v,m,isPct]=f;const cell=x=>isPct?pct(x):fmt(x);
+  const meta=m?(isPct?pct(m[2030]):fmt(m[2030])):'<span class="muted">—</span>';
+  th+=`<tr><td>${n}</td><td class="n">${cell(v[0])}</td><td class="n">${cell(v[1])}</td><td class="n">${cell(v[2])}</td><td class="n" style="color:${DORADO}">${meta}</td></tr>`;
+});
+th+='</tbody></table>';
+document.getElementById('table2').innerHTML=th;
+
+/* stacked CA */
+function stacked(){
+  const w=360,h=200,pad=28;const tot=D.caTotal.map((_,i)=>D.caCons[i]+D.caEnCons[i]+D.caForm[i]);
+  const mx=Math.max(...tot)*1.2;const bw=(w-pad)/3*.5;let g='';
+  anios.forEach((yr,i)=>{
+    const x=pad+i*((w-pad)/3)+((w-pad)/3-bw)/2;let yacc=h-24;
+    [[D.caForm[i],GRIS],[D.caEnCons[i],DORADO],[D.caCons[i],AZUL]].forEach(([v,c])=>{
+      const bh=v/mx*(h-44);yacc-=bh;
+      g+=`<rect x="${x}" y="${yacc}" width="${bw}" height="${bh}" fill="${c}"/>`;
+    });
+    g+=`<text x="${x+bw/2}" y="${h-6}" font-size="11" fill="#8B939C" text-anchor="middle">${yr}</text>`;
+    g+=`<text x="${x+bw/2}" y="${yacc-7}" font-size="12" font-weight="700" text-anchor="middle" fill="${AZUL}">${tot[i]}</text>`;
+  });
+  return `<svg width="100%" viewBox="0 0 ${w} ${h}">${g}</svg>`;
+}
+document.getElementById('stack2').innerHTML=stacked();
+
+/* ---------- concepto 3 ---------- */
+document.getElementById('spark3a').innerHTML=spark(D.ptcSnii,200,40,DORADO);
+document.getElementById('spark3b').innerHTML=spark(D.wos,200,40,DORADO);
+document.getElementById('line3').innerHTML=lineChart([
+  {data:[{i:0,v:93},{i:1,v:80},{i:2,v:86}],color:'#E0B23E',tag:'Real'},
+  {data:[{i:2,v:86},{i:3,v:87},{i:4,v:90},{i:5,v:90},{i:6,v:92},{i:7,v:95}],color:'#5C7CA8',tag:'Meta',dash:true}
+],{labels:[2023,2024,2025,2026,2027,2028,2029,2030],w:500,h:210,dark:true});
+
+/* ---------- switcher ---------- */
+function show(i,btn){
+  document.querySelectorAll('.stage').forEach((s,k)=>s.classList.toggle('on',k===i));
+  document.querySelectorAll('.switch button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
