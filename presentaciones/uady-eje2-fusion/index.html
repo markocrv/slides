@@ -95,6 +95,20 @@
   .lvl-l{font-size:11.5px;color:var(--gris);font-weight:600}
   .lvl .delta{margin-left:auto}
 
+  /* lectura estratégica */
+  .ins-banner{display:flex;align-items:center;gap:24px;background:linear-gradient(120deg,var(--azul),var(--azul-2));color:#fff;border-radius:14px;padding:18px 26px}
+  .ins-txt{flex:1}
+  .ins-banner .ins-k{font-size:21px;font-weight:800}
+  .ins-banner p{font-size:12.5px;color:#C7D2E0;margin-top:4px;max-width:330px;line-height:1.4}
+  .ins-stats{display:flex;align-items:center;gap:18px}
+  .istat{text-align:center}
+  .istat .iv{font-size:29px;font-weight:800;line-height:1}
+  .istat.up .iv{color:#5BD6A0}.istat.down .iv{color:#F2A1A1}
+  .istat .il{font-size:10.5px;color:#B9C4D4;margin-top:4px;max-width:118px}
+  .iarrow{font-size:24px;color:#7a849a}
+  .triang{margin-top:14px;background:var(--azul-suave);border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .triang .tlbl{font-size:12.5px;font-weight:700;color:var(--azul)}
+  .triang .tchip{background:#fff;border:1px solid var(--linea);border-radius:999px;padding:4px 11px;font-size:12px;font-weight:700;color:var(--verde)}
   .footer{max-width:1180px;margin:0 auto;padding:4px 26px 36px;font-size:11.5px;color:var(--gris-claro)}
 </style>
 </head>
@@ -108,13 +122,14 @@
   <button class="on" onclick="show(0,this)">① Profesorado (PTC)</button>
   <button onclick="show(1,this)">② Cuerpos Académicos</button>
   <button onclick="show(2,this)">③ Proyectos y estancias</button>
+  <button onclick="show(3,this)">④ Lectura estratégica</button>
 </div>
 
 <!-- ===== PÁGINA 1: PTC ===== -->
 <section class="stage on" id="s0">
   <div class="screen">
     <div class="scr-head">
-      <div><div class="eyebrow">Eje 2 · Pantalla 1 de 3</div><h1>Profesorado de Tiempo Completo</h1><div class="corte">Cifras al cierre de 2025</div></div>
+      <div><div class="eyebrow">Eje 2 · Pantalla 1 de 4</div><h1>Profesorado de Tiempo Completo</h1><div class="corte">Cifras al cierre de 2025</div></div>
       <img src="uady-logo.png" alt="UADY">
     </div>
     <div class="scr-body">
@@ -153,7 +168,7 @@
 <section class="stage" id="s1">
   <div class="screen">
     <div class="scr-head">
-      <div><div class="eyebrow">Eje 2 · Pantalla 2 de 3</div><h1>Cuerpos Académicos</h1><div class="corte">Composición y evolución · Corte 2025</div></div>
+      <div><div class="eyebrow">Eje 2 · Pantalla 2 de 4</div><h1>Cuerpos Académicos</h1><div class="corte">Composición y evolución · Corte 2025</div></div>
       <img src="uady-logo.png" alt="UADY">
     </div>
     <div class="scr-body">
@@ -181,7 +196,7 @@
 <section class="stage" id="s2">
   <div class="screen">
     <div class="scr-head">
-      <div><div class="eyebrow">Eje 2 · Pantalla 3 de 3</div><h1>Proyectos, Publicaciones y Estancias</h1><div class="corte">Cifras al cierre de 2025</div></div>
+      <div><div class="eyebrow">Eje 2 · Pantalla 3 de 4</div><h1>Proyectos, Publicaciones y Estancias</h1><div class="corte">Cifras al cierre de 2025</div></div>
       <img src="uady-logo.png" alt="UADY">
     </div>
     <div class="scr-body">
@@ -200,6 +215,50 @@
     </div>
   </div>
   <div class="footer">Una tendencia a la vez (escalas distintas) · Proyectos muestra trayectoria a la Meta PDI 2030 · Eje 2</div>
+</section>
+
+<!-- ===== PÁGINA 4: LECTURA ESTRATÉGICA ===== -->
+<section class="stage" id="s3">
+  <div class="screen">
+    <div class="scr-head">
+      <div><div class="eyebrow">Eje 2 · Pantalla 4 de 4</div><h1>Lectura estratégica</h1><div class="corte">Lo que dicen los datos · 2023–2025</div></div>
+      <img src="uady-logo.png" alt="UADY">
+    </div>
+    <div class="scr-body">
+      <div class="ins-banner">
+        <div class="ins-txt">
+          <div class="ins-k">Menos profesores, más ciencia</div>
+          <p>La planta de tiempo completo se redujo, pero su productividad e intensidad en investigación creció.</p>
+        </div>
+        <div class="ins-stats">
+          <div class="istat down"><div class="iv">−5.3%</div><div class="il">Profesores (PTC)</div></div>
+          <div class="iarrow">→</div>
+          <div class="istat up"><div class="iv">+35%</div><div class="il">Producción WoS por profesor</div></div>
+          <div class="istat up"><div class="iv">+59%</div><div class="il">Estancias posdoc por profesor</div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+        <div class="panel">
+          <div class="pt">Vamos adelantados · Meta SNII 2030</div>
+          <div id="insB" style="margin-top:8px"></div>
+          <p class="muted" style="font-size:12px;margin-top:8px">A ritmo histórico (+4.7 pp/año) se rebasaría el 70% antes de 2030; la meta solo exige +2.5 pp/año.</p>
+        </div>
+        <div class="panel">
+          <div class="pt">La investigación alcanza a la docencia</div>
+          <div id="insC"></div>
+          <p class="muted" style="font-size:12px;margin-top:4px">La brecha entre PRODEP y SNII se redujo de 170 a 105: la planta vira hacia un perfil de investigación.</p>
+        </div>
+      </div>
+
+      <div class="triang">
+        <span class="tlbl">4 señales independientes apuntan al mismo lugar:</span>
+        <span class="tchip">SNII +13%</span><span class="tchip">WoS +28%</span>
+        <span class="tchip">Posdoc +51%</span><span class="tchip">CA Consolidados +44%</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Lectura estratégica derivada de los indicadores del Eje 2 · cifras por profesor y brechas calculadas sobre datos reales · UADY</div>
 </section>
 
 <script>
@@ -314,6 +373,20 @@ function setBase(y){BASE=y;document.querySelectorAll('.cmp-btn').forEach(b=>b.cl
 document.getElementById('p2donut').innerHTML=donut([{v:52,c:AZUL},{v:25,c:DORADO},{v:2,c:GRIS}])+
   `<div class="muted" style="font-size:11px;margin-top:6px">Composición 2025</div>`;
 document.getElementById('trend2').innerHTML=stacked();
+/* ---- Pantalla 4: lectura estratégica ---- */
+function ritmoBar(lbl,v,max,color){
+  return `<div style="margin:10px 0">
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><span>${lbl}</span><b style="color:${color}">+${v} pp/año</b></div>
+    <div class="bar"><i style="width:${(v/max*100).toFixed(0)}%;background:${color}"></i></div></div>`;
+}
+document.getElementById('insB').innerHTML=
+  ritmoBar('Ritmo histórico 2023–2025',4.7,5.5,'#1F9D6B')+
+  ritmoBar('Requerido para la meta 2030',2.5,5.5,'#C89211');
+document.getElementById('insC').innerHTML=lineChart([
+  {data:D.prodepN.map((v,i)=>({i,v})),color:AZUL3,tag:'PRODEP'},
+  {data:D.ptcSnii.map((v,i)=>({i,v})),color:DORADO,tag:'SNII'}
+],{labels:[2023,2024,2025],w:600,h:185});
+
 renderTrend1(); renderTrend3(); setBase(2023);
 
 function show(i,btn){
