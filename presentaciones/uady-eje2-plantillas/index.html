@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UADY · Eje 2 — Plantillas por subcategoría</title>
+<style>
+  :root{
+    --azul:#192E4C; --azul-2:#2E4A73; --azul-3:#41618C; --azul-suave:#EAEEF4;
+    --dorado:#C89211; --dorado-claro:#E0B23E; --dorado-suave:#FBF3DD;
+    --antracita:#1B2433; --gris:#4A5159; --gris-claro:#8B939C;
+    --fondo:#EFF2F5; --card:#FFFFFF; --linea:#E1E6EC;
+    --verde:#1F9D6B; --rojo:#C0392B;
+    --sombra:0 1px 3px rgba(20,30,45,.08),0 8px 26px rgba(20,30,45,.08);
+    --sans:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--fondo);color:var(--antracita);-webkit-font-smoothing:antialiased}
+
+  .switch{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--linea);
+    display:flex;align-items:center;gap:14px;padding:11px 26px;box-shadow:0 2px 10px rgba(0,0,0,.04);flex-wrap:wrap}
+  .switch .brand{display:flex;align-items:center;gap:12px;margin-right:auto}
+  .switch .brand img{height:34px}
+  .switch .brand b{font-weight:700;letter-spacing:.5px;color:var(--azul);font-size:14px}
+  .switch .brand small{color:var(--gris-claro);font-weight:500;display:block;font-size:11.5px}
+  .switch button{border:1px solid var(--linea);background:#fff;color:var(--gris);padding:8px 16px;border-radius:999px;
+    font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+  .switch button:hover{border-color:var(--azul-3);color:var(--azul)}
+  .switch button.on{background:var(--azul);border-color:var(--azul);color:#fff;box-shadow:0 4px 12px rgba(25,46,76,.3)}
+
+  .stage{display:none;animation:fade .4s ease}
+  .stage.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* lienzo tipo pantalla 16:9 */
+  .screen{max-width:1140px;margin:24px auto;background:var(--card);border-radius:18px;box-shadow:var(--sombra);
+    overflow:hidden;min-height:600px;display:flex;flex-direction:column}
+  .scr-head{background:linear-gradient(100deg,var(--azul),var(--azul-2));color:#fff;padding:22px 34px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .scr-head .ttl .eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dorado-claro)}
+  .scr-head .ttl h1{font-size:25px;font-weight:700;margin-top:3px}
+  .scr-head .ttl .corte{font-size:12.5px;color:#B9C4D4;margin-top:3px}
+  .scr-head img{height:48px;background:#fff;border-radius:8px;padding:6px 9px}
+  .scr-body{padding:30px 34px 36px;flex:1;display:flex;flex-direction:column}
+
+  /* comparador */
+  .cmp{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;margin-bottom:24px}
+  .cmp .cmp-lbl{color:var(--gris-claro);font-weight:600}
+  .cmp .seg{display:inline-flex;background:#fff;border:1px solid var(--linea);border-radius:999px;padding:3px;box-shadow:var(--sombra)}
+  .cmp .seg button{border:none;background:none;padding:6px 16px;border-radius:999px;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--gris);cursor:pointer;transition:.15s}
+  .cmp .seg button:hover{color:var(--azul)}
+  .cmp .seg button.on{background:var(--azul);color:#fff}
+
+  .delta{font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:4px}
+  .up{color:var(--verde)} .down{color:var(--rojo)} .flat{color:var(--gris-claro)}
+  .muted{color:var(--gris-claro)}
+
+  /* Pantalla 1 — PTC */
+  .p1{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:stretch;flex:1}
+  .hero{grid-row:span 1;background:linear-gradient(135deg,var(--azul),var(--azul-2));color:#fff;border-radius:16px;
+    padding:30px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+  .hero .big{font-size:74px;font-weight:800;letter-spacing:-3px;line-height:1}
+  .hero .cap{font-size:14px;color:#C7D2E0;margin-top:8px;font-weight:600}
+  .hero .delta{margin-top:14px;background:rgba(255,255,255,.12);padding:5px 12px;border-radius:999px;color:#fff}
+  .sub-card{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:24px;display:flex;
+    flex-direction:column;align-items:center;text-align:center;box-shadow:var(--sombra)}
+  .sub-card .num{font-size:32px;font-weight:800;color:var(--azul);margin-top:10px}
+  .sub-card .lbl{font-size:13px;font-weight:600;color:var(--gris);margin-top:4px;line-height:1.3}
+  .sub-card .share{font-size:11.5px;color:var(--gris-claro);margin-top:3px}
+  .sub-card .delta{margin-top:10px}
+
+  /* Pantalla 2 — CA */
+  .p2{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:center;flex:1}
+  .ca-row{display:flex;align-items:center;gap:14px;padding:15px 0;border-bottom:1px solid var(--linea)}
+  .ca-row:last-child{border-bottom:none}
+  .ca-row .dot{width:14px;height:14px;border-radius:4px;flex-shrink:0}
+  .ca-row .nm{flex:1;font-size:14.5px;font-weight:600;color:var(--azul)}
+  .ca-row .ct{font-size:22px;font-weight:800;color:var(--azul);min-width:54px;text-align:right}
+  .ca-row .pc{font-size:13px;color:var(--gris-claro);min-width:46px;text-align:right}
+  .ca-row .delta{min-width:118px;justify-content:flex-end}
+  .ca-total{margin-top:12px;padding-top:14px;border-top:2px solid var(--azul);display:flex;justify-content:space-between;align-items:center}
+  .ca-total .t-lbl{font-size:14px;font-weight:700;color:var(--azul)}
+  .ca-total .t-val{font-size:24px;font-weight:800;color:var(--azul)}
+
+  /* Pantalla 3 — Proyectos */
+  .p3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch;flex:1}
+  .big-card{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:32px 26px;display:flex;
+    flex-direction:column;justify-content:center;box-shadow:var(--sombra);position:relative;overflow:hidden}
+  .big-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--dorado)}
+  .big-card .ico{font-size:30px}
+  .big-card .num{font-size:54px;font-weight:800;color:var(--azul);letter-spacing:-2px;line-height:1;margin-top:8px}
+  .big-card .delta{margin-top:8px}
+  .big-card .lbl{font-size:13.5px;font-weight:600;color:var(--gris);margin-top:14px;line-height:1.4}
+
+  .footer{max-width:1140px;margin:0 auto;padding:6px 26px 40px;font-size:11.5px;color:var(--gris-claro)}
+</style>
+</head>
+<body>
+
+<div class="switch">
+  <div class="brand">
+    <img src="uady-logo.png" alt="UADY">
+    <div><b>EJE 2 · Plantillas por subcategoría</b><small>Investigación con impacto social · Corte 2025</small></div>
+  </div>
+  <button class="on" onclick="show(0,this)">① Profesorado (PTC)</button>
+  <button onclick="show(1,this)">② Cuerpos Académicos</button>
+  <button onclick="show(2,this)">③ Proyectos y estancias</button>
+</div>
+
+<!-- ===== PANTALLA 1: PTC ===== -->
+<section class="stage on" id="s0">
+  <div class="screen">
+    <div class="scr-head">
+      <div class="ttl">
+        <div class="eyebrow">Eje estratégico 2 · Pantalla 1 de 3</div>
+        <h1>Profesorado de Tiempo Completo</h1>
+        <div class="corte">Cifras al cierre de 2025</div>
+      </div>
+      <img src="uady-logo.png" alt="UADY">
+    </div>
+    <div class="scr-body">
+      <div class="cmp" data-cmp><span class="cmp-lbl">Comparar 2025 con:</span>
+        <div class="seg">
+          <button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">vs 2023</button>
+          <button class="cmp-btn" data-base="2024" onclick="setBase(2024)">vs 2024</button>
+        </div></div>
+      <div class="p1" id="p1"></div>
+    </div>
+  </div>
+  <div class="footer">Plantilla basada en la propuesta del departamento · Paleta institucional UADY · Eje 2</div>
+</section>
+
+<!-- ===== PANTALLA 2: CUERPOS ACADÉMICOS ===== -->
+<section class="stage" id="s1">
+  <div class="screen">
+    <div class="scr-head">
+      <div class="ttl">
+        <div class="eyebrow">Eje estratégico 2 · Pantalla 2 de 3</div>
+        <h1>Cuerpos Académicos</h1>
+        <div class="corte">Composición al cierre de 2025</div>
+      </div>
+      <img src="uady-logo.png" alt="UADY">
+    </div>
+    <div class="scr-body">
+      <div class="cmp" data-cmp><span class="cmp-lbl">Comparar 2025 con:</span>
+        <div class="seg">
+          <button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">vs 2023</button>
+          <button class="cmp-btn" data-base="2024" onclick="setBase(2024)">vs 2024</button>
+        </div></div>
+      <div class="p2">
+        <div style="display:flex;flex-direction:column;align-items:center" id="p2donut"></div>
+        <div id="p2rows"></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">El total se mantiene 2025; los deltas comparan cada nivel contra el año seleccionado · Eje 2</div>
+</section>
+
+<!-- ===== PANTALLA 3: PROYECTOS, PUBLICACIONES Y ESTANCIAS ===== -->
+<section class="stage" id="s2">
+  <div class="screen">
+    <div class="scr-head">
+      <div class="ttl">
+        <div class="eyebrow">Eje estratégico 2 · Pantalla 3 de 3</div>
+        <h1>Proyectos, Publicaciones y Estancias</h1>
+        <div class="corte">Cifras al cierre de 2025</div>
+      </div>
+      <img src="uady-logo.png" alt="UADY">
+    </div>
+    <div class="scr-body">
+      <div class="cmp" data-cmp><span class="cmp-lbl">Comparar 2025 con:</span>
+        <div class="seg">
+          <button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">vs 2023</button>
+          <button class="cmp-btn" data-base="2024" onclick="setBase(2024)">vs 2024</button>
+        </div></div>
+      <div class="p3" id="p3"></div>
+    </div>
+  </div>
+  <div class="footer">Tres indicadores independientes de la subcategoría · Eje 2</div>
+</section>
+
+<script>
+const AZUL='#192E4C', DORADO='#C89211', GRIS='#8B939C', TEAL='#2E7D8C', VINO='#7A2E4A';
+const D={
+  ptc:[685,669,649], prodepN:[500,485,479], ptcSnii:[330,359,374],
+  caCons:[36,38,52], caEnCons:[37,38,25], caForm:[5,5,2], caTotal:[78,81,79],
+  proy:[93,80,86], wos:[276,298,354], posdoc:[45,58,68]
+};
+let BASE=2023; const CUR=2025; const yIdx={2023:0,2024:1,2025:2};
+const fmt=n=>n.toLocaleString('es-MX');
+
+function pctChange(arr){const a=arr[yIdx[CUR]],b=arr[yIdx[BASE]];return (a-b)/b*100;}
+function deltaHTML(arr){
+  const v=pctChange(arr),up=v>=0,arrow=up?'▲':'▼',sign=up?'+':'−';
+  const cls=v>0?'up':v<0?'down':'flat';
+  return `<span class="delta ${cls}">${arrow} ${sign}${Math.abs(v).toFixed(1)}% vs ${BASE}</span>`;
+}
+
+/* anillo de porcentaje (share 2025) */
+function ring(pct,color){
+  const r=44,c=2*Math.PI*r,off=c*(1-pct);
+  return `<svg width="118" height="118" viewBox="0 0 118 118">
+    <circle cx="59" cy="59" r="${r}" fill="none" stroke="#E1E6EC" stroke-width="11"/>
+    <circle cx="59" cy="59" r="${r}" fill="none" stroke="${color}" stroke-width="11" stroke-linecap="round"
+      stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90 59 59)"/>
+    <text x="59" y="66" text-anchor="middle" font-size="25" font-weight="800" fill="${AZUL}">${Math.round(pct*100)}%</text>
+  </svg>`;
+}
+/* dona de composición */
+function donut(parts,size=210){
+  const tot=parts.reduce((a,p)=>a+p.v,0);let acc=0;const R=size/2,r=R*.6;let g='';
+  parts.forEach(p=>{
+    const a0=acc/tot*2*Math.PI-Math.PI/2;acc+=p.v;const a1=acc/tot*2*Math.PI-Math.PI/2;
+    const lg=(a1-a0)>Math.PI?1:0;
+    const x0=R+R*Math.cos(a0),y0=R+R*Math.sin(a0),x1=R+R*Math.cos(a1),y1=R+R*Math.sin(a1);
+    const xi1=R+r*Math.cos(a1),yi1=R+r*Math.sin(a1),xi0=R+r*Math.cos(a0),yi0=R+r*Math.sin(a0);
+    g+=`<path d="M${x0} ${y0} A${R} ${R} 0 ${lg} 1 ${x1} ${y1} L${xi1} ${yi1} A${r} ${r} 0 ${lg} 0 ${xi0} ${yi0} Z" fill="${p.c}"/>`;
+  });
+  g+=`<text x="${R}" y="${R-4}" text-anchor="middle" font-size="40" font-weight="800" fill="${AZUL}">${tot}</text>`;
+  g+=`<text x="${R}" y="${R+20}" text-anchor="middle" font-size="13" fill="#8B939C">cuerpos acad.</text>`;
+  return `<svg width="${size}" height="${size}">${g}</svg>`;
+}
+
+/* ---------- render pantalla 1 (PTC) ---------- */
+function renderP1(){
+  const shProdep=479/649, shSnii=374/649;
+  document.getElementById('p1').innerHTML=`
+    <div class="hero">
+      <div class="big">649</div>
+      <div class="cap">Profesorado de Tiempo Completo</div>
+      ${deltaHTML(D.ptc).replace('class="delta','class="delta')}
+    </div>
+    <div class="sub-card">
+      ${ring(shProdep,DORADO)}
+      <div class="num">479</div>
+      <div class="lbl">PTC con Perfil Deseable PRODEP</div>
+      <div class="share">74% del total de PTC</div>
+      ${deltaHTML(D.prodepN)}
+    </div>
+    <div class="sub-card">
+      ${ring(shSnii,AZUL)}
+      <div class="num">374</div>
+      <div class="lbl">PTC con reconocimiento del SNII</div>
+      <div class="share">58% del total de PTC</div>
+      ${deltaHTML(D.ptcSnii)}
+    </div>`;
+}
+
+/* ---------- render pantalla 2 (CA) ---------- */
+function renderP2(){
+  document.getElementById('p2donut').innerHTML=
+    donut([{v:52,c:AZUL},{v:25,c:DORADO},{v:2,c:GRIS}])+
+    `<div class="muted" style="font-size:12px;margin-top:8px">Composición 2025</div>`;
+  const rows=[
+    ['Cuerpo Académico Consolidado (CAC)',AZUL,52,'66%',D.caCons],
+    ['Cuerpo Académico en Consolidación (CAEC)',DORADO,25,'32%',D.caEnCons],
+    ['Cuerpo Académico en Formación (CAEF)',GRIS,2,'2%',D.caForm],
+  ];
+  document.getElementById('p2rows').innerHTML=
+    rows.map(([nm,c,ct,pc,arr])=>`
+      <div class="ca-row">
+        <span class="dot" style="background:${c}"></span>
+        <span class="nm">${nm}</span>
+        <span class="ct">${ct}</span>
+        <span class="pc">${pc}</span>
+        ${deltaHTML(arr)}
+      </div>`).join('')+
+    `<div class="ca-total"><span class="t-lbl">Total de Cuerpos Académicos</span>
+      <span style="display:flex;align-items:center;gap:14px"><span class="t-val">79</span>${deltaHTML(D.caTotal)}</span></div>`;
+}
+
+/* ---------- render pantalla 3 ---------- */
+function renderP3(){
+  const cards=[
+    ['🔬','86','Proyectos de investigación que atienden problemáticas sociales relevantes',D.proy],
+    ['📄','354','Producción académica de la UADY en el Web of Science',D.wos],
+    ['🎓','68','Estancias posdoctorales',D.posdoc],
+  ];
+  document.getElementById('p3').innerHTML=cards.map(([ico,num,lbl,arr])=>`
+    <div class="big-card">
+      <div class="ico">${ico}</div>
+      <div class="num">${num}</div>
+      ${deltaHTML(arr)}
+      <div class="lbl">${lbl}</div>
+    </div>`).join('');
+}
+
+function setBase(y){
+  BASE=y;
+  document.querySelectorAll('.cmp-btn').forEach(b=>b.classList.toggle('on',+b.dataset.base===y));
+  renderP1(); renderP2(); renderP3();
+}
+setBase(2023);
+
+function show(i,btn){
+  document.querySelectorAll('.stage').forEach((s,k)=>s.classList.toggle('on',k===i));
+  document.querySelectorAll('.switch button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
