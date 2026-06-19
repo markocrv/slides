@@ -131,11 +131,6 @@
       <img src="uady-logo.png" alt="UADY">
     </div>
     <div class="scr-body">
-      <div class="cmp" data-cmp><span class="cmp-lbl">Comparar 2025 con:</span>
-        <div class="seg">
-          <button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">2023</button>
-          <button class="cmp-btn" data-base="2024" onclick="setBase(2024)">2024</button>
-        </div></div>
       <div class="p1" id="p1"></div>
 
       <div class="notas">
@@ -164,11 +159,6 @@
       <img src="uady-logo.png" alt="UADY">
     </div>
     <div class="scr-body">
-      <div class="cmp" data-cmp><span class="cmp-lbl">Comparar 2025 con:</span>
-        <div class="seg">
-          <button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">2023</button>
-          <button class="cmp-btn" data-base="2024" onclick="setBase(2024)">2024</button>
-        </div></div>
       <div class="p2">
         <div style="display:flex;flex-direction:column;align-items:center" id="p2donut"></div>
         <div id="p2rows"></div>
@@ -190,11 +180,6 @@
       <img src="uady-logo.png" alt="UADY">
     </div>
     <div class="scr-body">
-      <div class="cmp" data-cmp><span class="cmp-lbl">Comparar 2025 con:</span>
-        <div class="seg">
-          <button class="cmp-btn on" data-base="2023" onclick="setBase(2023)">2023</button>
-          <button class="cmp-btn" data-base="2024" onclick="setBase(2024)">2024</button>
-        </div></div>
       <div class="p3" id="p3"></div>
     </div>
   </div>
@@ -208,15 +193,7 @@ const D={
   caCons:[36,38,52], caEnCons:[37,38,25], caForm:[5,5,2], caTotal:[78,81,79],
   proy:[93,80,86], wos:[276,298,354], posdoc:[45,58,68]
 };
-let BASE=2023; const CUR=2025; const yIdx={2023:0,2024:1,2025:2};
 const fmt=n=>n.toLocaleString('es-MX');
-
-function pctChange(arr){const a=arr[yIdx[CUR]],b=arr[yIdx[BASE]];return (a-b)/b*100;}
-function deltaHTML(arr){
-  const v=pctChange(arr),up=v>=0,arrow=up?'▲':'▼',sign=up?'+':'−';
-  const cls=v>0?'up':v<0?'down':'flat';
-  return `<span class="delta ${cls}">${arrow} ${sign}${Math.abs(v).toFixed(1)}% vs ${BASE}</span>`;
-}
 
 /* anillo de porcentaje (share 2025) */
 function ring(pct,color){
@@ -250,21 +227,18 @@ function renderP1(){
     <div class="hero">
       <div class="big">649</div>
       <div class="cap">Profesorado de Tiempo Completo</div>
-      ${deltaHTML(D.ptc).replace('class="delta','class="delta')}
     </div>
     <div class="sub-card">
       ${ring(shProdep,DORADO)}
       <div class="num">479</div>
       <div class="lbl">PTC con Perfil Deseable PRODEP</div>
       <div class="share">74% del total de PTC</div>
-      ${deltaHTML(D.prodepN)}
     </div>
     <div class="sub-card">
       ${ring(shSnii,AZUL)}
       <div class="num">374</div>
       <div class="lbl">PTC con reconocimiento del SNII</div>
       <div class="share">58% del total de PTC</div>
-      ${deltaHTML(D.ptcSnii)}
     </div>`;
 }
 
@@ -285,10 +259,9 @@ function renderP2(){
         <span class="nm">${nm}</span>
         <span class="ct">${ct}</span>
         <span class="pc">${pc}</span>
-        ${deltaHTML(arr)}
       </div>`).join('')+
     `<div class="ca-total"><span class="t-lbl">Total de Cuerpos Académicos</span>
-      <span style="display:flex;align-items:center;gap:14px"><span class="t-val">79</span>${deltaHTML(D.caTotal)}</span></div>`;
+      <span class="t-val">79</span></div>`;
 }
 
 /* ---------- render pantalla 3 ---------- */
@@ -302,17 +275,11 @@ function renderP3(){
     <div class="big-card">
       <div class="ico">${ico}</div>
       <div class="num">${num}</div>
-      ${deltaHTML(arr)}
       <div class="lbl">${lbl}</div>
     </div>`).join('');
 }
 
-function setBase(y){
-  BASE=y;
-  document.querySelectorAll('.cmp-btn').forEach(b=>b.classList.toggle('on',+b.dataset.base===y));
-  renderP1(); renderP2(); renderP3();
-}
-setBase(2023);
+renderP1(); renderP2(); renderP3();
 
 function show(i,btn){
   document.querySelectorAll('.stage').forEach((s,k)=>s.classList.toggle('on',k===i));
