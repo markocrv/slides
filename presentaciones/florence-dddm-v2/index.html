@@ -67,7 +67,7 @@ button{font-family:'Inter'}
 .bar{height:14px;border-radius:8px;background:#F1EBE2;margin-top:24px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--brown);transition:width .9s cubic-bezier(.2,.8,.2,1)}
 .bet.win{border-color:#147A72;transform:translateY(-10px) scale(1.03);box-shadow:0 20px 40px rgba(20,122,114,.25)}
 .bet.win::after{content:'✓ ' attr(data-real);position:absolute;top:-22px;right:-14px;background:#147A72;color:#fff;font-weight:800;font-size:26px;padding:8px 18px;border-radius:30px;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
-.bet.lose{opacity:.55}
+.bet.lose{filter:grayscale(.7) opacity(.55)}
 .bet.lose[data-real]::after{content:attr(data-real);position:absolute;top:-18px;right:-10px;background:#fff;border:2px solid #C9BBAA;color:var(--soft);font-weight:700;font-size:20px;padding:5px 14px;border-radius:30px}
 @keyframes pop{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
 .bet-foot{display:flex;justify-content:space-between;align-items:center;margin-top:34px;font-size:24px;color:var(--soft)}
@@ -138,7 +138,7 @@ button{font-family:'Inter'}
 .ring{position:relative;width:640px;height:640px;flex:0 0 640px}
 .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
 .rbg{fill:none;stroke:#F1EBE2;stroke-width:34}
-.rfg{fill:none;stroke:var(--tc,#1E5A8A);stroke-width:34;stroke-linecap:round;stroke-dasharray:1759.3;stroke-dashoffset:1759.3;transition:stroke-dashoffset .25s linear,stroke .3s}
+.rfg{fill:none;stroke:var(--tc,#1E5A8A);stroke-width:34;stroke-linecap:round;stroke-dasharray:1759.3;stroke-dashoffset:0;transition:stroke-dashoffset .25s linear,stroke .3s}
 .ring.warn .rfg{stroke:#D0902A}.ring.over .rfg{stroke:#C0392B}
 .rin{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .t-phase{display:flex;gap:10px}
@@ -262,7 +262,7 @@ button{font-family:'Inter'}
 .frame-draw rect{width:calc(100% - 4px);height:calc(100% - 4px);fill:none;stroke:var(--dark);stroke-width:4}
 .fl{position:absolute;top:-24px;left:40px;background:var(--dark);color:var(--gold);font-weight:700;font-size:24px;letter-spacing:2px;text-transform:uppercase;padding:8px 22px;border-radius:12px}
 .g{display:grid;grid-template-columns:repeat(5,1fr);gap:16px 18px}
-.ph{background:#fff;border-radius:18px;border-top:8px solid var(--c);box-shadow:0 5px 16px rgba(80,60,40,.09);padding:22px 16px 18px;text-align:center;font-size:29px;font-weight:700;line-height:1.12;min-height:226px}
+.ph{background:#fff;border-radius:18px;border-top:8px solid var(--c);box-shadow:0 5px 16px rgba(80,60,40,.09);padding:22px 16px 18px;text-align:center;font-size:29px;font-weight:700;line-height:1.12;min-height:200px}
 .ph small{display:block;font-size:16px;letter-spacing:3px;color:var(--c);margin:10px 0 6px}
 .pb{width:72px;height:72px;border-radius:50%;background:var(--c);display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 0 0 6px var(--s)}
 .band{border-radius:16px;padding:22px;font-size:30px;font-weight:700;text-align:center;line-height:1.15}
@@ -271,12 +271,12 @@ button{font-family:'Inter'}
 .band.bi.visible::before{content:'';position:absolute;top:0;bottom:0;width:120px;left:-140px;background:linear-gradient(90deg,transparent,rgba(231,201,168,.35),transparent);animation:shine 2.6s ease-in-out infinite}
 @keyframes shine{to{left:110%}}
 .band.ld{background:#fff;color:var(--brown);border:3px dashed #B9A897}.band.ld small{color:var(--muted)}
-.qs{display:flex;gap:24px;margin-top:36px}.qs div{flex:1;font-size:29px;color:#4A433D;background:#fff;border-radius:16px;padding:18px 24px;box-shadow:0 4px 14px rgba(80,60,40,.07)}
+.qs{display:flex;gap:24px;margin-top:22px}.qs div{flex:1;font-size:29px;color:#4A433D;background:#fff;border-radius:16px;padding:18px 24px;box-shadow:0 4px 14px rgba(80,60,40,.07)}
 
 /* Tarjetas que se voltean */
 #flip-all{position:absolute;top:150px;right:84px;width:46px;height:46px;font:700 22px 'Inter';border-radius:50%;border:2px solid #D8C7B4;background:#fff;color:#B0A396;cursor:pointer;opacity:.6}#flip-all:hover{opacity:1}
 .flips{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:34px;perspective:1600px}
-.flip{height:300px;cursor:pointer}
+.flip{height:345px;cursor:pointer}
 .fin{position:relative;width:100%;height:100%;transition:transform .8s cubic-bezier(.3,1.3,.5,1);transform-style:preserve-3d}
 .flip.on .fin{transform:rotateY(180deg)}
 .ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;padding:26px 26px 20px;display:flex;flex-direction:column;box-shadow:0 8px 24px rgba(80,60,40,.12)}
@@ -308,6 +308,7 @@ button{font-family:'Inter'}
 .p1{font-size:36px;line-height:1.4;color:#E9DFD3}.p1 b{color:var(--gold)}
 .p2{font-size:28px;color:#BDB2A6;margin-top:30px!important}.p2 b{color:#fff}
 .dark .foot{color:#8E8378}
+.paper .foot{display:none}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 .static *{animation:none!important;transition:none!important}
 </style>
@@ -407,7 +408,7 @@ button{font-family:'Inter'}
  </div>
  <div class='ver fragment fade-up lo' data-lvl='1'><div class='meter'><div class='segs'><i class='on'></i><i class=''></i><i class=''></i><i class=''></i></div><small>Peso del BI</small><em class='pct'>0%</em></div>
   <div class='vt'>Esto no lo resuelve el BI</div><div class='vd'>Ningún tablero le dice a usted qué preguntar. Definir el problema es trabajo de <b>liderazgo y criterio</b>. El BI, a lo mucho, enciende alertas.</div></div></div><div class='foot'><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div></section>
-<section id='s-tline'><div class='kicker an'>Contexto · Equipo 1</div><h1 class='an'>Veinte años, del hospital a la ley</h1>
+<section id='s-tline'><div class='kicker an'>Contexto · Equipo 1</div><h1 class='an'>Del hospital a la ley: 21 años</h1>
  <div class='tline'><div class='tbar'><i></i></div><div class='ev up' style='--c:#9A6B4F;--i:0'><div class='evd'></div><div class='evc'><b>1853</b><div class='evt'>Inicia la Guerra de Crimea</div><div class='evx'>Gran Bretaña, Francia y el Imperio Otomano contra Rusia.</div></div></div><div class='ev dn' style='--c:#1E5A8A;--i:1'><div class='evd'></div><div class='evc'><b>Nov 1854</b><div class='evt'>Florence llega a Scutari</div><div class='evx'>Con 38 enfermeras, al Hospital del Cuartel.</div><span class=evf>F1</span></div></div><div class='ev up' style='--c:#B8860B;--i:2'><div class='evd'></div><div class='evc'><b>Ene 1855</b><div class='evt'>El peor mes</div><div class='evx'>2,761 muertes por enfermedad y 83 por heridas.</div><span class=evf>F3</span></div></div><div class='ev dn' style='--c:#7A4A9A;--i:3'><div class='evd'></div><div class='evc'><b>Mar 1855</b><div class='evt'>Llega la Comisión Sanitaria</div><div class='evx'>Drenajes, ventilación, agua limpia: la mortalidad se desploma.</div><span class=evf>F5</span></div></div><div class='ev up' style='--c:#D0602A;--i:4'><div class='evd'></div><div class='evc'><b>1856</b><div class='evt'>Termina la guerra y habla con la reina</div><div class='evx'>La evidencia llega a quien puede decidir: nace la Comisión Real.</div><span class=evf>F4</span></div></div><div class='ev dn' style='--c:#D0602A;--i:5'><div class='evd'></div><div class='evc'><b>1858</b><div class='evt'>La rosa y la Real Sociedad de Estadística</div><div class='evx'>Publica sus diagramas; primera mujer miembro de la Sociedad.</div><span class=evf>F4</span></div></div><div class='ev up' style='--c:#7A4A9A;--i:6'><div class='evd'></div><div class='evc'><b>1860</b><div class='evt'>Escuela de Enfermería Nightingale</div><div class='evx'>Institucionaliza lo aprendido para que no dependa de ella.</div><span class=evf>F5</span></div></div><div class='ev dn' style='--c:#7A4A9A;--i:7'><div class='evd'></div><div class='evc'><b>1875</b><div class='evt'>Ley de Salud Pública</div><div class='evx'>Drenaje, agua potable y normas sanitarias, obligatorios en todo el país.</div><span class=evf>F5</span></div></div></div>
  <div class='tl-foot an'>Del primer día en Scutari a la Ley de Salud Pública pasaron <b>21 años</b>. Decidir con datos también exige persistencia.</div><div class='foot'><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div></section>
 <section class='fase'>
@@ -690,7 +691,7 @@ Reveal.on('fragmentshown', e => { if (e.fragment.classList.contains('ver')) runM
     $('t-ph-expo').classList.toggle('on', phase === 'expo'); $('t-ph-q').classList.toggle('on', phase !== 'expo');
     $('t-clock').textContent = (c < 0 ? '−' : '') + String(Math.floor(a / 60)).padStart(2, '0') + ':' + String(a % 60).padStart(2, '0');
     ring.classList.toggle('warn', left <= 60 && left > 0); ring.classList.toggle('over', left <= 0);
-    $('t-ring').style.strokeDashoffset = CIRC * Math.max(0, left) / total;
+    $('t-ring').style.strokeDashoffset = CIRC * (1 - Math.max(0, left) / total);
     document.querySelectorAll('.tbtn').forEach(b => b.classList.toggle('on', +b.dataset.team === team));
     $('t-play').textContent = running ? '⏸ Pausar' : '▶ Iniciar';
     $('t-skip').textContent = phase === 'expo' ? 'Pasar a preguntas' : 'Volver a exposición';
