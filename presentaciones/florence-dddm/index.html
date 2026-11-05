@@ -235,8 +235,6 @@ html,body{margin:0;background:var(--paper)}
   <div class='hook-r'>
    <div class='kicker'>Antes de empezar</div>
    <h1 class='serif big'>¿Qué saben de<br>Florence Nightingale?</h1>
-   <div class='ideas-in'><input id='idea' type='text' placeholder='Escriba lo que diga el grupo y presione Enter…' autocomplete='off'><button id='idea-clear' title='Limpiar'>Limpiar</button></div>
-   <div id='ideas'></div>
   </div>
  </div>
 </section>
@@ -398,13 +396,13 @@ html,body{margin:0;background:var(--paper)}
     <button id='view-rosa' class='on'>Rosa</button><button id='view-bars'>Barras</button>
    </div>
    <svg id='rosa-svg' viewBox='0 0 1160 640'></svg>
-   <div class='rhint'>Pase el cursor sobre un mes para ver las cifras. El área de cada cuña es proporcional a la tasa anual de muertes por cada 1,000 soldados.</div>
+   <div class='rhint'>Área de cada cuña proporcional a la tasa anual de muertes por cada 1,000 soldados.</div>
   </div>
   <div class='rside'>
    <div class='it' style='--c:#1E5A8A'><small>El problema</small>En enero de 1855, a ese ritmo, el ejército desaparecía en un año.</div>
    <div class='it' style='--c:#B8860B'><small>La causa</small><b id='pct-dis'>80.5%</b> de las muertes fueron por enfermedades prevenibles <span class='blue'>(azul)</span>.</div>
    <div class='it' style='--c:#7A4A9A'><small>La solución</small>Después de la Comisión Sanitaria (marzo de 1855), la rosa se encoge.</div>
-   <div class='qq fragment'>¿Es el mejor gráfico posible?<span>Cambie a «Barras» y compare. ¿Por qué ella eligió la rosa?</span></div>
+   <div class='qq fragment'>¿Es el mejor gráfico posible?<span>¿Qué usarían hoy? ¿Por qué ella eligió este?</span></div>
   </div>
  </div>
  <div class='foot'><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
@@ -503,22 +501,6 @@ Reveal.initialize({
   controls:true, progress:true, center:false, slideNumber:'c/t'
 });
 
-/* ── Lluvia de ideas ── */
-(function(){
-  const inp = document.getElementById('idea'), box = document.getElementById('ideas');
-  const tints = ['#E3EDF6','#DFF1EE','#F7EED6','#FBE6DA','#EEE4F4'];
-  let i = 0;
-  inp.addEventListener('keydown', e => {
-    e.stopPropagation();
-    if (e.key === 'Enter' && inp.value.trim()) {
-      const s = document.createElement('span');
-      s.textContent = inp.value.trim();
-      s.style.background = tints[i % 5]; s.style.transform = `rotate(${(Math.random()*4-2).toFixed(1)}deg)`; i++;
-      box.appendChild(s); inp.value = '';
-    }
-  });
-  document.getElementById('idea-clear').onclick = () => { box.innerHTML = ''; inp.focus(); };
-})();
 
 /* ── Cronómetro ── */
 (function(){
