@@ -236,6 +236,14 @@ html,body{margin:0;background:var(--paper)}
 .dates small{display:block;font-size:15px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700}
 .dates b{font-size:30px}
 .reveal .dates p{font-size:22px;color:var(--muted);flex:1}
+.boss{display:flex;flex-direction:column;justify-content:center;height:100%}
+.boss .bq{font-family:'Playfair Display',serif;font-size:92px;line-height:1.15;color:#F3EADF}
+.boss .bq em{color:var(--gold);font-style:italic}
+.reveal .boss .bs{font-size:32px;color:#CDBFB0;margin-top:30px;max-width:1450px;line-height:1.4}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px}
+.tips>div{background:rgba(255,255,255,.07);border:1px solid rgba(231,201,168,.35);border-radius:20px;padding:24px 28px}
+.tips b{display:block;font-size:28px;color:var(--gold);margin-bottom:8px}
+.tips span{font-size:22px;line-height:1.4;color:#E6DACC}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -266,7 +274,7 @@ html,body{margin:0;background:var(--paper)}
  <div class="band fragment fade-up">
   <div class="card"><i>👤</i><span>Todas las entregas son <b>individuales</b>.</span></div>
   <div class="card"><i>🎤</i><span>El proyecto final se <b>expone en persona</b> en la última clase.</span></div>
-  <div class="card"><i>💯</i><span>Cada entrega se califica sobre <b>100 puntos</b> con su rúbrica.</span></div>
+  <div class="card"><i>⚖️</i><span>Las 3 ADA valen <b>50 %</b>; el proyecto final con su exposición, el otro <b>50 %</b>.</span></div>
   <div class="card"><i>📅</i><span>Todo subido a más tardar el <b>viernes 27 de noviembre</b>.</span></div>
  </div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
@@ -482,18 +490,31 @@ html,body{margin:0;background:var(--paper)}
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
 
+<!-- 14a · La exposición: 10 minutos con el dueño -->
+<section class="dark">
+ <div class="boss">
+  <div class="kicker">La exposición final · sábado 28 de noviembre</div>
+  <div class="bq">Yo soy su <em>jefe</em>,<br>o el <em>dueño</em> de la empresa.<br>Tiene <em>10 minutos.</em></div>
+  <p class="bs">En ese tiempo debe mostrarme lo relevante de sus datos: qué está pasando, por qué importa y qué debemos hacer.</p>
+  <div class="tips">
+   <div class="fragment fade-up"><b>Empiece por la conclusión</b><span>La primera frase es el hallazgo, no el índice.</span></div>
+   <div class="fragment fade-up"><b>Hable en el idioma del negocio</b><span>Pesos, clientes, días y metas. No visuales ni menús.</span></div>
+   <div class="fragment fade-up"><b>Termine con una decisión</b><span>Qué propone hacer con lo que muestra el tablero.</span></div>
+  </div>
+ </div>
+</section>
+
 <!-- 14 · La exposición -->
 <section style="--c:var(--pf)">
  <div class="kicker">La exposición en la última clase</div>
  <h1>Cuéntelo con las cinco fases del DDDM</h1>
- <p class="sub" style="margin-top:6px"><b>Sábado 28 de noviembre</b>, en persona y de forma individual.</p>
- <p class="sub">La misma ruta de Florence sirve para presentar su reporte. Así cubre todos los criterios de la rúbrica.</p>
+ <p class="sub" style="margin-top:6px"><b>10 minutos</b>, individual y en persona. La misma ruta de Florence ordena su exposición y cubre todos los criterios de la rúbrica.</p>
  <div class="phases">
-  <div class="ph" style="--c:#1E5A8A;--cs:#E3EDF6"><div class="n">Fase 1</div><h3>El problema</h3><p>¿Qué decisión de su área necesita datos?</p><span class="rb">Contexto</span></div>
-  <div class="ph fragment fade-up" style="--c:#147A72;--cs:#DFF1EE"><div class="n">Fase 2</div><h3>Los datos</h3><p>De dónde salieron, cómo los limpió y cómo los relacionó.</p><span class="rb">Criterios 1 y 2</span></div>
-  <div class="ph fragment fade-up" style="--c:#B8860B;--cs:#F6EBD0"><div class="n">Fase 3</div><h3>El análisis</h3><p>Sus KPI: qué mide cada uno y por qué importa.</p><span class="rb">Criterio 3</span></div>
-  <div class="ph fragment fade-up" style="--c:#D0602A;--cs:#F8E3D7"><div class="n">Fase 4</div><h3>La comunicación</h3><p>La página: qué cuenta cada gráfica a primera vista.</p><span class="rb">Criterio 4</span></div>
-  <div class="ph fragment fade-up" style="--c:#7A4A9A;--cs:#ECE2F2"><div class="n">Fase 5</div><h3>La decisión</h3><p>Qué haría distinto su empresa con este reporte.</p><span class="rb">Criterio 5</span></div>
+  <div class="ph" style="--c:#1E5A8A;--cs:#E3EDF6"><div class="n">Fase 1 · 1 min</div><h3>El problema</h3><p>¿Qué decisión de su área necesita datos?</p><span class="rb">Contexto</span></div>
+  <div class="ph fragment fade-up" style="--c:#147A72;--cs:#DFF1EE"><div class="n">Fase 2 · 1 min</div><h3>Los datos</h3><p>De dónde salieron y cómo se relacionan. Breve: al dueño le importa que sean confiables.</p><span class="rb">Criterios 1 y 2</span></div>
+  <div class="ph fragment fade-up" style="--c:#B8860B;--cs:#F6EBD0"><div class="n">Fase 3 · 3 min</div><h3>El análisis</h3><p>Sus KPI: qué mide cada uno y por qué importa.</p><span class="rb">Criterio 3</span></div>
+  <div class="ph fragment fade-up" style="--c:#D0602A;--cs:#F8E3D7"><div class="n">Fase 4 · 3 min</div><h3>La comunicación</h3><p>El recorrido por el tablero: qué cuenta cada gráfica a primera vista.</p><span class="rb">Criterio 4</span></div>
+  <div class="ph fragment fade-up" style="--c:#7A4A9A;--cs:#ECE2F2"><div class="n">Fase 5 · 2 min</div><h3>La decisión</h3><p>Qué haría distinto su empresa con este reporte.</p><span class="rb">Criterio 5</span></div>
  </div>
  <p class="sub fragment fade-up" style="margin-top:34px">Leer los números no basta. La rúbrica premia <b>interpretar</b>: qué revelan los datos y qué decisión apoyan.</p>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
@@ -510,7 +531,7 @@ html,body{margin:0;background:var(--paper)}
   <tr style="--c:var(--a3)"><td>ADA 3<small>En el celular</small></td><td>Vista móvil (25) · Legibilidad (25) · Publicación (25) · App móvil (25)</td><td>100</td></tr>
   <tr style="--c:var(--pf)"><td>Proyecto final<small>Su empresa · se expone</small></td><td>Datos (15) · Modelo (20) · KPI (25) · Visualización (25) · Interpretación (15)</td><td>100</td></tr>
  </table>
- <div class="dates"><div><small>Fecha límite de las cuatro entregas</small><b>Viernes 27 de noviembre</b></div><div><small>Exposición del proyecto final</small><b>Sábado 28 de noviembre</b></div><p>Las ADA se construyen junto con el grupo en cada sesión.</p></div>
+ <div class="dates"><div><small>Fecha límite de las cuatro entregas</small><b>Viernes 27 de noviembre</b></div><div><small>Exposición del proyecto final</small><b>Sábado 28 de noviembre</b></div><div><small>Calificación final</small><b>3 ADA 50 % · Proyecto 50 %</b></div></div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
 
