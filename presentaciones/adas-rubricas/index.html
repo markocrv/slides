@@ -231,6 +231,11 @@ html,body{margin:0;background:var(--paper)}
 .mobside li{list-style:none;font-size:24px;line-height:1.4;color:var(--muted);margin-top:18px;padding-left:30px;position:relative}
 .mobside li::before{content:'→';position:absolute;left:0;color:var(--a3);font-weight:800}
 
+.dates{display:flex;gap:24px;align-items:center;margin-top:18px}
+.dates>div{background:var(--dark);color:#F3EADF;border-radius:16px;padding:16px 26px}
+.dates small{display:block;font-size:15px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700}
+.dates b{font-size:30px}
+.reveal .dates p{font-size:22px;color:var(--muted);flex:1}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -254,7 +259,7 @@ html,body{margin:0;background:var(--paper)}
  <h1>Cuatro entregas, una sola historia</h1>
  <div class="route">
   <div class="stop" style="--c:var(--a1);--cs:var(--a1s)"><div class="dot"><small>ADA</small><b>1</b></div><h3>El modelo</h3><p>Tres tablas en Excel, sus tipos de dato y sus relaciones.</p><span class="pill">Finanzas personales</span></div>
-  <div class="stop fragment fade-up" style="--c:var(--a2);--cs:var(--a2s)"><div class="dot"><small>ADA</small><b>2</b></div><h3>El reporte</h3><p>Cuatro páginas con indicadores, gráficas y filtros.</p><span class="pill">Finanzas personales</span></div>
+  <div class="stop fragment fade-up" style="--c:var(--a2);--cs:var(--a2s)"><div class="dot"><small>ADA</small><b>2</b></div><h3>El reporte</h3><p>Seis páginas con indicadores, gráficas y filtros.</p><span class="pill">Finanzas personales</span></div>
   <div class="stop fragment fade-up" style="--c:var(--a3);--cs:var(--a3s)"><div class="dot"><small>ADA</small><b>3</b></div><h3>En el celular</h3><p>Vista móvil, publicación en la nube y consulta desde la app.</p><span class="pill">Finanzas personales</span></div>
   <div class="stop fragment fade-up" style="--c:var(--pf);--cs:var(--pfs)"><div class="dot"><small>Final</small><b>★</b></div><h3>Su empresa</h3><p>Un reporte con datos reales de su organización y al menos cuatro KPI.</p><span class="pill">Datos de su trabajo</span></div>
  </div>
@@ -262,6 +267,7 @@ html,body{margin:0;background:var(--paper)}
   <div class="card"><i>👤</i><span>Todas las entregas son <b>individuales</b>.</span></div>
   <div class="card"><i>🎤</i><span>El proyecto final se <b>expone en persona</b> en la última clase.</span></div>
   <div class="card"><i>💯</i><span>Cada entrega se califica sobre <b>100 puntos</b> con su rúbrica.</span></div>
+  <div class="card"><i>📅</i><span>Todo subido a más tardar el <b>viernes 27 de noviembre</b>.</span></div>
  </div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
@@ -333,8 +339,8 @@ html,body{margin:0;background:var(--paper)}
   <div class="thumb"><div class="rep" data-pagina="0" data-escala="0.405"></div><div class="tl"><b>1 · General</b><span>La vista de conjunto</span></div></div>
   <div class="thumb"><div class="rep" data-pagina="1" data-escala="0.405"></div><div class="tl"><b>2 · Categorías</b><span>¿En qué se va el dinero?</span></div></div>
   <div class="thumb"><div class="rep" data-pagina="2" data-escala="0.405"></div><div class="tl"><b>3 · Gastos</b><span>El detalle de los egresos</span></div></div>
-  <div class="thumb extra"><div class="rep" data-pagina="3" data-escala="0.405"></div><div class="tl"><b>4 · Egresos</b><span>¿Con qué pago?</span></div></div>
-  <div class="thumb extra"><div class="rep" data-pagina="4" data-escala="0.405"></div><div class="tl"><b>5 · Ingresos</b><span>¿De dónde entra?</span></div></div>
+  <div class="thumb"><div class="rep" data-pagina="3" data-escala="0.405"></div><div class="tl"><b>4 · Egresos</b><span>¿Con qué pago?</span></div></div>
+  <div class="thumb"><div class="rep" data-pagina="4" data-escala="0.405"></div><div class="tl"><b>5 · Ingresos</b><span>¿De dónde entra?</span></div></div>
   <div class="thumb"><div class="rep" data-pagina="5" data-escala="0.405"></div><div class="tl"><b>6 · Datos</b><span>Todos los movimientos</span></div></div>
  </div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
@@ -368,7 +374,7 @@ html,body{margin:0;background:var(--paper)}
  <div class="kicker">ADA 2 · Página 4 de 6</div>
  <h1>Egresos: ¿Con qué pago?</h1>
  <div class="pgwrap"><div class="rep" data-pagina="3" data-escala="1.06"></div>
-  <div class="pgside"><p>Egresos por banco (pastel) y por tipo de pago (barras): crédito, débito, efectivo.</p><div class="pf"><small>Filtro de página</small>Categorias[Tipo] = Egreso</div><div class="crit-list"><span>Página adicional del reporte de clase</span></div></div></div>
+  <div class="pgside"><p>Egresos por banco (pastel) y por tipo de pago (barras): crédito, débito, efectivo.</p><div class="pf"><small>Filtro de página</small>Categorias[Tipo] = Egreso</div><div class="crit-list"><span>Criterio 2 · pastel por banco y barras por tipo de pago</span><span>Criterio 3 · filtro de página</span></div></div></div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
 
@@ -376,7 +382,7 @@ html,body{margin:0;background:var(--paper)}
  <div class="kicker">ADA 2 · Página 5 de 6</div>
  <h1>Ingresos: ¿De dónde entra?</h1>
  <div class="pgwrap"><div class="rep" data-pagina="4" data-escala="1.06"></div>
-  <div class="pgside"><p>La misma página que Egresos, filtrada a los ingresos.</p><div class="pf"><small>Filtro de página</small>Categorias[Tipo] = Ingreso</div><div class="crit-list"><span>Página adicional del reporte de clase</span></div></div></div>
+  <div class="pgside"><p>La misma página que Egresos, filtrada a los ingresos.</p><div class="pf"><small>Filtro de página</small>Categorias[Tipo] = Ingreso</div><div class="crit-list"><span>Criterio 2 · pastel por banco y barras por tipo de pago</span><span>Criterio 3 · filtro de página</span></div></div></div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
 
@@ -480,6 +486,7 @@ html,body{margin:0;background:var(--paper)}
 <section style="--c:var(--pf)">
  <div class="kicker">La exposición en la última clase</div>
  <h1>Cuéntelo con las cinco fases del DDDM</h1>
+ <p class="sub" style="margin-top:6px"><b>Sábado 28 de noviembre</b>, en persona y de forma individual.</p>
  <p class="sub">La misma ruta de Florence sirve para presentar su reporte. Así cubre todos los criterios de la rúbrica.</p>
  <div class="phases">
   <div class="ph" style="--c:#1E5A8A;--cs:#E3EDF6"><div class="n">Fase 1</div><h3>El problema</h3><p>¿Qué decisión de su área necesita datos?</p><span class="rb">Contexto</span></div>
@@ -503,6 +510,7 @@ html,body{margin:0;background:var(--paper)}
   <tr style="--c:var(--a3)"><td>ADA 3<small>En el celular</small></td><td>Vista móvil (25) · Legibilidad (25) · Publicación (25) · App móvil (25)</td><td>100</td></tr>
   <tr style="--c:var(--pf)"><td>Proyecto final<small>Su empresa · se expone</small></td><td>Datos (15) · Modelo (20) · KPI (25) · Visualización (25) · Interpretación (15)</td><td>100</td></tr>
  </table>
+ <div class="dates"><div><small>Fecha límite de las cuatro entregas</small><b>Viernes 27 de noviembre</b></div><div><small>Exposición del proyecto final</small><b>Sábado 28 de noviembre</b></div><p>Las ADA se construyen junto con el grupo en cada sesión.</p></div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
 
@@ -682,21 +690,21 @@ const RUB = {
    'Las 5 tarjetas están presentes y los valores son correctos, pero algún color o formato de número no coincide con el modelo.',
    '3 o 4 tarjetas están presentes o algún cálculo arroja un valor incorrecto.',
    'Menos de 3 tarjetas presentes o los valores calculados son incorrectos en la mayoría.']],
-  ['Visualizaciones', 'Línea (p. 1), nube de palabras (p. 1), pastel (p. 2) y tabla con formato condicional (p. 3)', 30, [
-   'Todos los visuales están en la página correcta, muestran los datos adecuados, tienen etiquetas de datos visibles y el formato condicional de colores por categoría está aplicado en la tabla de gastos.',
+  ['Visualizaciones', 'Línea y nube de palabras (General), pastel (Categorías), tablas con formato condicional (Gastos y Datos), pastel por banco y barras por tipo de pago (Egresos e Ingresos)', 30, [
+   'Todos los visuales están en la página correcta, muestran los datos adecuados, tienen etiquetas de datos visibles y el formato condicional de colores según el monto está aplicado en las tablas de Gastos y Datos.',
    'Todos los visuales están presentes, pero alguno está en la página incorrecta, le faltan etiquetas o el formato condicional está aplicado a medias.',
-   '2 o 3 de los 4 visuales están bien construidos; el resto falta o muestra datos incorrectos.',
-   'Solo 1 visual o ninguno está correctamente construido.']],
-  ['Filtros e interactividad', 'Fechas, segmentadores por categoría, subcategoría, banco y tipo, y buscador de concepto', 25, [
-   'Todos los filtros están en las páginas correctas, funcionan al seleccionar valores y afectan los visuales correspondientes. El buscador de concepto (p. 4) también opera correctamente.',
+   'Al menos la mitad de los visuales están bien construidos; el resto falta o muestra datos incorrectos.',
+   'Menos de la mitad de los visuales están correctamente construidos.']],
+  ['Filtros e interactividad', 'Fechas, filtros de página (Egreso/Ingreso), segmentadores por categoría, subcategoría, banco y tipo, y buscador de concepto', 25, [
+   'Todos los filtros están en las páginas correctas, funcionan al seleccionar valores y afectan los visuales correspondientes. El buscador de concepto (Datos) opera correctamente y los filtros de página dejan solo egresos en Gastos y Egresos, y solo ingresos en Ingresos.',
    'La mayoría de los filtros funcionan, pero alguno no afecta los visuales correctamente o está en la página equivocada.',
    'Solo están los filtros de fecha; faltan los segmentadores por categoría o banco.',
    'No hay filtros funcionales o faltan en la mayoría de las páginas.']],
-  ['Diseño y presentación', 'Títulos, estructura de las 4 páginas, consistencia visual y legibilidad', 25, [
-   'Las 4 páginas tienen sus títulos correctos y la fecha y hora en el encabezado; los elementos están alineados, el diseño es limpio y la paleta es consistente con el modelo.',
-   'Las 4 páginas están presentes, pero algún título es incorrecto, hay elementos desalineados o la paleta difiere notablemente del modelo.',
-   'Solo 2 o 3 páginas están completas, o el diseño general dificulta la lectura.',
-   'Solo 1 página, o el reporte no tiene una estructura reconocible respecto al modelo.']],
+  ['Diseño y presentación', 'Títulos, estructura de las 6 páginas, consistencia visual y legibilidad', 25, [
+   'Las 6 páginas tienen sus títulos correctos y la fecha y hora en el encabezado; los elementos están alineados, el diseño es limpio y la paleta es consistente con el modelo.',
+   'Las 6 páginas están presentes, pero algún título es incorrecto, hay elementos desalineados o la paleta difiere notablemente del modelo.',
+   'Solo 3 a 5 páginas están completas, o el diseño general dificulta la lectura.',
+   'Solo 1 o 2 páginas, o el reporte no tiene una estructura reconocible respecto al modelo.']],
  ],
  ada3: [
   ['Diseño de la vista móvil', 'Configuración del lienzo vertical en Power BI Desktop', 25, [
