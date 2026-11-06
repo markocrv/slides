@@ -234,6 +234,30 @@ section.split .grp .fk{display:table-cell;background:var(--teal-s);color:var(--t
 .closing .l em{color:var(--gold);font-style:italic}
 .closing .s{font-size:32px;color:#CDBFB0;margin-top:50px!important;max-width:1400px;line-height:1.4}
 
+/* El valor está en el cruce */
+.cross{display:flex;flex-direction:column;gap:18px;margin-top:40px}
+.xrow{display:grid;grid-template-columns:720px 60px 1fr;align-items:center;background:#fff;border-radius:20px;padding:20px 28px;box-shadow:0 6px 20px rgba(80,60,40,.09)}
+.xt{display:flex;gap:10px;flex-wrap:wrap}
+.xt span{font-size:21px;font-weight:800;color:#fff;background:var(--c);padding:8px 16px;border-radius:12px}
+.xa{font-size:40px;color:var(--teal);font-weight:800;text-align:center}
+.xq{font-size:29px;line-height:1.3;font-weight:600}
+.xq.dim{color:#A39686;font-weight:500;font-style:italic}
+.xrow.hot{border:4px solid var(--teal);box-shadow:0 12px 30px rgba(20,122,114,.22)}
+.xrow.hot .xq b{color:var(--teal);display:block;font-size:22px;letter-spacing:3px;text-transform:uppercase;margin-top:6px}
+.reveal .xend{margin-top:34px;font-family:'Playfair Display',serif;font-size:48px;text-align:center}
+
+/* El plano de los datos */
+.plano{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;margin-top:40px;align-items:start}
+.blueprint{width:100%;height:330px;color:var(--e1);background:#E3EDF6;border-radius:22px;padding:20px;box-sizing:border-box}
+.blueprint text{font:600 20px 'Inter';fill:var(--e1)}
+.reveal .plano-t{font-family:'Playfair Display',serif;font-size:40px;line-height:1.2;margin-top:28px}
+.reveal .plano-s{font-size:23px;line-height:1.45;color:var(--muted);margin-top:18px}
+.reasons{display:flex;flex-direction:column;gap:18px}
+.rs{display:flex;gap:24px;align-items:flex-start;background:#fff;border-radius:20px;padding:22px 28px;box-shadow:0 6px 20px rgba(80,60,40,.09)}
+.rs>b{flex:0 0 60px;height:60px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px}
+.rs h3{margin:2px 0 6px;font-size:30px;font-weight:800}
+.rs p{font-size:24px;line-height:1.38;color:var(--muted)}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -297,6 +321,50 @@ section.split .grp .fk{display:table-cell;background:var(--teal-s);color:var(--t
   <div class="q">Una tabla,<br><em>un tema.</em></div>
   <p class="s">Cada dato debe vivir en un solo lugar. Lo demás se consigue <b style="color:#F3EADF">relacionando</b>.</p>
  </div>
+</section>
+
+<!-- 5b · El valor está en el cruce -->
+<section>
+ <div class="kicker">Por qué relacionar</div>
+ <h1>El valor está en el cruce</h1>
+ <p class="sub">Cada tabla que se suma permite una pregunta que antes no se podía contestar.</p>
+ <div class="cross">
+  <div class="xrow"><div class="xt"><span style="--c:var(--e1)">Soldados</span></div><div class="xa">→</div><div class="xq dim">Una lista de nombres. No responde nada.</div></div>
+  <div class="xrow fragment fade-up"><div class="xt"><span style="--c:var(--e4)">Ingresos</span><span style="--c:var(--e5)">Causas</span></div><div class="xa">→</div><div class="xq">¿De qué se enferman y mueren los soldados?</div></div>
+  <div class="xrow fragment fade-up"><div class="xt"><span style="--c:var(--e4)">Ingresos</span><span style="--c:var(--e5)">Causas</span><span style="--c:var(--e3)">Hospitales</span></div><div class="xa">→</div><div class="xq">¿En qué hospital se muere más por causas prevenibles?</div></div>
+  <div class="xrow fragment fade-up"><div class="xt"><span style="--c:var(--e4)">Ingresos</span><span style="--c:var(--e5)">Causas</span><span style="--c:var(--e3)">Hospitales</span><span style="--c:var(--e1)">Soldados</span></div><div class="xa">→</div><div class="xq">¿Qué regimientos llegan más enfermos?</div></div>
+  <div class="xrow fragment fade-up hot"><div class="xt"><span style="--c:var(--e4)">Ingresos</span><span style="--c:var(--e5)">Causas</span><span style="--c:var(--e3)">Hospitales</span><span style="--c:var(--e2)">Calendario</span></div><div class="xa">→</div><div class="xq">¿Bajaron las muertes después de la Comisión Sanitaria de marzo de 1855? <b>La pregunta de Florence.</b></div></div>
+ </div>
+ <p class="xend fragment fade-up">Una tabla aislada <b>describe</b>. Las tablas relacionadas <b class="hl">explican</b>.</p>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 5c · Por qué el modelo ER -->
+<section>
+ <div class="kicker">El modelo entidad-relación</div>
+ <h1>El plano de los datos</h1>
+ <div class="plano">
+  <div class="plano-l">
+   <svg viewBox="0 0 420 300" class="blueprint" aria-hidden="true">
+    <rect x="20" y="20" width="380" height="260" rx="6" fill="none" stroke="currentColor" stroke-width="4"/>
+    <line x1="200" y1="20" x2="200" y2="170" stroke="currentColor" stroke-width="3"/>
+    <line x1="20" y1="170" x2="300" y2="170" stroke="currentColor" stroke-width="3"/>
+    <line x1="300" y1="170" x2="300" y2="280" stroke="currentColor" stroke-width="3"/>
+    <path d="M200 120a40 40 0 0 1 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 5"/>
+    <text x="110" y="100" text-anchor="middle">Sala</text><text x="300" y="100" text-anchor="middle">Cocina</text>
+    <text x="160" y="235" text-anchor="middle">Recámara</text><text x="350" y="235" text-anchor="middle">Baño</text>
+   </svg>
+   <p class="plano-t">Nadie construye una casa sin plano. Nadie debería armar un tablero sin un modelo de datos.</p>
+   <p class="plano-s">Lo propuso Peter Chen en 1976 para que el negocio y los sistemas hablaran del mismo dibujo. Medio siglo después sigue siendo la forma estándar de diseñar información.</p>
+  </div>
+  <div class="reasons">
+   <div class="rs fragment fade-up"><b>1</b><div><h3>Un idioma común</h3><p>El director y el programador leen el mismo diagrama. Se discute el negocio, no el código.</p></div></div>
+   <div class="rs fragment fade-up"><b>2</b><div><h3>Hace visibles las reglas del negocio</h3><p>¿Un alumno puede estar en dos programas? ¿Una póliza tiene un solo agente? Dibujar la relación obliga a contestarlo.</p></div></div>
+   <div class="rs fragment fade-up"><b>3</b><div><h3>Una sola versión de la verdad</h3><p>Cada dato vive en un lugar y se consulta desde todos los demás. Se acaban las cifras que no cuadran entre áreas.</p></div></div>
+   <div class="rs fragment fade-up"><b>4</b><div><h3>Es lo que Power BI necesita</h3><p>La vista de Modelo es un diagrama entidad-relación. Si el modelo está mal, el tablero se ve bien y miente.</p></div></div>
+  </div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
 
 <!-- 6 · Entidad y atributo -->
