@@ -172,6 +172,65 @@ html,body{margin:0;background:var(--paper)}
 .closing .l{font-family:'Playfair Display',serif;font-size:84px;line-height:1.22;color:#F3EADF}
 .closing .l em{color:var(--gold);font-style:italic}
 .reveal .closing .s{font-size:32px;color:#CDBFB0;margin-top:46px;max-width:1450px;line-height:1.4}
+/* Réplicas del reporte de clase */
+.rep{position:relative;transform-origin:0 0}
+.rp{position:absolute;left:0;top:0;width:1280px;height:720px;background:#F4F5FA;font-family:'Segoe UI','Inter',sans-serif;color:#252423;overflow:hidden;border-radius:4px;transform-origin:0 0}
+.rp.m{width:340px}
+.vz{position:absolute;background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.12);overflow:hidden;box-sizing:border-box}
+.vz.tx{background:transparent;box-shadow:none;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;color:#262A76}
+.vz.img{background:transparent;box-shadow:none;display:flex;align-items:center}
+.vz.img img{height:100%;display:block}
+.vz.card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4px}
+.vz.card .cl{font-size:14px;font-weight:700;color:#605E5C}
+.vz.card .cv{font-size:30px;font-weight:700;color:var(--cc,#262A76);line-height:1.15}
+.vz.card.now .cv{font-size:20px}
+.vz.sl{padding:6px 8px;font-size:12px}
+.vz.sl .sh{font-weight:700;color:#605E5C;margin-bottom:4px}
+.vz.sl .rg{display:flex;gap:6px}
+.vz.sl .rg span{flex:1;border:1px solid #C8C6C4;border-radius:2px;padding:3px 5px;font-size:11px}
+.vz.sl .rb{height:4px;background:#262A76;border-radius:2px;margin-top:10px;position:relative}
+.vz.sl .rb::before,.vz.sl .rb::after{content:'';position:absolute;top:-4px;width:12px;height:12px;border-radius:50%;background:#262A76}
+.vz.sl .rb::before{left:-2px}.vz.sl .rb::after{right:-2px}
+.vz.sl .op{display:flex;flex-wrap:wrap;gap:4px}
+.vz.sl .op span{border:1px solid #C8C6C4;border-radius:2px;padding:2px 6px;font-size:11px;white-space:nowrap}
+.vz.tb{font-size:11px}
+.vz.tb table{width:100%;border-collapse:collapse}
+.vz.tb th{text-align:left;font-weight:700;padding:5px 6px;border-bottom:2px solid #262A76;white-space:nowrap}
+.vz.tb td{padding:4px 6px;border-bottom:1px solid #EDEBE9;white-space:nowrap}
+.vz.tb td.n{text-align:right}
+.vz.ch svg{display:block;width:100%;height:100%;font-family:'Segoe UI','Inter',sans-serif}
+.vz.wc{display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:2px 14px;padding:10px}
+.vz.wc span{font-weight:700;line-height:1}
+.vz.bs{padding:8px}
+.vz.bs .sb{border:1px solid #8A8886;border-radius:2px;height:28px;display:flex;align-items:center;padding:0 8px;font-size:12px;color:#605E5C}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 26px;margin-top:26px}
+.thumb .rep{width:518px;height:292px}
+.thumb .rp{box-shadow:0 6px 20px rgba(80,60,40,.18)}
+.thumb .tl{margin-top:10px;font-size:21px;display:flex;gap:12px;align-items:baseline}
+.thumb .tl b{color:var(--a2)}
+.thumb .tl span{color:var(--muted)}
+.thumb.extra .tl b{color:var(--soft)}
+.pgwrap{display:flex;gap:30px;margin-top:20px;align-items:flex-start}
+.pgwrap>.rep{flex:0 0 1357px;height:763px}
+.pgwrap .rp{box-shadow:0 10px 30px rgba(80,60,40,.18)}
+.pgside{flex:1}
+.reveal .pgside p{font-size:23px;line-height:1.42;color:#3A342F}
+.pgside .pf{margin-top:20px;background:var(--dark);color:#F3EADF;border-radius:14px;padding:14px 18px;font-size:20px;font-weight:700}
+.pgside .pf small{display:block;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:2px}
+.crit-list{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.crit-list span{font-size:19px;font-weight:700;color:var(--a2);background:var(--a2s);border-radius:12px;padding:10px 14px;line-height:1.3}
+.reveal .pgslide h1{font-size:50px}
+.kc .e .sw{display:inline-block;width:14px;height:14px;border-radius:4px;background:var(--k);margin:0 8px 0 0;vertical-align:-1px}
+.kc .e .sw:first-child{margin-left:0}
+.mob{display:grid;grid-template-columns:330px 330px 1fr;gap:50px;margin-top:30px;align-items:start}
+.phone2{text-align:center}
+.phone2 .scr{width:290px;height:680px;border:14px solid var(--dark);border-radius:44px;overflow:hidden;background:#F4F5FA;margin:0 auto;position:relative;box-shadow:0 14px 34px rgba(0,0,0,.2)}
+.phone2 .scr .rep{position:absolute;left:0;top:10px}
+.phone2>span{display:block;margin-top:14px;font-size:22px;font-weight:800;color:var(--a3)}
+.reveal .mobside p{font-size:30px;line-height:1.35;font-weight:700}
+.mobside li{list-style:none;font-size:24px;line-height:1.4;color:var(--muted);margin-top:18px;padding-left:30px;position:relative}
+.mobside li::before{content:'→';position:absolute;left:0;color:var(--a3);font-weight:800}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -235,7 +294,7 @@ html,body{margin:0;background:var(--paper)}
     <div class="st fragment fade-up"><b>3</b><span>Revisar el <b>tipo de dato</b> y el <b>formato</b> de cada campo.</span></div>
     <div class="st fragment fade-up"><b>4</b><span>Crear las dos relaciones <b>muchos a uno</b> desde Movimientos.</span></div>
    </div>
-   <p class="sub fragment fade-up" style="margin-top:26px;font-size:22px">Los campos del diagrama son de ejemplo: lo importante es que cada movimiento apunte a su categoría y a su forma de pago por la llave.</p>
+   <p class="sub fragment fade-up" style="margin-top:26px;font-size:22px">Así viene el Excel de clase. Supermercado (en Categorias) y UADY y Transferencia (en FF) no tienen movimientos: el catálogo existe aunque no se haya usado.</p>
   </div>
  </div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
@@ -249,8 +308,8 @@ html,body{margin:0;background:var(--paper)}
  <div class="types">
   <div class="ty"><b>Fecha</b><span>tipo fecha</span><em>dd/mm/aaaa</em></div>
   <div class="ty fragment fade-up"><b>ID</b><span>número entero</span><em>1, 2, 3…</em></div>
-  <div class="ty fragment fade-up"><b>Monto</b><span>decimal o moneda</span><em>$1,250.00</em></div>
-  <div class="ty fragment fade-up"><b>Texto</b><span>texto</span><em>Supermercado</em></div>
+  <div class="ty fragment fade-up"><b>Cantidad</b><span>decimal o moneda</span><em>$1,200.00</em></div>
+  <div class="ty fragment fade-up"><b>Texto</b><span>texto</span><em>Gasolina</em></div>
  </div>
  <div class="band fragment fade-up">
   <div class="card" style="border-left:10px solid var(--red)"><i>⚠️</i><span>Lo que más baja puntos: dejar campos como <b>«Cualquiera»</b>, encabezados duplicados o filas en blanco en el Excel.</span></div>
@@ -266,34 +325,66 @@ html,body{margin:0;background:var(--paper)}
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
 
-<!-- 7 · ADA 2: el reporte -->
+<!-- 7 · ADA 2: el reporte de clase -->
 <section style="--c:var(--a2)">
  <div class="kicker">ADA 2 · Análisis y visualización de datos</div>
- <h1>Replicar el reporte de clase: cuatro páginas</h1>
- <div class="pages">
-  <div class="pg"><div class="top">Página 1 · Resumen <span>fecha y hora</span></div><div class="body">
-    <div class="slicer">📅 Selector de fechas</div>
-    <div class="kpis"><div class="kp" style="background:#6A5F55">#</div><div class="kp" style="background:var(--green)">Ingreso</div><div class="kp" style="background:var(--red)">Egreso</div><div class="kp" style="background:var(--amber)">Utilidad</div><div class="kp" style="background:var(--amber)">% Ahorro</div></div>
-    <div class="wf"><small>Línea</small><svg viewBox="0 0 200 80"><polyline points="0,60 25,48 50,52 75,30 100,38 125,22 150,30 175,14 200,20" fill="none" stroke="#147A72" stroke-width="4"/></svg></div>
-    <div class="wf"><small>Nube de palabras</small><div class="cloud"><span style="font-size:30px">Súper</span><span style="font-size:16px">Gasolina</span><span style="font-size:22px">Renta</span><span style="font-size:14px">Café</span><span style="font-size:19px">Luz</span><span style="font-size:13px">Cine</span></div></div>
-  </div><div class="lbl">KPI, tendencia y conceptos</div><div class="desc">Cinco tarjetas, gráfica de línea y nube de palabras.</div></div>
-  <div class="pg fragment fade-up"><div class="top">Página 2 · Distribución <span>fecha y hora</span></div><div class="body">
-    <div class="slicer">📅 Selector de fechas</div>
-    <div class="wf"><small>Pastel</small><svg viewBox="0 0 120 120"><circle r="50" cx="60" cy="60" fill="#147A72"/><path d="M60 60L60 10A50 50 0 0 1 107 75Z" fill="#D0602A"/><path d="M60 60L107 75A50 50 0 0 1 40 106Z" fill="#B8860B"/><path d="M60 60L40 106A50 50 0 0 1 12 48Z" fill="#7A4A9A"/></svg></div>
-    <div class="slicer">▾ Categoría · Subcategoría</div>
-  </div><div class="lbl">¿En qué se va el dinero?</div><div class="desc">Gráfica de pastel con segmentadores.</div></div>
-  <div class="pg fragment fade-up"><div class="top">Página 3 · Gastos <span>fecha y hora</span></div><div class="body">
-    <div class="slicer">▾ Banco · Tipo</div>
-    <div class="wf" style="align-items:flex-start;padding-top:28px"><small>Tabla con formato condicional</small><table class="tbl">
-      <tr><td><span style="color:#D0602A">●</span> Comida</td><td>$4,820</td></tr><tr><td><span style="color:#147A72">●</span> Transporte</td><td>$2,150</td></tr>
-      <tr><td><span style="color:#B8860B">●</span> Vivienda</td><td>$7,500</td></tr><tr><td><span style="color:#7A4A9A">●</span> Ocio</td><td>$1,340</td></tr><tr><td><span style="color:#D0602A">●</span> Comida</td><td>$960</td></tr></table></div>
-  </div><div class="lbl">El detalle de los gastos</div><div class="desc">Tabla con colores por categoría.</div></div>
-  <div class="pg fragment fade-up"><div class="top">Página 4 · Búsqueda <span>fecha y hora</span></div><div class="body">
-    <div class="search">🔍 Buscar concepto…</div>
-    <div class="wf" style="align-items:flex-start;padding-top:28px"><small>Resultado</small><table class="tbl">
-      <tr><td>03/09 · Súper Chedraui</td><td>$1,240</td></tr><tr><td>10/09 · Súper Chedraui</td><td>$860</td></tr><tr><td>17/09 · Súper Chedraui</td><td>$1,105</td></tr></table></div>
-  </div><div class="lbl">Encontrar un movimiento</div><div class="desc">Buscador de concepto.</div></div>
+ <h1>Replicar el reporte de clase</h1>
+ <div class="thumbs">
+  <div class="thumb"><div class="rep" data-pagina="0" data-escala="0.405"></div><div class="tl"><b>1 · General</b><span>La vista de conjunto</span></div></div>
+  <div class="thumb"><div class="rep" data-pagina="1" data-escala="0.405"></div><div class="tl"><b>2 · Categorías</b><span>¿En qué se va el dinero?</span></div></div>
+  <div class="thumb"><div class="rep" data-pagina="2" data-escala="0.405"></div><div class="tl"><b>3 · Gastos</b><span>El detalle de los egresos</span></div></div>
+  <div class="thumb extra"><div class="rep" data-pagina="3" data-escala="0.405"></div><div class="tl"><b>4 · Egresos</b><span>¿Con qué pago?</span></div></div>
+  <div class="thumb extra"><div class="rep" data-pagina="4" data-escala="0.405"></div><div class="tl"><b>5 · Ingresos</b><span>¿De dónde entra?</span></div></div>
+  <div class="thumb"><div class="rep" data-pagina="5" data-escala="0.405"></div><div class="tl"><b>6 · Datos</b><span>Todos los movimientos</span></div></div>
  </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<section style="--c:var(--a2)" class="pgslide">
+ <div class="kicker">ADA 2 · Página 1 de 6</div>
+ <h1>General: la vista de conjunto</h1>
+ <div class="pgwrap"><div class="rep" data-pagina="0" data-escala="1.06"></div>
+  <div class="pgside"><p>Cinco tarjetas KPI con su color, selector de fechas, gráfica de línea «Gastos por Fecha», nube de palabras de conceptos y tabla de egresos.</p><div class="crit-list"><span>Criterio 1 · las 5 tarjetas y el selector de fechas</span><span>Criterio 2 · línea y nube de palabras</span></div></div></div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<section style="--c:var(--a2)" class="pgslide">
+ <div class="kicker">ADA 2 · Página 2 de 6</div>
+ <h1>Categorías: ¿En qué se va el dinero?</h1>
+ <div class="pgwrap"><div class="rep" data-pagina="1" data-escala="1.06"></div>
+  <div class="pgside"><p>Pastel de egresos por categoría, segmentadores de fecha y categoría, y dos tablas: por categoría y por movimiento.</p><div class="crit-list"><span>Criterio 2 · gráfica de pastel</span><span>Criterio 3 · segmentador de categorías</span></div></div></div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<section style="--c:var(--a2)" class="pgslide">
+ <div class="kicker">ADA 2 · Página 3 de 6</div>
+ <h1>Gastos: el detalle de los egresos</h1>
+ <div class="pgwrap"><div class="rep" data-pagina="2" data-escala="1.06"></div>
+  <div class="pgside"><p>Tabla de egresos donde el Concepto se pinta de verde a rojo según el monto, con segmentadores de categoría y subcategoría.</p><div class="pf"><small>Filtro de página</small>Categorias[Tipo] = Egreso</div><div class="crit-list"><span>Criterio 2 · tabla con formato condicional</span><span>Criterio 3 · segmentadores de categoría y subcategoría</span></div></div></div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<section style="--c:var(--a2)" class="pgslide">
+ <div class="kicker">ADA 2 · Página 4 de 6</div>
+ <h1>Egresos: ¿Con qué pago?</h1>
+ <div class="pgwrap"><div class="rep" data-pagina="3" data-escala="1.06"></div>
+  <div class="pgside"><p>Egresos por banco (pastel) y por tipo de pago (barras): crédito, débito, efectivo.</p><div class="pf"><small>Filtro de página</small>Categorias[Tipo] = Egreso</div><div class="crit-list"><span>Página adicional del reporte de clase</span></div></div></div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<section style="--c:var(--a2)" class="pgslide">
+ <div class="kicker">ADA 2 · Página 5 de 6</div>
+ <h1>Ingresos: ¿De dónde entra?</h1>
+ <div class="pgwrap"><div class="rep" data-pagina="4" data-escala="1.06"></div>
+  <div class="pgside"><p>La misma página que Egresos, filtrada a los ingresos.</p><div class="pf"><small>Filtro de página</small>Categorias[Tipo] = Ingreso</div><div class="crit-list"><span>Página adicional del reporte de clase</span></div></div></div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<section style="--c:var(--a2)" class="pgslide">
+ <div class="kicker">ADA 2 · Página 6 de 6</div>
+ <h1>Datos: todos los movimientos</h1>
+ <div class="pgwrap"><div class="rep" data-pagina="5" data-escala="1.06"></div>
+  <div class="pgside"><p>Tabla completa con segmentadores de tipo, banco, tipo de pago, categoría y subcategoría, y un buscador de concepto.</p><div class="crit-list"><span>Criterio 3 · segmentadores de banco y tipo, y buscador de concepto</span></div></div></div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
 
@@ -302,13 +393,13 @@ html,body{margin:0;background:var(--paper)}
  <div class="kicker">ADA 2 · Las cinco tarjetas</div>
  <h1>Cinco números que resumen su mes</h1>
  <div class="kpi-row">
-  <div class="kc" style="--kc:#6A5F55"><div class="lb"># Movimientos</div><div class="v">148</div><div class="f">Conteo de filas de Movimientos</div><div class="e">¿Cuánta actividad hubo?</div></div>
-  <div class="kc fragment fade-up" style="--kc:var(--green)"><div class="lb">Total ingreso</div><div class="v">$38,500</div><div class="f">Suma del monto de los movimientos de ingreso</div><div class="e">Verde: lo que entra</div></div>
-  <div class="kc fragment fade-up" style="--kc:var(--red)"><div class="lb">Total egreso</div><div class="v">$31,240</div><div class="f">Suma del monto de los movimientos de egreso</div><div class="e">Rojo: lo que sale</div></div>
-  <div class="kc fragment fade-up" style="--kc:var(--amber)"><div class="lb">Utilidad</div><div class="v">$7,260</div><div class="f">Ingreso − Egreso</div><div class="e">Lo que queda</div></div>
-  <div class="kc fragment fade-up" style="--kc:var(--amber)"><div class="lb">% Ahorro</div><div class="v">18.9 %</div><div class="f">Utilidad ÷ Ingreso</div><div class="e">En la empresa se llama margen</div></div>
+  <div class="kc" style="--kc:#6A5F55"><div class="lb"># Movimientos</div><div class="v">14</div><div class="f">Conteo de ID en Movimientos</div><div class="e">¿Cuánta actividad hubo?</div></div>
+  <div class="kc fragment fade-up" style="--kc:var(--green)"><div class="lb">Total ingreso</div><div class="v">$30,000</div><div class="f">Suma de Cantidad donde Categorias[Tipo] = Ingreso</div><div class="e">Siempre verde</div></div>
+  <div class="kc fragment fade-up" style="--kc:var(--red)"><div class="lb">Total egreso</div><div class="v">$22,100</div><div class="f">Suma de Cantidad donde Categorias[Tipo] = Egreso</div><div class="e">Siempre rojo</div></div>
+  <div class="kc fragment fade-up" style="--kc:var(--green)"><div class="lb">Utilidad</div><div class="v">$7,900</div><div class="f">Ingreso − Egreso</div><div class="e"><i class="sw" style="--k:var(--green)"></i>≥ $5,000<br><i class="sw" style="--k:var(--amber)"></i>$3,000–4,999<br><i class="sw" style="--k:var(--red)"></i>&lt; $3,000</div></div>
+  <div class="kc fragment fade-up" style="--kc:var(--amber)"><div class="lb">% Ahorro</div><div class="v">26.33 %</div><div class="f">Utilidad ÷ Ingreso</div><div class="e"><i class="sw" style="--k:var(--green)"></i>≥ 30 %<br><i class="sw" style="--k:var(--amber)"></i>20–29.9 %<br><i class="sw" style="--k:var(--red)"></i>&lt; 20 %</div></div>
  </div>
- <p class="sub fragment fade-up" style="margin-top:36px">Formato de moneda y de porcentaje, sus colores, y un selector de fechas que funcione en <b>todas</b> las páginas.</p>
+ <p class="sub fragment fade-up" style="margin-top:36px">Ingreso o egreso no está en Movimientos: lo decide la <b>categoría</b>. Por eso estas tarjetas solo funcionan si la relación con Categorias está bien hecha. Valores del Excel de clase (9 al 18 de mayo de 2026).</p>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
 
@@ -333,6 +424,23 @@ html,body{margin:0;background:var(--paper)}
  <div class="band fragment fade-up">
   <div class="card"><i>📸</i><span>La evidencia es una <b>captura de pantalla</b> del celular o una <b>demostración en vivo</b>.</span></div>
   <div class="card"><i>🔢</i><span>En la vista móvil, al menos: <b>tarjetas KPI</b>, <b>una gráfica</b> y <b>una tabla</b>, legibles sin hacer zoom.</span></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 10b · ADA 3: vista móvil del reporte de clase -->
+<section style="--c:var(--a3)">
+ <div class="kicker">ADA 3 · La vista móvil del reporte de clase</div>
+ <h1>Lo más importante, primero</h1>
+ <div class="mob">
+  <div class="phone2"><div class="scr"><div class="rep" data-pagina="0" data-movil="1"></div></div><span>General</span></div>
+  <div class="phone2"><div class="scr"><div class="rep" data-pagina="1" data-movil="1"></div></div><span>Categorías</span></div>
+  <div class="mobside">
+   <p>En el celular no cabe todo: se elige qué entra y en qué orden.</p>
+   <ul><li>En <b>General</b>, las tarjetas van de la más importante (% de ahorro) a la de detalle (# de movimientos).</li>
+   <li>En <b>Categorías</b>, basta con la tabla de egresos por categoría.</li>
+   <li>Las páginas sin vista móvil se ven en el celular con el diseño de escritorio.</li></ul>
+  </div>
  </div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
@@ -458,15 +566,96 @@ function drawER(svg, ents, rels){
 }
 const $ = id => document.getElementById(id);
 
-/* Modelo de la ADA 1 (campos de ejemplo) */
+/* Modelo de la ADA 1 (campos del Excel de clase) */
 drawER($('er-ada1'), [
-  {id:'m', x:20, y:150, w:360, title:'Movimientos', role:'EVENTO', color:'#1E5A8A', attrs:[['MovimientoID','PK'],['Fecha',''],['Concepto',''],['Monto',''],['CategoriaID','FK'],['FFID','FK']]},
-  {id:'c', x:620, y:30, w:360, title:'Categorías', role:'CATÁLOGO', attrs:[['CategoriaID','PK'],['Categoría',''],['Subcategoría',''],['Tipo','']]},
-  {id:'f', x:620, y:340, w:360, title:'FF', role:'FORMAS DE PAGO', attrs:[['FFID','PK'],['FormaPago',''],['Banco',''],['Tipo','']]},
+  {id:'m', x:20, y:150, w:360, title:'Movimientos', role:'EVENTO · 14 FILAS', color:'#1E5A8A', attrs:[['ID','PK'],['Fecha',''],['Concepto',''],['Cantidad',''],['Categorias.ID','FK'],['FF.ID','FK']]},
+  {id:'c', x:620, y:30, w:360, title:'Categorias', role:'CATÁLOGO · 13 FILAS', attrs:[['ID','PK'],['Categorias',''],['Subcategorias',''],['Tipo (Ingreso/Egreso)','']]},
+  {id:'f', x:620, y:340, w:360, title:'FF', role:'FORMAS DE PAGO · 7 FILAS', attrs:[['ID','PK'],['Nombre',''],['Banco',''],['Tipo','']]},
 ], [
-  {from:'m', fk:'CategoriaID', to:'c', pk:'CategoriaID'},
-  {from:'m', fk:'FFID', to:'f', pk:'FFID'},
+  {from:'m', fk:'Categorias.ID', to:'c', pk:'ID'},
+  {from:'m', fk:'FF.ID', to:'f', pk:'ID'},
 ]);
+
+/* ═════ Réplica del reporte de clase (generada de Finanzas Personales.xlsx.pbix + el Excel) ═════ */
+const REPORTE = {"paginas": [{"nombre": "General", "filtro": null, "visuales": [{"tipo": "textbox", "x": 15.525606469002694, "y": 12.075471698113207, "w": 1257.5741239892184, "h": 74.17789757412399, "z": 0, "titulo": null, "texto": "Reporte Financiero Personal"}, {"tipo": "image", "x": 15.525606469002694, "y": 12.075471698113207, "w": 138.0053908355795, "h": 74.17789757412399, "z": 1000, "titulo": null}, {"tipo": "cardVisual", "x": 977.2506738544474, "y": 12.075471698113207, "w": 295.8490566037736, "h": 74.17789757412399, "z": 2000, "titulo": null, "ref": "Movimientos.Ahora", "valor": "ahora", "num": null, "etiqueta": "Ahora"}, {"tipo": "cardVisual", "x": 15.525606469002694, "y": 96.60377358490565, "w": 172.5067385444744, "h": 97.46630727762803, "z": 3000, "titulo": "# Movimientos", "ref": "CountNonNull(Movimientos.ID)", "valor": "14", "num": 14, "etiqueta": "# Movimientos"}, {"tipo": "cardVisual", "x": 197.52021563342316, "y": 97.46630727762803, "w": 234.60916442048517, "h": 96.60377358490565, "z": 4000, "titulo": "Total Ingreso", "ref": "Movimientos.TotalIngreso", "valor": "$30,000", "num": 30000, "etiqueta": "Total Ingreso"}, {"tipo": "cardVisual", "x": 439.8921832884097, "y": 97.46630727762803, "w": 235.47169811320754, "h": 96.60377358490565, "z": 5000, "titulo": "Total Egreso", "ref": "Movimientos.TotalEgreso", "valor": "$22,100", "num": 22100, "etiqueta": "Total Egreso"}, {"tipo": "cardVisual", "x": 683.1266846361186, "y": 97.46630727762803, "w": 219.08355795148248, "h": 96.60377358490565, "z": 6000, "titulo": "Utilidad", "ref": "Movimientos.Utilidad", "valor": "$7,900", "num": 7900, "etiqueta": "Utilidad"}, {"tipo": "cardVisual", "x": 915.1482479784366, "y": 96.60377358490565, "w": 210.45822102425876, "h": 96.60377358490565, "z": 7000, "titulo": "% Ahorro", "ref": "Movimientos.PAhorro", "valor": "26.33 %", "num": 0.2633333333333333, "etiqueta": "% Ahorro"}, {"tipo": "lineChart", "x": 15.525606469002694, "y": 200.1078167115903, "w": 709.0026954177897, "h": 489.05660377358487, "z": 8000, "titulo": "Gastos por Fecha", "campo": "Fecha", "medida": "Total Egreso", "serie": [["09/05/2026", 2000, "$2,000"], ["10/05/2026", 800, "$800"], ["11/05/2026", 1300, "$1,300"], ["16/05/2026", 13000, "$13,000"], ["18/05/2026", 5000, "$5,000"]]}, {"tipo": "tableEx", "x": 741.7789757412398, "y": 406.2533692722372, "w": 531.3207547169811, "h": 282.911051212938, "z": 9000, "titulo": null, "columnas": ["Fecha", "Concepto", "Total Egreso", "%"], "filas": [["09/05/2026", "Gasolina", "$1,200", "5.43 %"], ["09/05/2026", "Cinepolis", "$300", "1.36 %"], ["09/05/2026", "Absenta", "$500", "2.26 %"], ["10/05/2026", "Internet", "$500", "2.26 %"], ["10/05/2026", "Padel", "$200", "0.90 %"], ["10/05/2026", "Doctor", "$100", "0.45 %"], ["11/05/2026", "Medicina", "$500", "2.26 %"], ["11/05/2026", "Gasolina", "$600", "2.71 %"], ["11/05/2026", "Padel", "$200", "0.90 %"], ["16/05/2026", "Renta", "$8,000", "36.20 %"], ["16/05/2026", "Pintura", "$5,000", "22.62 %"], ["18/05/2026", "Maestria", "$5,000", "22.62 %"]]}, {"tipo": "slicer", "x": 1133.3692722371968, "y": 96.60377358490565, "w": 139.73045822102426, "h": 96.60377358490565, "z": 10000, "titulo": null, "campo": "Fecha", "rango": ["09/05/2026", "18/05/2026"]}, {"tipo": "wordCloud", "x": 741.7789757412398, "y": 200.1078167115903, "w": 531.3207547169811, "h": 197.52021563342316, "z": 11000, "titulo": null, "palabras": [["Gasolina", 2], ["Padel", 2], ["Nomina", 1], ["Cinepolis", 1], ["Absenta", 1], ["Internet", 1], ["Doctor", 1], ["Medicina", 1], ["Renta", 1], ["Pintura", 1], ["Maestria", 1], ["Curso", 1]]}], "movil": [{"tipo": "textbox", "x": 0, "y": 13, "w": 324, "h": 120, "z": 0, "titulo": null, "texto": "Reporte Financiero Personal"}, {"tipo": "cardVisual", "x": 0, "y": 144, "w": 320, "h": 64, "z": 2000, "titulo": null, "ref": "Movimientos.Ahora", "valor": "ahora", "num": null, "etiqueta": "Ahora"}, {"tipo": "cardVisual", "x": 0, "y": 222, "w": 324, "h": 120, "z": 7000, "titulo": "% Ahorro", "ref": "Movimientos.PAhorro", "valor": "26.33 %", "num": 0.2633333333333333, "etiqueta": "% Ahorro"}, {"tipo": "cardVisual", "x": 0, "y": 349, "w": 324, "h": 120, "z": 6000, "titulo": "Utilidad", "ref": "Movimientos.Utilidad", "valor": "$7,900", "num": 7900, "etiqueta": "Utilidad"}, {"tipo": "cardVisual", "x": 0, "y": 483, "w": 322, "h": 120, "z": 5000, "titulo": "Total Egreso", "ref": "Movimientos.TotalEgreso", "valor": "$22,100", "num": 22100, "etiqueta": "Total Egreso"}, {"tipo": "cardVisual", "x": 0, "y": 615, "w": 324, "h": 120, "z": 4000, "titulo": "Total Ingreso", "ref": "Movimientos.TotalIngreso", "valor": "$30,000", "num": 30000, "etiqueta": "Total Ingreso"}, {"tipo": "cardVisual", "x": 0, "y": 750, "w": 319, "h": 120, "z": 3000, "titulo": "# Movimientos", "ref": "CountNonNull(Movimientos.ID)", "valor": "14", "num": 14, "etiqueta": "# Movimientos"}, {"tipo": "image", "x": 102, "y": 889, "w": 108, "h": 120, "z": 1000, "titulo": null}]}, {"nombre": "Categorias", "filtro": null, "visuales": [{"tipo": "textbox", "x": 15.525606469002694, "y": 12.075471698113207, "w": 1257.5741239892184, "h": 74.17789757412399, "z": 0, "titulo": null, "texto": "Análisis de Categorías"}, {"tipo": "image", "x": 15.525606469002694, "y": 12.075471698113207, "w": 138.0053908355795, "h": 74.17789757412399, "z": 1000, "titulo": null}, {"tipo": "cardVisual", "x": 977.2506738544474, "y": 12.075471698113207, "w": 295.8490566037736, "h": 74.17789757412399, "z": 2000, "titulo": null, "ref": "Movimientos.Ahora", "valor": "ahora", "num": null, "etiqueta": "Ahora"}, {"tipo": "cardVisual", "x": 1016.0646900269542, "y": 94.01617250673854, "w": 257.03504043126685, "h": 126.79245283018868, "z": 3000, "titulo": "# Movimientos", "ref": "CountNonNull(Movimientos.ID)", "valor": "14", "num": 14, "etiqueta": "# Movimientos"}, {"tipo": "cardVisual", "x": 1016.0646900269542, "y": 227.7088948787062, "w": 257.03504043126685, "h": 131.96765498652292, "z": 4000, "titulo": "Total Egreso", "ref": "Movimientos.TotalEgreso", "valor": "$22,100", "num": 22100, "etiqueta": "Total Egreso"}, {"tipo": "tableEx", "x": 741.7789757412398, "y": 366.5768194070081, "w": 531.3207547169811, "h": 322.5876010781671, "z": 5000, "titulo": null, "columnas": ["Fecha", "Concepto", "Total Egreso", "%"], "filas": [["09/05/2026", "Gasolina", "$1,200", "5.43 %"], ["09/05/2026", "Cinepolis", "$300", "1.36 %"], ["09/05/2026", "Absenta", "$500", "2.26 %"], ["10/05/2026", "Internet", "$500", "2.26 %"], ["10/05/2026", "Padel", "$200", "0.90 %"], ["10/05/2026", "Doctor", "$100", "0.45 %"], ["11/05/2026", "Medicina", "$500", "2.26 %"], ["11/05/2026", "Gasolina", "$600", "2.71 %"], ["11/05/2026", "Padel", "$200", "0.90 %"], ["16/05/2026", "Renta", "$8,000", "36.20 %"], ["16/05/2026", "Pintura", "$5,000", "22.62 %"], ["18/05/2026", "Maestria", "$5,000", "22.62 %"]]}, {"tipo": "slicer", "x": 15.525606469002694, "y": 94.01617250673854, "w": 232.8840970350404, "h": 85.39083557951483, "z": 6000, "titulo": null, "campo": "Fecha", "rango": ["09/05/2026", "18/05/2026"]}, {"tipo": "pieChart", "x": 15.525606469002694, "y": 197.52021563342316, "w": 706.4150943396227, "h": 483.8814016172507, "z": 7000, "titulo": null, "campo": "Categorías", "medida": "Total Egreso", "serie": [["Operativo", 10300, "$10,300"], ["Mejoras", 5000, "$5,000"], ["Educación", 5000, "$5,000"], ["Ocio", 800, "$800"], ["Salud", 600, "$600"], ["Deporte", 400, "$400"]]}, {"tipo": "slicer", "x": 260.4851752021563, "y": 94.01617250673854, "w": 461.455525606469, "h": 85.39083557951483, "z": 8000, "titulo": null, "campo": "Categorías", "opciones": ["Deporte", "Educación", "Mejoras", "Ocio", "Operativo", "Otro Ingresos", "Salud", "Sueldo"]}, {"tipo": "tableEx", "x": 732.2911051212938, "y": 94.87870619946091, "w": 275.14824797843664, "h": 264.7978436657682, "z": 8001, "titulo": null, "columnas": ["Categorías", "Total Egreso", "%"], "filas": [["Operativo", "$10,300", "46.61 %"], ["Ocio", "$800", "3.62 %"], ["Deporte", "$400", "1.81 %"], ["Salud", "$600", "2.71 %"], ["Mejoras", "$5,000", "22.62 %"], ["Educación", "$5,000", "22.62 %"]]}], "movil": [{"tipo": "textbox", "x": 0, "y": 6, "w": 324, "h": 120, "z": 0, "titulo": null, "texto": "Análisis de Categorías"}, {"tipo": "tableEx", "x": 0, "y": 145, "w": 324, "h": 287, "z": 8001, "titulo": null, "columnas": ["Categorías", "Total Egreso", "%"], "filas": [["Operativo", "$10,300", "46.61 %"], ["Ocio", "$800", "3.62 %"], ["Deporte", "$400", "1.81 %"], ["Salud", "$600", "2.71 %"], ["Mejoras", "$5,000", "22.62 %"], ["Educación", "$5,000", "22.62 %"]]}]}, {"nombre": "Gastos", "filtro": ["Categorias.Tipo", ["Egreso"]], "visuales": [{"tipo": "textbox", "x": 15.525606469002694, "y": 12.075471698113207, "w": 1257.5741239892184, "h": 74.17789757412399, "z": 0, "titulo": null, "texto": "Análisis de Gastos"}, {"tipo": "image", "x": 15.525606469002694, "y": 12.075471698113207, "w": 138.0053908355795, "h": 74.17789757412399, "z": 1000, "titulo": null}, {"tipo": "cardVisual", "x": 977.2506738544474, "y": 12.075471698113207, "w": 295.8490566037736, "h": 74.17789757412399, "z": 2000, "titulo": null, "ref": "Movimientos.Ahora", "valor": "ahora", "num": null, "etiqueta": "Ahora"}, {"tipo": "tableEx", "x": 15.525606469002694, "y": 105.22911051212938, "w": 1010.8894878706199, "h": 599.4609164420485, "z": 3000, "titulo": null, "columnas": ["#", "Fecha", "Cantidad", "Concepto", "Categorías", "Subcategorías", "%"], "filas": [["1", "09/05/2026", "$1,200", "Gasolina", "Operativo", "Automovil", "5.43 %"], ["1", "09/05/2026", "$300", "Cinepolis", "Ocio", "Cine", "1.36 %"], ["1", "09/05/2026", "$500", "Absenta", "Ocio", "Restaurante", "2.26 %"], ["1", "10/05/2026", "$500", "Internet", "Operativo", "Internet", "2.26 %"], ["1", "10/05/2026", "$200", "Padel", "Deporte", "Padel", "0.90 %"], ["1", "10/05/2026", "$100", "Doctor", "Salud", "Doctor", "0.45 %"], ["1", "11/05/2026", "$500", "Medicina", "Salud", "Medicina", "2.26 %"], ["1", "11/05/2026", "$600", "Gasolina", "Operativo", "Automovil", "2.71 %"], ["1", "11/05/2026", "$200", "Padel", "Deporte", "Padel", "0.90 %"], ["1", "16/05/2026", "$8,000", "Renta", "Operativo", "Renta", "36.20 %"], ["1", "16/05/2026", "$5,000", "Pintura", "Mejoras", "Pintura", "22.62 %"], ["1", "18/05/2026", "$5,000", "Maestria", "Educación", "Maestria", "22.62 %"]], "escala": {"columna": 3, "valores": [1200, 300, 500, 500, 200, 100, 500, 600, 200, 8000, 5000, 5000]}}, {"tipo": "cardVisual", "x": 1043.66576819407, "y": 608.0862533692722, "w": 229.43396226415092, "h": 96.60377358490565, "z": 4000, "titulo": "Total Egreso", "ref": "Movimientos.TotalEgreso", "valor": "$22,100", "num": 22100, "etiqueta": "Total Egreso"}, {"tipo": "slicer", "x": 1043.647416413374, "y": 231.48936170212767, "w": 229.54407294832828, "h": 114.77203647416414, "z": 5000, "titulo": null, "campo": "Categorías", "opciones": ["Deporte", "Educación", "Mejoras", "Ocio", "Operativo", "Salud"]}, {"tipo": "slicer", "x": 1043.647416413374, "y": 359.87841945288756, "w": 229.54407294832828, "h": 114.77203647416414, "z": 6000, "titulo": null, "campo": "Subcategorías", "opciones": ["Automovil", "Cine", "Doctor", "Internet", "Maestria", "Medicina", "Padel", "Pintura", "Renta", "Restaurante"]}, {"tipo": "cardVisual", "x": 1043.7470725995315, "y": 488.9929742388759, "w": 229.3208430913349, "h": 98.64168618266979, "z": 7000, "titulo": "# Movimientos", "ref": "CountNonNull(Movimientos.ID)", "valor": "12", "num": 12, "etiqueta": "# Movimientos"}, {"tipo": "slicer", "x": 1043.647416413374, "y": 105.04559270516718, "w": 229.54407294832828, "h": 114.77203647416414, "z": 8000, "titulo": null, "campo": "Fecha", "rango": ["09/05/2026", "18/05/2026"]}], "movil": []}, {"nombre": "Egresos", "filtro": ["Categorias.Tipo", ["Egreso"]], "visuales": [{"tipo": "textbox", "x": 15.525606469002694, "y": 12.075471698113207, "w": 1257.5741239892184, "h": 74.17789757412399, "z": 0, "titulo": null, "texto": "Análisis de Fuentes - Egresos"}, {"tipo": "image", "x": 15.525606469002694, "y": 12.075471698113207, "w": 138.0053908355795, "h": 74.17789757412399, "z": 1000, "titulo": null}, {"tipo": "cardVisual", "x": 977.2506738544474, "y": 12.075471698113207, "w": 295.8490566037736, "h": 74.17789757412399, "z": 2000, "titulo": null, "ref": "Movimientos.Ahora", "valor": "ahora", "num": null, "etiqueta": "Ahora"}, {"tipo": "cardVisual", "x": 903.5866261398177, "y": 94.34650455927051, "w": 369.6048632218845, "h": 97.26443768996961, "z": 3000, "titulo": "# Movimientos", "ref": "CountNonNull(Movimientos.ID)", "valor": "12", "num": 12, "etiqueta": "# Movimientos"}, {"tipo": "cardVisual", "x": 903.5866261398177, "y": 197.4468085106383, "w": 369.6048632218845, "h": 96.29179331306992, "z": 4000, "titulo": "Total Egreso", "ref": "Movimientos.TotalEgreso", "valor": "$22,100", "num": 22100, "etiqueta": "Total Egreso"}, {"tipo": "tableEx", "x": 903.5866261398177, "y": 301.5197568389058, "w": 369.6048632218845, "h": 388.0851063829787, "z": 5000, "titulo": null, "columnas": ["#", "Fecha", "Concepto", "Cantidad"], "filas": [["1", "09/05/2026", "Gasolina", "$1,200"], ["1", "09/05/2026", "Cinepolis", "$300"], ["1", "09/05/2026", "Absenta", "$500"], ["1", "10/05/2026", "Internet", "$500"], ["1", "10/05/2026", "Padel", "$200"], ["1", "10/05/2026", "Doctor", "$100"], ["1", "11/05/2026", "Medicina", "$500"], ["1", "11/05/2026", "Gasolina", "$600"], ["1", "11/05/2026", "Padel", "$200"], ["1", "16/05/2026", "Renta", "$8,000"], ["1", "16/05/2026", "Pintura", "$5,000"], ["1", "18/05/2026", "Maestria", "$5,000"]]}, {"tipo": "slicer", "x": 15.525606469002694, "y": 94.01617250673854, "w": 232.8840970350404, "h": 85.39083557951483, "z": 6000, "titulo": null, "campo": "Fecha", "rango": ["09/05/2026", "18/05/2026"]}, {"tipo": "pieChart", "x": 15.525606469002694, "y": 191.48247978436657, "w": 877.1967654986522, "h": 236.3342318059299, "z": 7000, "titulo": null, "campo": "Banco", "medida": "Cantidad", "serie": [["Efectivo", 8600, "$8,600"], ["Klar", 6200, "$6,200"], ["BBVA", 5500, "$5,500"], ["Santander", 1800, "$1,800"]]}, {"tipo": "slicer", "x": 260.66869300911856, "y": 94.34650455927051, "w": 632.2188449848024, "h": 85.59270516717325, "z": 8000, "titulo": null, "campo": "Categorías", "opciones": ["Deporte", "Educación", "Mejoras", "Ocio", "Operativo", "Salud"]}, {"tipo": "barChart", "x": 16.388140161725065, "y": 436.4420485175202, "w": 876.3342318059299, "h": 253.58490566037736, "z": 9000, "titulo": null, "campo": "Tipo de pago", "medida": "Cantidad", "serie": [["Credito", 13500, "$13,500"], ["Efectivo", 8600, "$8,600"]]}], "movil": []}, {"nombre": "Ingresos", "filtro": ["Categorias.Tipo", ["Ingreso"]], "visuales": [{"tipo": "textbox", "x": 15.525606469002694, "y": 12.075471698113207, "w": 1257.5741239892184, "h": 74.17789757412399, "z": 0, "titulo": null, "texto": "Análisis de Fuentes - Ingresos"}, {"tipo": "image", "x": 15.525606469002694, "y": 12.075471698113207, "w": 138.0053908355795, "h": 74.17789757412399, "z": 1000, "titulo": null}, {"tipo": "cardVisual", "x": 977.2506738544474, "y": 12.075471698113207, "w": 295.8490566037736, "h": 74.17789757412399, "z": 2000, "titulo": null, "ref": "Movimientos.Ahora", "valor": "ahora", "num": null, "etiqueta": "Ahora"}, {"tipo": "cardVisual", "x": 903.5866261398177, "y": 94.34650455927051, "w": 369.6048632218845, "h": 97.26443768996961, "z": 3000, "titulo": "# Movimientos", "ref": "CountNonNull(Movimientos.ID)", "valor": "2", "num": 2, "etiqueta": "# Movimientos"}, {"tipo": "slicer", "x": 15.525606469002694, "y": 94.01617250673854, "w": 232.8840970350404, "h": 85.39083557951483, "z": 4000, "titulo": null, "campo": "Fecha", "rango": ["09/05/2026", "18/05/2026"]}, {"tipo": "pieChart", "x": 15.525606469002694, "y": 191.48247978436657, "w": 877.1967654986522, "h": 236.3342318059299, "z": 5000, "titulo": null, "campo": "Banco", "medida": "Cantidad", "serie": [["Santander", 30000, "$30,000"]]}, {"tipo": "slicer", "x": 260.66869300911856, "y": 94.34650455927051, "w": 632.2188449848024, "h": 85.59270516717325, "z": 6000, "titulo": null, "campo": "Categorías", "opciones": ["Otro Ingresos", "Sueldo"]}, {"tipo": "barChart", "x": 16.388140161725065, "y": 436.4420485175202, "w": 876.3342318059299, "h": 253.58490566037736, "z": 7000, "titulo": null, "campo": "Tipo de pago", "medida": "Cantidad", "serie": [["Debito", 30000, "$30,000"]]}, {"tipo": "cardVisual", "x": 903.9353099730458, "y": 197.52021563342316, "w": 369.1644204851752, "h": 96.60377358490565, "z": 8000, "titulo": "Total Ingreso", "ref": "Movimientos.TotalIngreso", "valor": "$30,000", "num": 30000, "etiqueta": "Total Ingreso"}, {"tipo": "tableEx", "x": 903.5866261398177, "y": 301.5197568389058, "w": 369.6048632218845, "h": 388.0851063829787, "z": 9000, "titulo": null, "columnas": ["#", "Fecha", "Concepto", "Cantidad"], "filas": [["1", "09/05/2026", "Nomina", "$20,000"], ["1", "18/05/2026", "Curso", "$10,000"]]}], "movil": []}, {"nombre": "Datos", "filtro": null, "visuales": [{"tipo": "textbox", "x": 15.525606469002694, "y": 12.075471698113207, "w": 1257.5741239892184, "h": 74.17789757412399, "z": 0, "titulo": null, "texto": "Datos"}, {"tipo": "image", "x": 15.525606469002694, "y": 12.075471698113207, "w": 138.0053908355795, "h": 74.17789757412399, "z": 1000, "titulo": null}, {"tipo": "cardVisual", "x": 977.2506738544474, "y": 12.075471698113207, "w": 295.8490566037736, "h": 74.17789757412399, "z": 2000, "titulo": null, "ref": "Movimientos.Ahora", "valor": "ahora", "num": null, "etiqueta": "Ahora"}, {"tipo": "tableEx", "x": 15.525606469002694, "y": 203.55795148247978, "w": 1250.6738544474392, "h": 501.1320754716981, "z": 3000, "titulo": null, "columnas": ["#", "Fecha", "Cantidad", "Concepto", "Forma de pago", "Banco", "Tipo de pago", "Categorías", "Subcategorías", "Tipo"], "filas": [["1", "09/05/2026", "$1,200", "Gasolina", "Like U", "Santander", "Credito", "Operativo", "Automovil", "Egreso"], ["1", "09/05/2026", "$20,000", "Nomina", "Nomina", "Santander", "Debito", "Sueldo", "UADY", "Ingreso"], ["1", "09/05/2026", "$300", "Cinepolis", "Platino", "Klar", "Credito", "Ocio", "Cine", "Egreso"], ["1", "09/05/2026", "$500", "Absenta", "Platino", "Klar", "Credito", "Ocio", "Restaurante", "Egreso"], ["1", "10/05/2026", "$500", "Internet", "Oro", "BBVA", "Credito", "Operativo", "Internet", "Egreso"], ["1", "10/05/2026", "$200", "Padel", "Platino", "Klar", "Credito", "Deporte", "Padel", "Egreso"], ["1", "10/05/2026", "$100", "Doctor", "Efectivo", "Efectivo", "Efectivo", "Salud", "Doctor", "Egreso"], ["1", "11/05/2026", "$500", "Medicina", "Efectivo", "Efectivo", "Efectivo", "Salud", "Medicina", "Egreso"], ["1", "11/05/2026", "$600", "Gasolina", "Like U", "Santander", "Credito", "Operativo", "Automovil", "Egreso"], ["1", "11/05/2026", "$200", "Padel", "Platino", "Klar", "Credito", "Deporte", "Padel", "Egreso"], ["1", "16/05/2026", "$8,000", "Renta", "Efectivo", "Efectivo", "Efectivo", "Operativo", "Renta", "Egreso"], ["1", "16/05/2026", "$5,000", "Pintura", "Platino", "Klar", "Credito", "Mejoras", "Pintura", "Egreso"], ["1", "18/05/2026", "$5,000", "Maestria", "Oro", "BBVA", "Credito", "Educación", "Maestria", "Egreso"], ["1", "18/05/2026", "$10,000", "Curso", "Nomina", "Santander", "Debito", "Otro Ingresos", "Maestria", "Ingreso"]], "escala": {"columna": 3, "valores": [1200, 0, 300, 500, 500, 200, 100, 500, 600, 200, 8000, 5000, 5000, 0]}}, {"tipo": "slicer", "x": 632.2371967654987, "y": 95.74123989218329, "w": 141.455525606469, "h": 100.91644204851751, "z": 4000, "titulo": null, "campo": "Categorías", "opciones": ["Deporte", "Educación", "Mejoras", "Ocio", "Operativo", "Otro Ingresos", "Salud", "Sueldo"]}, {"tipo": "slicer", "x": 784.9056603773585, "y": 94.87870619946091, "w": 156.11859838274933, "h": 100.91644204851751, "z": 5000, "titulo": null, "campo": "Subcategorías", "opciones": ["Automovil", "Cine", "Doctor", "Internet", "Maestria", "Medicina", "Padel", "Pintura", "Renta", "Restaurante", "UADY"]}, {"tipo": "cardVisual", "x": 1110.0808625336927, "y": 94.01617250673854, "w": 163.0188679245283, "h": 104.366576819407, "z": 6000, "titulo": "# Movimientos", "ref": "CountNonNull(Movimientos.ID)", "valor": "14", "num": 14, "etiqueta": "# Movimientos"}, {"tipo": "slicer", "x": 15.562310030395137, "y": 94.34650455927051, "w": 149.7872340425532, "h": 101.15501519756839, "z": 7000, "titulo": null, "campo": "Fecha", "rango": ["09/05/2026", "18/05/2026"]}, {"tipo": "slicer", "x": 177.6819407008086, "y": 94.87870619946091, "w": 140.59299191374663, "h": 101.77897574123989, "z": 8000, "titulo": null, "campo": "Tipo", "opciones": ["Egreso", "Ingreso"]}, {"tipo": "slicer", "x": 326.0377358490566, "y": 95.74123989218329, "w": 140.59299191374663, "h": 102.64150943396226, "z": 9000, "titulo": null, "campo": "Banco", "opciones": ["BBVA", "Efectivo", "Klar", "Santander"]}, {"tipo": "slicer", "x": 478.7061994609164, "y": 95.74123989218329, "w": 141.455525606469, "h": 100.91644204851751, "z": 10000, "titulo": null, "campo": "Tipo de pago", "opciones": ["Credito", "Debito", "Efectivo"]}, {"tipo": "buscador", "x": 947.9245283018868, "y": 95.74123989218329, "w": 156.11859838274933, "h": 99.19137466307278, "z": 11000, "titulo": null, "campo": "Concepto"}], "movil": []}], "resumen": {"tablas": {"Movimientos": ["ID", "Fecha", "Concepto", "Cantidad", "Categorias.ID", "FF.ID"], "Categorias": ["ID", "Categorias", "Subcategorias", "Tipo"], "FF": ["ID", "Nombre", "Banco", "Tipo"]}, "filas": {"Movimientos": 14, "Categorias": 13, "FF": 7}, "sin_uso": {"Categorias": ["Supermercado"], "FF": ["UADY", "Transferencia"]}}};
+const TEMA = ['#262A76', '#2F8AC3', '#EB5559', '#26B0D2', '#AE3535', '#7D7FAD', '#FFC1CB', '#8E1F20'];
+const VERDE = '#117A65', AMAR = '#F1C40F', ROJO = '#A93226';
+function colorCard(v){
+  if (v.ref === 'Movimientos.TotalIngreso') return VERDE;
+  if (v.ref === 'Movimientos.TotalEgreso') return ROJO;
+  if (v.ref === 'Movimientos.Utilidad') return v.num >= 5000 ? VERDE : v.num >= 3000 ? AMAR : ROJO;
+  if (v.ref === 'Movimientos.PAhorro') return v.num >= .3 ? VERDE : v.num >= .2 ? AMAR : ROJO;
+  return '#262A76';
+}
+function escala(x, min, max){ // verde → amarillo → rojo, como el formato condicional del reporte
+  const t = max > min ? (x - min) / (max - min) : 0, mix = (a, b, u) => a.map((c, i) => Math.round(c + (b[i] - c) * u));
+  const G = [17, 122, 101], Y = [241, 196, 15], R = [169, 50, 38];
+  return `rgb(${t < .5 ? mix(G, Y, t * 2) : mix(Y, R, (t - .5) * 2)})`;
+}
+function grafica(v){
+  const W = v.w, H = v.h, sr = v.serie, max = Math.max(...sr.map(x => x[1]));
+  if (v.tipo === 'lineChart'){
+    const L = 60, R = 30, T = 40, B = 40, pw = W - L - R, ph = H - T - B;
+    const pts = sr.map((x, i) => [L + (sr.length > 1 ? i * pw / (sr.length - 1) : pw / 2), T + ph - x[1] / max * ph]);
+    let g = '';
+    for (let k = 0; k <= 4; k++){ const y = T + ph - k * ph / 4;
+      g += `<line x1="${L}" y1="${y}" x2="${L + pw}" y2="${y}" stroke="#EDEBE9"/><text x="${L - 8}" y="${y + 4}" font-size="11" text-anchor="end" fill="#605E5C">${(max * k / 4 / 1000).toFixed(1)} mil</text>`; }
+    g += `<polyline points="${pts.map(p => p.join(',')).join(' ')}" fill="none" stroke="${TEMA[0]}" stroke-width="3"/>`;
+    pts.forEach((p, i) => g += `<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="${TEMA[0]}"/><text x="${p[0]}" y="${p[1] - 10}" font-size="12" font-weight="700" text-anchor="middle">${sr[i][2]}</text><text x="${p[0]}" y="${T + ph + 18}" font-size="11" text-anchor="middle" fill="#605E5C">${sr[i][0].slice(0, 5)}</text>`);
+    return `<svg viewBox="0 0 ${W} ${H}"><text x="10" y="22" font-size="14" font-weight="700">${v.titulo || ''}</text>${g}</svg>`;
+  }
+  if (v.tipo === 'pieChart'){
+    const tot = sr.reduce((a, x) => a + x[1], 0), r = Math.min(H - 50, W * .45) / 2, cx = 30 + r, cy = H / 2 + 8;
+    let a0 = -Math.PI / 2, g = '';
+    sr.forEach((x, i) => { const a1 = a0 + x[1] / tot * 2 * Math.PI, big = a1 - a0 > Math.PI ? 1 : 0, c = TEMA[i % TEMA.length];
+      g += sr.length === 1 ? `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${c}"/>` :
+        `<path d="M${cx} ${cy}L${cx + r * Math.cos(a0)} ${cy + r * Math.sin(a0)}A${r} ${r} 0 ${big} 1 ${cx + r * Math.cos(a1)} ${cy + r * Math.sin(a1)}Z" fill="${c}" stroke="#fff" stroke-width="2"/>`;
+      a0 = a1; });
+    const lx = cx + r + 30, y0 = cy - sr.length * 13;
+    sr.forEach((x, i) => g += `<rect x="${lx}" y="${y0 + i * 26}" width="12" height="12" fill="${TEMA[i % TEMA.length]}"/><text x="${lx + 20}" y="${y0 + i * 26 + 11}" font-size="13">${x[0]} · ${x[2]} (${(x[1] / tot * 100).toFixed(1)} %)</text>`);
+    return `<svg viewBox="0 0 ${W} ${H}"><text x="10" y="22" font-size="13" font-weight="700" fill="#605E5C">${v.medida} por ${v.campo}</text>${g}</svg>`;
+  }
+  const L = 110, T = 40, bh = Math.min(40, (H - T - 16) / sr.length - 10), pw = W - L - 100; // barras horizontales
+  let g = '';
+  sr.forEach((x, i) => { const y = T + i * (bh + 10), w = x[1] / max * pw;
+    g += `<text x="${L - 8}" y="${y + bh / 2 + 4}" font-size="12" text-anchor="end">${x[0]}</text><rect x="${L}" y="${y}" width="${w}" height="${bh}" fill="${TEMA[0]}"/><text x="${L + w + 6}" y="${y + bh / 2 + 4}" font-size="12" font-weight="700">${x[2]}</text>`; });
+  return `<svg viewBox="0 0 ${W} ${H}"><text x="10" y="22" font-size="13" font-weight="700" fill="#605E5C">${v.medida} por ${v.campo}</text>${g}</svg>`;
+}
+function visual(v){
+  const st = `left:${v.x}px;top:${v.y}px;width:${v.w}px;height:${v.h}px;z-index:${Math.round(v.z || 0)}`;
+  switch (v.tipo){
+    case 'image': return `<div class="vz img" style="${st}"><img src="logo-reporte.png" alt=""></div>`;
+    case 'textbox': return `<div class="vz tx" style="${st}">${v.texto}</div>`;
+    case 'cardVisual':
+      if (v.ref === 'Movimientos.Ahora'){ const d = new Date(), p = n => String(n).padStart(2, '0');
+        return `<div class="vz card now" style="${st}"><div class="cl">Fecha y hora</div><div class="cv">${p(d.getDate())}/${p(d.getMonth() + 1)}/${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}</div></div>`; }
+      return `<div class="vz card" style="${st};--cc:${colorCard(v)}"><div class="cl">${v.etiqueta}</div><div class="cv">${v.valor}</div></div>`;
+    case 'slicer':
+      if (v.rango) return `<div class="vz sl" style="${st}"><div class="sh">${v.campo}</div><div class="rg"><span>${v.rango[0]}</span><span>${v.rango[1]}</span></div><div class="rb"></div></div>`;
+      return `<div class="vz sl" style="${st}"><div class="sh">${v.campo}</div><div class="op">${v.opciones.map(o => `<span>${o}</span>`).join('')}</div></div>`;
+    case 'lineChart': case 'pieChart': case 'barChart': return `<div class="vz ch" style="${st}">${grafica(v)}</div>`;
+    case 'wordCloud': { const mx = Math.max(...v.palabras.map(x => x[1]));
+      return `<div class="vz wc" style="${st}">${v.palabras.map((x, i) => `<span style="font-size:${16 + 22 * x[1] / mx}px;color:${TEMA[i % 4]}">${x[0]}</span>`).join('')}</div>`; }
+    case 'tableEx': {
+      const num = c => /^[$\d]/.test(c) || /%$/.test(c);
+      const vals = v.escala ? v.escala.valores : null, mn = vals ? Math.min(...vals) : 0, mx = vals ? Math.max(...vals) : 0;
+      const rows = v.filas.map((f, r) => '<tr>' + f.map((c, k) => {
+        const bg = vals && k === v.escala.columna ? ` style="background:${escala(vals[r], mn, mx)};color:#fff;font-weight:700"` : '';
+        return `<td class="${num(c) ? 'n' : ''}"${bg}>${c}</td>`; }).join('') + '</tr>').join('');
+      return `<div class="vz tb" style="${st}"><table><tr>${v.columnas.map(c => `<th>${c}</th>`).join('')}</tr>${rows}</table></div>`; }
+    case 'buscador': return `<div class="vz bs" style="${st}"><div style="font-size:12px;font-weight:700;color:#605E5C;margin-bottom:6px">${v.campo}</div><div class="sb">🔍 Buscar</div></div>`;
+  }
+  return '';
+}
+document.querySelectorAll('.rep').forEach(el => {
+  const pg = REPORTE.paginas[+el.dataset.pagina];
+  if (el.dataset.movil){
+    const vs = pg.movil, h = Math.max(...vs.map(v => v.y + v.h)) + 20;
+    el.innerHTML = `<div class="rp m" style="height:${h}px;transform:scale(${262 / 340})">${vs.map(visual).join('')}</div>`;
+    return;
+  }
+  el.innerHTML = `<div class="rp" style="transform:scale(${el.dataset.escala})">${pg.visuales.map(visual).join('')}</div>`;
+});
 
 /* ═════ Rúbricas (texto fiel a los documentos de cada ADA) ═════ */
 const RUB = {
