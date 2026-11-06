@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Del bolsillo a la empresa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+:root{--paper:#F8F3EA;--ink:#2A2622;--muted:#6A5F55;--soft:#7A6E62;--line:#E3D9CD;--dark:#2F2A26;--gold:#E7C9A8;
+ --teal:#147A72;--teal-s:#DFF1EE;--red:#B9473A;--red-s:#F7E1DD;--green:#2E8B57;--amber:#D0902A;
+ --a1:#1E5A8A;--a1s:#E3EDF6;--a2:#147A72;--a2s:#DFF1EE;--a3:#7A4A9A;--a3s:#ECE2F2;--pf:#D0602A;--pfs:#F8E3D7;
+ --r-background-color:#F8F3EA}
+html,body{margin:0;background:var(--paper)}
+.reveal-viewport{background:var(--paper)}
+.reveal{font-family:'Inter',system-ui,sans-serif;color:var(--ink)}
+.reveal .slides{text-align:left}
+.reveal .slides section{height:100%;box-sizing:border-box;padding:64px 84px;
+ background-image:radial-gradient(ellipse at 8% 0%,rgba(20,122,114,.13),transparent 45%),radial-gradient(ellipse at 100% 100%,rgba(198,140,120,.16),transparent 45%)}
+.reveal .slides section.dark{background:var(--dark);background-image:none;color:#F3EADF}
+.reveal h1{font-family:'Inter',sans-serif;font-size:58px;font-weight:800;letter-spacing:-1px;color:var(--ink);margin:0;line-height:1.08;text-transform:none}
+.reveal p{margin:0}.reveal ul{margin:0;padding:0}
+.kicker{font-size:22px;letter-spacing:4px;text-transform:uppercase;color:var(--c,var(--teal));font-weight:700;margin-bottom:10px}
+.dark .kicker{color:var(--gold)}
+.reveal .sub{font-size:28px;color:var(--muted);margin-top:12px;line-height:1.35}
+.foot{position:absolute;left:84px;right:84px;bottom:30px;font-size:16px;color:#9A8E82;display:flex;justify-content:space-between;z-index:2}
+.reveal .progress{color:var(--teal);height:5px}.reveal .controls{color:var(--teal)}
+.reveal .slide-number{background:rgba(47,42,38,.75);font-family:'Inter';font-size:14px}
+.back-btn{position:fixed;top:16px;left:16px;z-index:30;padding:8px 14px;border-radius:10px;background:rgba(47,42,38,.78);color:#F3EADF;font:600 13px 'Inter';text-decoration:none;opacity:.55;transition:opacity .2s}
+.back-btn:hover{opacity:1}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.reveal .fragment.fade-up{transform:translate(0,30px)}
+.reveal .fragment.fade-up.visible{transform:none}
+.card{background:#fff;border-radius:22px;padding:28px 32px;box-shadow:0 6px 22px rgba(80,60,40,.10)}
+
+/* Portada */
+.cover{display:flex;flex-direction:column;justify-content:center;height:100%}
+.cover .big{font-size:120px;line-height:1.02;font-family:'Playfair Display',serif;font-weight:600;color:#F3EADF}
+.cover .big em{color:var(--gold);font-style:italic}
+.reveal .cover .lead{font-size:34px;color:#CDBFB0;margin-top:30px;max-width:1200px;line-height:1.35}
+.reveal .cover .meta{font-size:22px;letter-spacing:5px;text-transform:uppercase;color:#9C8F82;margin-top:70px}
+
+/* Ruta */
+.route{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:70px;position:relative}
+.route::before{content:'';position:absolute;left:8%;right:8%;top:62px;height:6px;background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3),var(--pf));border-radius:3px}
+.stop{text-align:center;position:relative;padding:0 18px}
+.stop .dot{width:124px;height:124px;border-radius:50%;background:var(--c);color:#fff;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 0 10px var(--paper),0 10px 26px rgba(0,0,0,.18)}
+.stop .dot b{font-size:40px;line-height:1}.stop .dot small{font-size:15px;letter-spacing:2px;font-weight:700;margin-top:4px}
+.stop h3{font-size:31px;margin:26px 0 10px;font-weight:800}
+.stop p{font-size:23px;line-height:1.4;color:var(--muted)}
+.stop .pill{display:inline-block;margin-top:16px;font-size:18px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--c);background:var(--cs);padding:8px 16px;border-radius:20px}
+.band{margin-top:60px;display:flex;gap:24px}
+.band .card{flex:1;font-size:25px;line-height:1.4;display:flex;gap:20px;align-items:center}
+.band .card i{font-style:normal;font-size:46px}
+
+/* Personal ↔ empresa */
+.map{display:grid;grid-template-columns:1fr 90px 1fr;row-gap:16px;margin-top:40px;align-items:center}
+.map .h{font-size:20px;letter-spacing:3px;text-transform:uppercase;font-weight:800;padding:0 26px 4px}
+.map .p{background:#fff;border-radius:16px;padding:18px 26px;font-size:26px;box-shadow:0 4px 14px rgba(80,60,40,.08);border-left:8px solid var(--a2)}
+.map .e{background:#fff;border-radius:16px;padding:18px 26px;font-size:26px;box-shadow:0 4px 14px rgba(80,60,40,.08);border-left:8px solid var(--pf)}
+.map .p small,.map .e small{display:block;font-size:19px;color:var(--muted);margin-top:2px}
+.map .ar{text-align:center;font-size:40px;color:var(--soft);font-weight:800}
+
+/* ER */
+.er{width:100%;display:block}
+.er .box{fill:#fff;stroke:var(--c);stroke-width:3}
+.er .hd{fill:var(--c)}
+.er .tt{fill:#fff;font:800 26px 'Inter'}
+.er .at{fill:#3A342F;font:500 21px 'Inter'}
+.er .ky{font:700 16px 'JetBrains Mono';fill:var(--c)}
+.er .role{font:800 15px 'Inter';letter-spacing:3px;fill:var(--c)}
+.er .ln{stroke:#6A5F55;stroke-width:3;fill:none}
+.two{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;margin-top:30px;align-items:start}
+.steps{display:flex;flex-direction:column;gap:16px}
+.st{display:flex;gap:20px;align-items:flex-start;font-size:26px;line-height:1.35}
+.st>b{flex:0 0 54px;height:54px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px}
+.types{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:50px}
+.ty{background:#fff;border-radius:22px;padding:40px 24px;box-shadow:0 6px 22px rgba(80,60,40,.10);text-align:center;border-top:12px solid var(--c)}
+.ty b{display:block;font-size:44px;font-weight:800}.ty span{display:block;font-size:24px;color:var(--muted);margin-top:8px}
+.ty em{display:block;font-style:normal;font-family:'JetBrains Mono';font-size:28px;font-weight:700;color:var(--c);margin-top:22px;background:var(--a1s);border-radius:12px;padding:12px}
+
+/* Rúbrica interactiva */
+.rub{display:grid;grid-template-columns:400px 1fr;gap:34px;margin-top:34px}
+.crits{display:flex;flex-direction:column;gap:12px}
+.crit{all:unset;cursor:pointer;background:#fff;border-radius:16px;padding:18px 22px;box-shadow:0 4px 14px rgba(80,60,40,.08);display:flex;align-items:center;gap:16px;border:3px solid transparent;transition:all .25s}
+.crit .n{flex:0 0 46px;height:46px;border-radius:50%;background:var(--cs);color:var(--c);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px}
+.crit .t{flex:1;font-size:22px;font-weight:700;line-height:1.2}
+.crit .pt{font:800 26px 'Inter';color:var(--c);font-variant-numeric:tabular-nums}
+.crit.on{border-color:var(--c);transform:translateX(10px);box-shadow:0 10px 26px rgba(0,0,0,.12)}
+.crit.on .n{background:var(--c);color:#fff}
+.total{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;font-size:22px;font-weight:800;color:var(--muted)}
+.total b{font-size:30px;color:var(--ink)}
+.bar{display:flex;height:16px;border-radius:8px;overflow:hidden;margin:4px 22px 0}
+.bar i{display:block;height:100%;background:var(--c);opacity:.3;border-right:3px solid #fff;transition:opacity .25s}
+.bar i.on{opacity:1}
+.levels{display:grid;grid-template-columns:1.25fr 1fr 1fr 1fr;gap:14px}
+.lv{background:#fff;border-radius:18px;padding:22px 22px;box-shadow:0 4px 14px rgba(80,60,40,.08);border-top:10px solid var(--lc);display:flex;flex-direction:column}
+.lv h4{margin:0 0 4px;font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--lc);font-weight:800}
+.lv .what{font-size:17px;color:var(--muted);font-weight:600;margin-bottom:12px}
+.lv p{font-size:21px;line-height:1.42;color:#3A342F}
+.lv.ex{background:linear-gradient(180deg,#fff,#F3FAF8);box-shadow:0 10px 30px rgba(46,139,87,.18)}
+.lv.ex p{font-size:23px}
+.crit-title{font-size:30px;font-weight:800;margin-bottom:6px}
+.crit-sub{font-size:21px;color:var(--muted);margin-bottom:18px}
+.hint{font-size:18px;color:#9A8E82;margin-top:14px}
+
+/* Wireframes del reporte */
+.pages{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:34px}
+.pg{background:#fff;border-radius:18px;box-shadow:0 6px 22px rgba(80,60,40,.12);overflow:hidden;display:flex;flex-direction:column}
+.pg .top{background:var(--dark);color:#F3EADF;padding:12px 16px;font-size:17px;font-weight:700;display:flex;justify-content:space-between}
+.pg .top span{opacity:.6;font-weight:500;font-size:14px}
+.pg .body{padding:14px;display:flex;flex-direction:column;gap:10px;height:440px}
+.pg .lbl{font-size:20px;font-weight:800;padding:16px 16px 4px}
+.pg .desc{font-size:18px;color:var(--muted);padding:0 16px 18px;line-height:1.4}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.kp{border-radius:8px;height:48px;background:#F1EBE2;display:flex;align-items:center;justify-content:center;font:800 13px 'Inter';color:#fff}
+.slicer{height:30px;border:2px dashed #CDBFB0;border-radius:8px;font-size:13px;color:#9A8E82;display:flex;align-items:center;padding:0 10px}
+.wf{border-radius:10px;background:#F6F1E9;flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.wf svg{width:92%;height:85%}
+.wf small{position:absolute;top:6px;left:10px;font-size:13px;color:#9A8E82;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.cloud{display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:center;align-items:center;padding:16px}
+.cloud span{font-weight:800;color:var(--a2);line-height:1}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl td{padding:6px 8px;border-bottom:1px solid #EFE8DD}
+.tbl td:last-child{text-align:right;font-weight:700}
+.search{height:40px;border:2px solid var(--a2);border-radius:10px;display:flex;align-items:center;padding:0 12px;font-size:15px;color:var(--muted);gap:8px}
+
+/* KPIs */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:40px}
+.kc{background:#fff;border-radius:22px;padding:24px;box-shadow:0 6px 22px rgba(80,60,40,.10);border-top:12px solid var(--kc)}
+.kc .lb{font-size:19px;letter-spacing:2px;text-transform:uppercase;font-weight:800;color:var(--muted)}
+.kc .v{font:800 46px/1.1 'Inter';color:var(--kc);margin:12px 0 10px;font-variant-numeric:tabular-nums}
+.kc .f{font-size:20px;line-height:1.35;color:#3A342F;background:#F6F1E9;border-radius:12px;padding:12px 14px}
+.kc .e{font-size:18px;color:var(--muted);margin-top:10px;line-height:1.35}
+
+/* Móvil */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px;align-items:stretch}
+.fl{background:#fff;border-radius:22px;padding:26px;box-shadow:0 6px 22px rgba(80,60,40,.10);position:relative;text-align:center}
+.fl:not(:last-child)::after{content:'→';position:absolute;right:-24px;top:50%;transform:translate(50%,-50%);font-size:40px;color:var(--a3);font-weight:800}
+.fl .ic{font-size:64px}
+.fl h3{font-size:28px;margin:14px 0 10px;font-weight:800}
+.fl p{font-size:21px;line-height:1.4;color:var(--muted)}
+.fl .crumb{margin-top:14px;font-family:'JetBrains Mono';font-size:17px;color:var(--a3);background:var(--a3s);border-radius:10px;padding:8px 10px}
+.phone{width:250px;height:440px;border-radius:36px;border:10px solid var(--dark);margin:0 auto;background:#fff;padding:14px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px}
+.phone i{display:block;border-radius:8px;background:#F1EBE2}
+
+/* Proyecto final */
+.areas{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px}
+.ar2{background:#fff;border-radius:22px;padding:26px;box-shadow:0 6px 22px rgba(80,60,40,.10);border-top:10px solid var(--pf)}
+.ar2 h3{font-size:28px;margin:0 0 6px;font-weight:800}
+.ar2 .who{font-size:18px;color:var(--muted);margin-bottom:14px}
+.ar2 li{list-style:none;font-size:21px;line-height:1.35;padding:8px 0;border-top:1px solid #F0E9DF}
+.ar2 li b{color:var(--pf)}
+.phases{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:40px}
+.ph{background:#fff;border-radius:20px;padding:24px 22px;box-shadow:0 6px 22px rgba(80,60,40,.10);border-top:10px solid var(--c)}
+.ph .n{font-size:17px;letter-spacing:3px;text-transform:uppercase;font-weight:800;color:var(--c)}
+.ph h3{font-size:27px;line-height:1.15;margin:8px 0 12px;font-weight:800}
+.ph p{font-size:20px;line-height:1.4;color:var(--muted)}
+.ph .rb{margin-top:12px;font-size:16px;font-weight:800;color:var(--c);background:var(--cs);padding:6px 10px;border-radius:10px;display:inline-block}
+
+/* Tabla resumen */
+.sum{width:100%;border-collapse:separate;border-spacing:0 12px;margin-top:20px}
+.sum td{background:#fff;padding:18px 22px;font-size:23px;vertical-align:middle}
+.sum td:first-child{border-radius:16px 0 0 16px;border-left:10px solid var(--c);font-weight:800;width:260px}
+.sum td:last-child{border-radius:0 16px 16px 0;font-weight:800;color:var(--c);text-align:right;width:150px}
+.sum td small{display:block;font-size:17px;color:var(--muted);font-weight:500}
+.sum th{font-size:18px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-align:left;padding:0 22px}
+
+/* Cierre */
+.closing{display:flex;flex-direction:column;justify-content:center;height:100%}
+.closing .l{font-family:'Playfair Display',serif;font-size:84px;line-height:1.22;color:#F3EADF}
+.closing .l em{color:var(--gold);font-style:italic}
+.reveal .closing .s{font-size:32px;color:#CDBFB0;margin-top:46px;max-width:1450px;line-height:1.4}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="back-btn" href="../../dashboard.html">← Volver</a>
+<div class="reveal"><div class="slides">
+
+<!-- 1 · Portada -->
+<section class="dark">
+ <div class="cover">
+  <div class="kicker">Actividades de aprendizaje y rúbricas</div>
+  <div class="big">Del <em>bolsillo</em><br>a la empresa</div>
+  <p class="lead">Construiremos juntos un tablero de finanzas personales. Después usará lo aprendido para armar uno con los datos de su organización.</p>
+  <p class="meta">Inteligencia de Negocios · MDE · UADY</p>
+ </div>
+</section>
+
+<!-- 2 · La ruta -->
+<section>
+ <div class="kicker">La ruta del curso</div>
+ <h1>Cuatro entregas, una sola historia</h1>
+ <div class="route">
+  <div class="stop" style="--c:var(--a1);--cs:var(--a1s)"><div class="dot"><small>ADA</small><b>1</b></div><h3>El modelo</h3><p>Tres tablas en Excel, sus tipos de dato y sus relaciones.</p><span class="pill">Finanzas personales</span></div>
+  <div class="stop fragment fade-up" style="--c:var(--a2);--cs:var(--a2s)"><div class="dot"><small>ADA</small><b>2</b></div><h3>El reporte</h3><p>Cuatro páginas con indicadores, gráficas y filtros.</p><span class="pill">Finanzas personales</span></div>
+  <div class="stop fragment fade-up" style="--c:var(--a3);--cs:var(--a3s)"><div class="dot"><small>ADA</small><b>3</b></div><h3>En el celular</h3><p>Vista móvil, publicación en la nube y consulta desde la app.</p><span class="pill">Finanzas personales</span></div>
+  <div class="stop fragment fade-up" style="--c:var(--pf);--cs:var(--pfs)"><div class="dot"><small>Final</small><b>★</b></div><h3>Su empresa</h3><p>Un reporte con datos reales de su organización y al menos cuatro KPI.</p><span class="pill">Datos de su trabajo</span></div>
+ </div>
+ <div class="band fragment fade-up">
+  <div class="card"><i>👤</i><span>Todas las entregas son <b>individuales</b>.</span></div>
+  <div class="card"><i>🎤</i><span>El proyecto final se <b>expone en persona</b> en la última clase.</span></div>
+  <div class="card"><i>💯</i><span>Cada entrega se califica sobre <b>100 puntos</b> con su rúbrica.</span></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 3 · Por qué finanzas personales -->
+<section>
+ <div class="kicker">Por qué empezar por su dinero</div>
+ <h1>Sus finanzas ya son una pequeña empresa</h1>
+ <p class="sub">Todos tienen los datos y todos conocen el negocio. Las piezas son las mismas que en cualquier organización.</p>
+ <div class="map">
+  <div class="h" style="color:var(--a2)">Finanzas personales</div><div></div><div class="h" style="color:var(--pf)">Su empresa</div>
+  <div class="p">Movimientos<small>cada gasto o ingreso, con fecha y monto</small></div><div class="ar">→</div><div class="e">Transacciones<small>ventas, compras, pólizas, entregas, cuotas</small></div>
+  <div class="p fragment fade-up" data-fragment-index="1">Categorías<small>comida, transporte, sueldo…</small></div><div class="ar fragment fade-up" data-fragment-index="1">→</div><div class="e fragment fade-up" data-fragment-index="1">Catálogos<small>cuentas contables, centros de costo, productos</small></div>
+  <div class="p fragment fade-up" data-fragment-index="2">Formas de pago<small>banco, tarjeta, efectivo</small></div><div class="ar fragment fade-up" data-fragment-index="2">→</div><div class="e fragment fade-up" data-fragment-index="2">Medios y canales<small>cuentas bancarias, sucursales, canales de venta</small></div>
+  <div class="p fragment fade-up" data-fragment-index="3">% de ahorro<small>cuánto de lo que entra se queda</small></div><div class="ar fragment fade-up" data-fragment-index="3">→</div><div class="e fragment fade-up" data-fragment-index="3">Margen<small>cuánto de lo que se vende es utilidad</small></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 4 · ADA 1: el modelo -->
+<section style="--c:var(--a1)">
+ <div class="kicker">ADA 1 · Construcción de un modelo de datos en Power BI</div>
+ <h1>Tres tablas, dos relaciones</h1>
+ <div class="two">
+  <svg class="er" id="er-ada1" viewBox="0 0 1000 600" style="height:600px"></svg>
+  <div>
+   <div class="steps">
+    <div class="st"><b>1</b><span>Construir en Excel las tablas <b>Movimientos</b>, <b>Categorías</b> y <b>FF</b> (formas de pago), cada una con formato de tabla.</span></div>
+    <div class="st fragment fade-up"><b>2</b><span>Importarlas a Power BI desde <b>Obtener datos → Excel</b>.</span></div>
+    <div class="st fragment fade-up"><b>3</b><span>Revisar el <b>tipo de dato</b> y el <b>formato</b> de cada campo.</span></div>
+    <div class="st fragment fade-up"><b>4</b><span>Crear las dos relaciones <b>muchos a uno</b> desde Movimientos.</span></div>
+   </div>
+   <p class="sub fragment fade-up" style="margin-top:26px;font-size:22px">Los campos del diagrama son de ejemplo: lo importante es que cada movimiento apunte a su categoría y a su forma de pago por la llave.</p>
+  </div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 5 · ADA 1: tipos -->
+<section style="--c:var(--a1)">
+ <div class="kicker">ADA 1 · Tipos de dato y formato (35 pts)</div>
+ <h1>Cada campo, con su tipo y su formato</h1>
+ <p class="sub">Si Power BI cree que una fecha es texto, no hay filtro de fechas. Si un monto es texto, no se puede sumar.</p>
+ <div class="types">
+  <div class="ty"><b>Fecha</b><span>tipo fecha</span><em>dd/mm/aaaa</em></div>
+  <div class="ty fragment fade-up"><b>ID</b><span>número entero</span><em>1, 2, 3…</em></div>
+  <div class="ty fragment fade-up"><b>Monto</b><span>decimal o moneda</span><em>$1,250.00</em></div>
+  <div class="ty fragment fade-up"><b>Texto</b><span>texto</span><em>Supermercado</em></div>
+ </div>
+ <div class="band fragment fade-up">
+  <div class="card" style="border-left:10px solid var(--red)"><i>⚠️</i><span>Lo que más baja puntos: dejar campos como <b>«Cualquiera»</b>, encabezados duplicados o filas en blanco en el Excel.</span></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 6 · ADA 1: rúbrica -->
+<section style="--c:var(--a1);--cs:var(--a1s)">
+ <div class="kicker">ADA 1 · Rúbrica</div>
+ <h1>Cómo se califica el modelo</h1>
+ <div class="rub" data-rub="ada1"></div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 7 · ADA 2: el reporte -->
+<section style="--c:var(--a2)">
+ <div class="kicker">ADA 2 · Análisis y visualización de datos</div>
+ <h1>Replicar el reporte de clase: cuatro páginas</h1>
+ <div class="pages">
+  <div class="pg"><div class="top">Página 1 · Resumen <span>fecha y hora</span></div><div class="body">
+    <div class="slicer">📅 Selector de fechas</div>
+    <div class="kpis"><div class="kp" style="background:#6A5F55">#</div><div class="kp" style="background:var(--green)">Ingreso</div><div class="kp" style="background:var(--red)">Egreso</div><div class="kp" style="background:var(--amber)">Utilidad</div><div class="kp" style="background:var(--amber)">% Ahorro</div></div>
+    <div class="wf"><small>Línea</small><svg viewBox="0 0 200 80"><polyline points="0,60 25,48 50,52 75,30 100,38 125,22 150,30 175,14 200,20" fill="none" stroke="#147A72" stroke-width="4"/></svg></div>
+    <div class="wf"><small>Nube de palabras</small><div class="cloud"><span style="font-size:30px">Súper</span><span style="font-size:16px">Gasolina</span><span style="font-size:22px">Renta</span><span style="font-size:14px">Café</span><span style="font-size:19px">Luz</span><span style="font-size:13px">Cine</span></div></div>
+  </div><div class="lbl">KPI, tendencia y conceptos</div><div class="desc">Cinco tarjetas, gráfica de línea y nube de palabras.</div></div>
+  <div class="pg fragment fade-up"><div class="top">Página 2 · Distribución <span>fecha y hora</span></div><div class="body">
+    <div class="slicer">📅 Selector de fechas</div>
+    <div class="wf"><small>Pastel</small><svg viewBox="0 0 120 120"><circle r="50" cx="60" cy="60" fill="#147A72"/><path d="M60 60L60 10A50 50 0 0 1 107 75Z" fill="#D0602A"/><path d="M60 60L107 75A50 50 0 0 1 40 106Z" fill="#B8860B"/><path d="M60 60L40 106A50 50 0 0 1 12 48Z" fill="#7A4A9A"/></svg></div>
+    <div class="slicer">▾ Categoría · Subcategoría</div>
+  </div><div class="lbl">¿En qué se va el dinero?</div><div class="desc">Gráfica de pastel con segmentadores.</div></div>
+  <div class="pg fragment fade-up"><div class="top">Página 3 · Gastos <span>fecha y hora</span></div><div class="body">
+    <div class="slicer">▾ Banco · Tipo</div>
+    <div class="wf" style="align-items:flex-start;padding-top:28px"><small>Tabla con formato condicional</small><table class="tbl">
+      <tr><td><span style="color:#D0602A">●</span> Comida</td><td>$4,820</td></tr><tr><td><span style="color:#147A72">●</span> Transporte</td><td>$2,150</td></tr>
+      <tr><td><span style="color:#B8860B">●</span> Vivienda</td><td>$7,500</td></tr><tr><td><span style="color:#7A4A9A">●</span> Ocio</td><td>$1,340</td></tr><tr><td><span style="color:#D0602A">●</span> Comida</td><td>$960</td></tr></table></div>
+  </div><div class="lbl">El detalle de los gastos</div><div class="desc">Tabla con colores por categoría.</div></div>
+  <div class="pg fragment fade-up"><div class="top">Página 4 · Búsqueda <span>fecha y hora</span></div><div class="body">
+    <div class="search">🔍 Buscar concepto…</div>
+    <div class="wf" style="align-items:flex-start;padding-top:28px"><small>Resultado</small><table class="tbl">
+      <tr><td>03/09 · Súper Chedraui</td><td>$1,240</td></tr><tr><td>10/09 · Súper Chedraui</td><td>$860</td></tr><tr><td>17/09 · Súper Chedraui</td><td>$1,105</td></tr></table></div>
+  </div><div class="lbl">Encontrar un movimiento</div><div class="desc">Buscador de concepto.</div></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 8 · ADA 2: KPIs -->
+<section style="--c:var(--a2)">
+ <div class="kicker">ADA 2 · Las cinco tarjetas</div>
+ <h1>Cinco números que resumen su mes</h1>
+ <div class="kpi-row">
+  <div class="kc" style="--kc:#6A5F55"><div class="lb"># Movimientos</div><div class="v">148</div><div class="f">Conteo de filas de Movimientos</div><div class="e">¿Cuánta actividad hubo?</div></div>
+  <div class="kc fragment fade-up" style="--kc:var(--green)"><div class="lb">Total ingreso</div><div class="v">$38,500</div><div class="f">Suma del monto de los movimientos de ingreso</div><div class="e">Verde: lo que entra</div></div>
+  <div class="kc fragment fade-up" style="--kc:var(--red)"><div class="lb">Total egreso</div><div class="v">$31,240</div><div class="f">Suma del monto de los movimientos de egreso</div><div class="e">Rojo: lo que sale</div></div>
+  <div class="kc fragment fade-up" style="--kc:var(--amber)"><div class="lb">Utilidad</div><div class="v">$7,260</div><div class="f">Ingreso − Egreso</div><div class="e">Lo que queda</div></div>
+  <div class="kc fragment fade-up" style="--kc:var(--amber)"><div class="lb">% Ahorro</div><div class="v">18.9 %</div><div class="f">Utilidad ÷ Ingreso</div><div class="e">En la empresa se llama margen</div></div>
+ </div>
+ <p class="sub fragment fade-up" style="margin-top:36px">Formato de moneda y de porcentaje, sus colores, y un selector de fechas que funcione en <b>todas</b> las páginas.</p>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 9 · ADA 2: rúbrica -->
+<section style="--c:var(--a2);--cs:var(--a2s)">
+ <div class="kicker">ADA 2 · Rúbrica</div>
+ <h1>Cómo se califica el reporte</h1>
+ <div class="rub" data-rub="ada2"></div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 10 · ADA 3: flujo -->
+<section style="--c:var(--a3)">
+ <div class="kicker">ADA 3 · Del escritorio al celular</div>
+ <h1>Que su reporte viaje con usted</h1>
+ <div class="flow">
+  <div class="fl"><div class="ic">📐</div><h3>Diseñar</h3><p>Acomodar los visuales en un lienzo vertical: primero lo más importante.</p><div class="crumb">Vista → Diseño móvil</div></div>
+  <div class="fl fragment fade-up"><div class="ic">☁️</div><h3>Publicar</h3><p>Subir el reporte a un área de trabajo de Office 365.</p><div class="crumb">Publicar → workspace</div></div>
+  <div class="fl fragment fade-up"><div class="ic">🌐</div><h3>Verificar</h3><p>Abrirlo en el servicio web y confirmar que los datos estén actualizados.</p><div class="crumb">app.powerbi.com</div></div>
+  <div class="fl fragment fade-up"><div class="ic">📱</div><h3>Consultar</h3><p>Abrirlo en la app del celular: debe aparecer la vista móvil, no la de escritorio.</p><div class="crumb">App Power BI</div></div>
+ </div>
+ <div class="band fragment fade-up">
+  <div class="card"><i>📸</i><span>La evidencia es una <b>captura de pantalla</b> del celular o una <b>demostración en vivo</b>.</span></div>
+  <div class="card"><i>🔢</i><span>En la vista móvil, al menos: <b>tarjetas KPI</b>, <b>una gráfica</b> y <b>una tabla</b>, legibles sin hacer zoom.</span></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 11 · ADA 3: rúbrica -->
+<section style="--c:var(--a3);--cs:var(--a3s)">
+ <div class="kicker">ADA 3 · Rúbrica</div>
+ <h1>Cómo se califica la versión móvil</h1>
+ <div class="rub" data-rub="ada3"></div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 12 · Proyecto final -->
+<section style="--c:var(--pf)">
+ <div class="kicker">Proyecto final · Reporte de BI aplicado a su empresa</div>
+ <h1>Ahora con los datos de su trabajo</h1>
+ <p class="sub">Elija el área o proceso más relevante para usted y construya al menos una página con cuatro KPI o más. Por ejemplo:</p>
+ <div class="areas">
+  <div class="ar2"><h3>Finanzas</h3><div class="who">contabilidad, tesorería, auditoría</div><ul><li><b>Margen</b> por línea de negocio</li><li><b>Días de cobro</b> promedio</li><li><b>Gasto real vs. presupuesto</b></li><li><b>Cartera vencida</b></li></ul></div>
+  <div class="ar2 fragment fade-up"><h3>Ventas y marketing</h3><div class="who">comercio, seguros, consultoría</div><ul><li><b>Ventas</b> por canal y por mes</li><li><b>Ticket promedio</b></li><li><b>Conversión</b> de campañas</li><li><b>Retención</b> de clientes</li></ul></div>
+  <div class="ar2 fragment fade-up"><h3>Recursos humanos</h3><div class="who">RH, administración pública</div><ul><li><b>Rotación</b> de personal</li><li><b>Ausentismo</b></li><li><b>Horas de capacitación</b> por persona</li><li><b>Tiempo de contratación</b></li></ul></div>
+  <div class="ar2 fragment fade-up"><h3>Operaciones y programas</h3><div class="who">gobierno, fundaciones, universidad</div><ul><li><b>Cobertura</b> de beneficiarios</li><li><b>Cumplimiento</b> de metas</li><li><b>Costo por beneficiario</b></li><li><b>Tiempo de atención</b></li></ul></div>
+ </div>
+ <p class="sub fragment fade-up" style="margin-top:28px">La página necesita al menos una gráfica de tendencia o comparación, una tabla de detalle y filtros. Y cada KPI debe estar <b>justificado</b>: por qué le sirve a su negocio.</p>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 13 · Proyecto final: rúbrica -->
+<section style="--c:var(--pf);--cs:var(--pfs)">
+ <div class="kicker">Proyecto final · Rúbrica</div>
+ <h1>Cómo se califica el proyecto</h1>
+ <div class="rub" data-rub="pf"></div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 14 · La exposición -->
+<section style="--c:var(--pf)">
+ <div class="kicker">La exposición en la última clase</div>
+ <h1>Cuéntelo con las cinco fases del DDDM</h1>
+ <p class="sub">La misma ruta de Florence sirve para presentar su reporte. Así cubre todos los criterios de la rúbrica.</p>
+ <div class="phases">
+  <div class="ph" style="--c:#1E5A8A;--cs:#E3EDF6"><div class="n">Fase 1</div><h3>El problema</h3><p>¿Qué decisión de su área necesita datos?</p><span class="rb">Contexto</span></div>
+  <div class="ph fragment fade-up" style="--c:#147A72;--cs:#DFF1EE"><div class="n">Fase 2</div><h3>Los datos</h3><p>De dónde salieron, cómo los limpió y cómo los relacionó.</p><span class="rb">Criterios 1 y 2</span></div>
+  <div class="ph fragment fade-up" style="--c:#B8860B;--cs:#F6EBD0"><div class="n">Fase 3</div><h3>El análisis</h3><p>Sus KPI: qué mide cada uno y por qué importa.</p><span class="rb">Criterio 3</span></div>
+  <div class="ph fragment fade-up" style="--c:#D0602A;--cs:#F8E3D7"><div class="n">Fase 4</div><h3>La comunicación</h3><p>La página: qué cuenta cada gráfica a primera vista.</p><span class="rb">Criterio 4</span></div>
+  <div class="ph fragment fade-up" style="--c:#7A4A9A;--cs:#ECE2F2"><div class="n">Fase 5</div><h3>La decisión</h3><p>Qué haría distinto su empresa con este reporte.</p><span class="rb">Criterio 5</span></div>
+ </div>
+ <p class="sub fragment fade-up" style="margin-top:34px">Leer los números no basta. La rúbrica premia <b>interpretar</b>: qué revelan los datos y qué decisión apoyan.</p>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 15 · Resumen -->
+<section>
+ <div class="kicker">En una sola vista</div>
+ <h1>Lo que se entrega</h1>
+ <table class="sum">
+  <tr><th>Entrega</th><th>Lo que se evalúa</th><th style="text-align:right">Puntos</th></tr>
+  <tr style="--c:var(--a1)"><td>ADA 1<small>El modelo</small></td><td>Construcción e importación (30) · Tipos de dato y formato (35) · Relaciones (35)</td><td>100</td></tr>
+  <tr style="--c:var(--a2)"><td>ADA 2<small>El reporte</small></td><td>Tarjetas KPI (20) · Visualizaciones (30) · Filtros (25) · Diseño (25)</td><td>100</td></tr>
+  <tr style="--c:var(--a3)"><td>ADA 3<small>En el celular</small></td><td>Vista móvil (25) · Legibilidad (25) · Publicación (25) · App móvil (25)</td><td>100</td></tr>
+  <tr style="--c:var(--pf)"><td>Proyecto final<small>Su empresa · se expone</small></td><td>Datos (15) · Modelo (20) · KPI (25) · Visualización (25) · Interpretación (15)</td><td>100</td></tr>
+ </table>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 16 · Cierre -->
+<section class="dark">
+ <div class="closing">
+  <div class="kicker">Para llevar</div>
+  <div class="l">Si puede leer <em>su dinero,</em><br>puede leer <em>su empresa.</em></div>
+  <p class="s">Movimientos, catálogos, relaciones, indicadores y una decisión al final. Lo que cambia es la escala, no la lógica.</p>
+ </div>
+</section>
+
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+const INK = '#5B5048';
+const HD = 52, RH = 36;
+
+/* ents: {id, x, y, w, title, color, role, attrs:[[nombre, 'PK'|'FK'|'']], opt}
+   rels: {from, fk, to, pk, side:'h'|'v', opt}  — from = lado "muchos", to = lado "uno"; el renglón de la FK y la PK fija la altura de la línea */
+function drawER(svg, ents, rels){
+  const box = {};
+  const gL = el('g', {}, svg), gE = el('g', {}, svg);
+  ents.forEach(e => {
+    const w = e.w || 320, h = HD + RH * e.attrs.length + 14;
+    box[e.id] = {x: e.x, y: e.y, w, h, attrs: e.attrs.map(a => a[0])};
+    const g = el('g', {style: `--c:${e.color || INK}`, class: e.opt ? 'opt' : ''}, gE);
+    if (e.role){ const r = el('text', {x: e.x + 4, y: e.y - 12, class: 'role'}, g); r.textContent = e.role; }
+    el('rect', {x: e.x, y: e.y, width: w, height: h, rx: 14, class: 'box'}, g);
+    el('path', {d: `M${e.x} ${e.y + HD}V${e.y + 14}q0-14 14-14h${w - 28}q14 0 14 14V${e.y + HD}Z`, class: 'hd'}, g);
+    const t = el('text', {x: e.x + 20, y: e.y + HD / 2 + 9, class: 'tt'}, g); t.textContent = e.title;
+    e.attrs.forEach(([n, k], i) => {
+      const y = e.y + HD + 10 + RH * i + RH / 2 + 7;
+      if (k){ const kt = el('text', {x: e.x + 20, y, class: 'ky'}, g); kt.textContent = k; }
+      const at = el('text', {x: e.x + (k ? 66 : 20), y, class: 'at'}, g); at.textContent = n;
+      if (k === 'PK') at.setAttribute('font-weight', '700');
+    });
+  });
+  const rowY = (b, name) => b.y + HD + 10 + RH * b.attrs.indexOf(name) + RH / 2;
+  rels.forEach(r => {
+    const a = box[r.from], b = box[r.to];
+    let p1, p2, dir;
+    if ((r.side || 'h') === 'h'){
+      const sgn = (b.x + b.w / 2) > (a.x + a.w / 2) ? 1 : -1;
+      p1 = [sgn > 0 ? a.x + a.w : a.x, rowY(a, r.fk)]; p2 = [sgn > 0 ? b.x : b.x + b.w, rowY(b, r.pk || r.fk)]; dir = [sgn, 0];
+    } else {
+      const sgn = (b.y + b.h / 2) > (a.y + a.h / 2) ? 1 : -1, x = r.x || Math.max(a.x, b.x) + 60;
+      p1 = [x, sgn > 0 ? a.y + a.h : a.y]; p2 = [x, sgn > 0 ? b.y : b.y + b.h]; dir = [0, sgn];
+    }
+    const g = el('g', {class: r.opt ? 'opt' : ''}, gL);
+    const d = dir[0] ? `M${p1[0]} ${p1[1]}H${r.mx || (p1[0] + p2[0]) / 2}V${p2[1]}H${p2[0]}` : `M${p1[0]} ${p1[1]}V${p2[1]}`;
+    el('path', {d, class: 'ln'}, g);
+    const [dx, dy] = dir, L = 26, bx = p1[0] + dx * L, by = p1[1] + dy * L, px = -dy, py = dx;
+    el('path', {d: `M${bx} ${by}L${p1[0] + px * 14} ${p1[1] + py * 14}M${bx} ${by}L${p1[0]} ${p1[1]}M${bx} ${by}L${p1[0] - px * 14} ${p1[1] - py * 14}`, class: 'ln'}, g);
+    const cx = p2[0] - dx * 14, cy = p2[1] - dy * 14, cx2 = p2[0] - dx * 24, cy2 = p2[1] - dy * 24;
+    el('path', {d: `M${cx + px * 13} ${cy + py * 13}L${cx - px * 13} ${cy - py * 13}M${cx2 + px * 13} ${cy2 + py * 13}L${cx2 - px * 13} ${cy2 - py * 13}`, class: 'ln'}, g);
+  });
+}
+const $ = id => document.getElementById(id);
+
+/* Modelo de la ADA 1 (campos de ejemplo) */
+drawER($('er-ada1'), [
+  {id:'m', x:20, y:150, w:360, title:'Movimientos', role:'EVENTO', color:'#1E5A8A', attrs:[['MovimientoID','PK'],['Fecha',''],['Concepto',''],['Monto',''],['CategoriaID','FK'],['FFID','FK']]},
+  {id:'c', x:620, y:30, w:360, title:'Categorías', role:'CATÁLOGO', attrs:[['CategoriaID','PK'],['Categoría',''],['Subcategoría',''],['Tipo','']]},
+  {id:'f', x:620, y:340, w:360, title:'FF', role:'FORMAS DE PAGO', attrs:[['FFID','PK'],['FormaPago',''],['Banco',''],['Tipo','']]},
+], [
+  {from:'m', fk:'CategoriaID', to:'c', pk:'CategoriaID'},
+  {from:'m', fk:'FFID', to:'f', pk:'FFID'},
+]);
+
+/* ═════ Rúbricas (texto fiel a los documentos de cada ADA) ═════ */
+const RUB = {
+ ada1: [
+  ['Construcción e importación', 'Tablas en Excel y carga correcta a Power BI', 30, [
+   'Las 3 tablas están creadas como tablas de Excel con todos sus campos, sin errores de estructura, e importadas correctamente desde «Obtener datos». Aparecen completas en el panel de campos.',
+   'Las 3 tablas están presentes e importadas, pero alguna no está formateada como tabla de Excel o la ruta del archivo quedó mal referenciada.',
+   'Solo 2 tablas construidas e importadas correctamente, o hay errores de estructura (encabezados duplicados, filas en blanco) que afectan la carga.',
+   'El archivo no tiene estructura de tabla, falta más de una tabla o no se realizó la importación desde Excel.']],
+  ['Tipos de dato y formato', 'Tipo y formato de cada campo en Power Query o la vista de datos', 35, [
+   'Todos los campos tienen el tipo correcto (Fecha = fecha, ID = entero, Cantidad/Monto = decimal o moneda, Texto = texto) y los formatos están aplicados (moneda con símbolo, fechas dd/mm/aaaa).',
+   'La mayoría de los campos tienen el tipo correcto, pero 1 o 2 tienen tipo genérico o el formato no está aplicado.',
+   'Varios campos tienen el tipo incorrecto o se dejaron como «Cualquiera» sin revisión.',
+   'No se revisaron los tipos de dato; la mayoría de los campos quedaron con tipo automático sin validación.']],
+  ['Modelo de relaciones', 'Relaciones, cardinalidad y dirección del filtro', 35, [
+   'Las 2 relaciones (Movimientos → Categorías y Movimientos → FF) están creadas con cardinalidad muchos a uno (*:1) y dirección de filtro correcta. El diagrama está organizado y legible.',
+   'Ambas relaciones existen, pero la cardinalidad o la dirección de una es incorrecta, o el diagrama está desordenado.',
+   'Solo 1 relación está correctamente definida o se crearon relaciones entre campos incorrectos.',
+   'No hay relaciones definidas o las conexiones son completamente incorrectas.']],
+ ],
+ ada2: [
+  ['Métricas y tarjetas KPI', '# Movimientos, Total Ingreso, Total Egreso, Utilidad, % Ahorro y selector de fechas', 20, [
+   'Las 5 tarjetas KPI están presentes con los cálculos correctos, formato de moneda o porcentaje, colores correspondientes (verde, rojo, amarillo) y el selector de fechas funciona en todas las páginas.',
+   'Las 5 tarjetas están presentes y los valores son correctos, pero algún color o formato de número no coincide con el modelo.',
+   '3 o 4 tarjetas están presentes o algún cálculo arroja un valor incorrecto.',
+   'Menos de 3 tarjetas presentes o los valores calculados son incorrectos en la mayoría.']],
+  ['Visualizaciones', 'Línea (p. 1), nube de palabras (p. 1), pastel (p. 2) y tabla con formato condicional (p. 3)', 30, [
+   'Todos los visuales están en la página correcta, muestran los datos adecuados, tienen etiquetas de datos visibles y el formato condicional de colores por categoría está aplicado en la tabla de gastos.',
+   'Todos los visuales están presentes, pero alguno está en la página incorrecta, le faltan etiquetas o el formato condicional está aplicado a medias.',
+   '2 o 3 de los 4 visuales están bien construidos; el resto falta o muestra datos incorrectos.',
+   'Solo 1 visual o ninguno está correctamente construido.']],
+  ['Filtros e interactividad', 'Fechas, segmentadores por categoría, subcategoría, banco y tipo, y buscador de concepto', 25, [
+   'Todos los filtros están en las páginas correctas, funcionan al seleccionar valores y afectan los visuales correspondientes. El buscador de concepto (p. 4) también opera correctamente.',
+   'La mayoría de los filtros funcionan, pero alguno no afecta los visuales correctamente o está en la página equivocada.',
+   'Solo están los filtros de fecha; faltan los segmentadores por categoría o banco.',
+   'No hay filtros funcionales o faltan en la mayoría de las páginas.']],
+  ['Diseño y presentación', 'Títulos, estructura de las 4 páginas, consistencia visual y legibilidad', 25, [
+   'Las 4 páginas tienen sus títulos correctos y la fecha y hora en el encabezado; los elementos están alineados, el diseño es limpio y la paleta es consistente con el modelo.',
+   'Las 4 páginas están presentes, pero algún título es incorrecto, hay elementos desalineados o la paleta difiere notablemente del modelo.',
+   'Solo 2 o 3 páginas están completas, o el diseño general dificulta la lectura.',
+   'Solo 1 página, o el reporte no tiene una estructura reconocible respecto al modelo.']],
+ ],
+ ada3: [
+  ['Diseño de la vista móvil', 'Configuración del lienzo vertical en Power BI Desktop', 25, [
+   'La vista móvil está activada desde «Vista» → «Diseño móvil». Los visuales principales están en el lienzo vertical sin solaparse, con tamaños proporcionales a la pantalla.',
+   'La vista móvil está configurada, pero algunos visuales se solapan, están mal dimensionados o el orden de lectura no es lógico.',
+   'La vista móvil está activada pero solo contiene 1 o 2 visuales, o el acomodo dificulta la lectura.',
+   'No se configuró la vista móvil o se entregó únicamente la vista de escritorio.']],
+  ['Contenido y legibilidad móvil', 'Visuales incluidos, jerarquía y uso en pantalla pequeña', 25, [
+   'Incluye al menos las tarjetas KPI, una gráfica y una tabla. Los textos se leen sin hacer zoom, los elementos van de mayor a menor relevancia y no hay visuales cortados.',
+   'Los visuales clave están, pero alguno tiene texto muy pequeño, está cortado o la jerarquía no es clara.',
+   'Solo están los KPI o solo la tabla; faltan gráficas o la vista es difícil de leer en pantalla pequeña.',
+   'El contenido es insuficiente o los visuales son ilegibles en un dispositivo móvil.']],
+  ['Publicación en Office 365', 'De Power BI Desktop al servicio en la nube', 25, [
+   'El reporte se publicó con «Publicar» → workspace de Office 365. El alumno demuestra que aparece en el servicio web (app.powerbi.com) con los datos actualizados.',
+   'El reporte está publicado, pero en el workspace incorrecto, o los datos no están actualizados respecto a la versión de escritorio.',
+   'El reporte está publicado pero con errores (visuales faltantes, datos vacíos) o el alumno no puede demostrar el acceso en la nube.',
+   'El reporte no se publicó o no hay evidencia de que esté disponible en Office 365.']],
+  ['Visualización en el celular', 'Acceso desde la app de Power BI', 25, [
+   'El alumno abre el reporte desde la app de Power BI y se activa automáticamente la vista móvil diseñada. Presenta evidencia (captura o demostración en vivo) con todos los visuales correctos.',
+   'El reporte se ve en el celular, pero aparece la vista de escritorio en lugar de la móvil, o algún visual no carga.',
+   'El reporte abre en el celular, pero la experiencia es deficiente (carga parcial, visuales cortados o sin datos).',
+   'No se presenta evidencia de visualización en un dispositivo móvil.']],
+ ],
+ pf: [
+  ['Identificación y recopilación de datos', 'Pertinencia, calidad y origen de los datos', 15, [
+   'Los datos provienen de fuentes reales de la empresa, son pertinentes al área elegida, suficientes para calcular KPI significativos y están organizados antes de importarse a Power BI.',
+   'Los datos son reales pero incompletos o requirieron ajustes importantes; los KPI que se pueden construir son limitados.',
+   'Los datos son genéricos o de ejemplo, no corresponden a una empresa real, pero permiten demostrar el uso de la herramienta.',
+   'No hay datos identificables de una empresa o son insuficientes para cualquier análisis.']],
+  ['Modelo de datos', 'Tablas, tipos de dato, formatos y relaciones', 20, [
+   'Las tablas están bien estructuradas, con tipos y formatos correctos. Las relaciones tienen la cardinalidad adecuada y el modelo permite cruzar la información sin ambigüedades.',
+   'El modelo tiene las tablas y relaciones necesarias, pero algún tipo de dato es incorrecto o una relación tiene la cardinalidad equivocada.',
+   'Hay al menos una tabla importada con relaciones básicas, pero el modelo tiene errores que limitan los cálculos.',
+   'No hay modelo estructurado o las tablas están desconectadas entre sí.']],
+  ['KPI e indicadores', 'Relevancia, cálculo y pertinencia al área', 25, [
+   'Presenta al menos 4 KPI relevantes para el área elegida, bien calculados y con formato adecuado. El alumno justifica por qué cada indicador es útil para su negocio.',
+   'Presenta 3 KPI correctos, pero alguno no es relevante para el contexto o no tiene formato.',
+   'Presenta 2 KPI básicos sin profundizar en indicadores específicos del área.',
+   'Menos de 2 KPI, valores incorrectos o sin significado claro para el negocio.']],
+  ['Visualizaciones y diseño', 'Gráficas, tablas, filtros y presentación de la página', 25, [
+   'La página incluye al menos una gráfica de tendencia o comparación, una tabla de detalle y filtros interactivos. Diseño limpio, con título y paleta consistente; los visuales comunican la situación del área.',
+   'La página tiene gráfica y tabla, pero los filtros son limitados o el diseño dificulta la lectura. Los datos mostrados son correctos.',
+   'La página tiene al menos una gráfica o tabla, pero no tiene filtros y el diseño es básico o desordenado.',
+   'No hay visualizaciones significativas, o la página solo muestra tarjetas de texto.']],
+  ['Interpretación y presentación', 'Explicar los hallazgos y su utilidad para decidir', 15, [
+   'El alumno explica qué mide cada KPI, qué revelan los datos sobre su área y cómo el reporte apoya decisiones estratégicas concretas en su empresa.',
+   'Describe los visuales, pero la conexión con la toma de decisiones es superficial o poco fundamentada en los datos.',
+   'Se limita a leer los números, sin interpretación ni contexto empresarial.',
+   'No presenta, o no puede explicar qué significan los datos mostrados.']],
+ ],
+};
+const LV = [['Excelente', '#2E8B57', 'ex'], ['Satisfactorio', '#147A72', ''], ['Suficiente', '#D0902A', ''], ['Insuficiente', '#B9473A', '']];
+document.querySelectorAll('.rub').forEach(host => {
+  const data = RUB[host.dataset.rub], total = data.reduce((s, c) => s + c[2], 0);
+  host.innerHTML = `<div><div class="crits">${data.map((c, i) => `<button class="crit" data-i="${i}"><span class="n">${i + 1}</span><span class="t">${c[0]}</span><span class="pt">${c[2]}</span></button>`).join('')}</div>
+    <div class="total"><span>Total</span><b>${total}</b></div><div class="bar">${data.map(c => `<i style="width:${c[2]}%"></i>`).join('')}</div>
+    <p class="hint">Toque cada criterio para ver sus cuatro niveles.</p></div><div class="detail"></div>`;
+  const show = i => {
+    const [t, s, p, lv] = data[i];
+    host.querySelectorAll('.crit').forEach((b, j) => b.classList.toggle('on', j === i));
+    host.querySelectorAll('.bar i').forEach((b, j) => b.classList.toggle('on', j === i));
+    host.querySelector('.detail').innerHTML = `<div class="crit-title">${i + 1}. ${t} · ${p} pts</div><div class="crit-sub">${s}</div>
+      <div class="levels">${lv.map((x, k) => `<div class="lv ${LV[k][2]}" style="--lc:${LV[k][1]}"><h4>${LV[k][0]}</h4><div class="what">${k === 0 ? 'para obtener los ' + p + ' pts' : ''}</div><p>${x}</p></div>`).join('')}</div>`;
+  };
+  host.querySelectorAll('.crit').forEach(b => b.onclick = () => show(+b.dataset.i));
+  show(0);
+});
+
+const STATIC = location.search.includes('static');
+Reveal.initialize({width:1920, height:1080, margin:0.03, minScale:0.1, maxScale:2.0, hash:true,
+  transition:'fade', transitionSpeed:'fast', controls:true, progress:true, center:false, slideNumber:'c/t'});
+Reveal.on('ready', () => { if (STATIC) document.querySelectorAll('.fragment').forEach(f => f.classList.add('visible')); });
+</script>
+</body>
+</html>
