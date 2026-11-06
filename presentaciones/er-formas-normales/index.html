@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De la sábana al modelo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<style>
+:root{--paper:#F8F3EA;--ink:#2A2622;--muted:#6A5F55;--soft:#7A6E62;--line:#E3D9CD;--brown:#9A6B4F;--dark:#2F2A26;--gold:#E7C9A8;
+ --teal:#147A72;--teal-s:#DFF1EE;--red:#B9473A;--red-s:#F7E1DD;
+ --e1:#1E5A8A;--e1s:#E3EDF6;--e2:#147A72;--e2s:#DFF1EE;--e3:#B8860B;--e3s:#F6EBD0;--e4:#D0602A;--e4s:#F8E3D7;--e5:#7A4A9A;--e5s:#ECE2F2;
+ --r-background-color:#F8F3EA}
+html,body{margin:0;background:var(--paper)}
+.reveal-viewport{background:var(--paper)}
+.reveal{font-family:'Inter',system-ui,sans-serif;color:var(--ink)}
+.reveal .slides{text-align:left}
+.reveal .slides section{height:100%;box-sizing:border-box;padding:64px 84px;
+ background-image:radial-gradient(ellipse at 8% 0%,rgba(20,122,114,.13),transparent 45%),radial-gradient(ellipse at 100% 100%,rgba(198,140,120,.16),transparent 45%)}
+.reveal .slides section.dark{background:var(--dark);background-image:none;color:#F3EADF}
+.reveal h1{font-family:'Inter',sans-serif;font-size:60px;font-weight:800;letter-spacing:-1px;color:var(--ink);margin:0;line-height:1.08;text-transform:none}
+.reveal .dark h1{color:#F3EADF}
+.reveal p{margin:0}.reveal ul{margin:0;padding:0}
+.serif,.reveal h1.serif{font-family:'Playfair Display',Georgia,serif;font-weight:600;letter-spacing:0}
+.kicker{font-size:22px;letter-spacing:4px;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:10px}
+.dark .kicker{color:var(--gold)}
+.sub{font-size:28px;color:var(--muted);margin-top:12px!important;line-height:1.35}
+.dark .sub{color:#CDBFB0}
+.foot{position:absolute;left:84px;right:84px;bottom:30px;font-size:16px;color:#9A8E82;display:flex;justify-content:space-between;z-index:2}
+.reveal .progress{color:var(--teal);height:5px}.reveal .controls{color:var(--teal)}
+.reveal .slide-number{background:rgba(47,42,38,.75);font-family:'Inter';font-size:14px}
+.back-btn{position:fixed;top:16px;left:16px;z-index:30;padding:8px 14px;border-radius:10px;background:rgba(47,42,38,.78);color:#F3EADF;font:600 13px 'Inter';text-decoration:none;opacity:.55;transition:opacity .2s}
+.back-btn:hover{opacity:1}
+b,strong{font-weight:700}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.hl{color:var(--teal)}.hl-r{color:var(--red)}
+.card{background:#fff;border-radius:22px;padding:30px 34px;box-shadow:0 6px 22px rgba(80,60,40,.10)}
+.reveal .fragment.fade-up{transform:translate(0,30px)}
+.reveal .fragment.fade-up.visible{transform:none}
+
+/* Portada */
+.cover{display:flex;flex-direction:column;justify-content:center;height:100%}
+.cover .big{font-size:120px;line-height:1.02;font-family:'Playfair Display',serif;font-weight:600;color:#F3EADF}
+.cover .big em{color:var(--gold);font-style:italic}
+.cover .lead{font-size:34px;color:#CDBFB0;margin-top:30px!important;max-width:1250px;line-height:1.35}
+.cover .meta{font-size:22px;letter-spacing:5px;text-transform:uppercase;color:#9C8F82;margin-top:70px!important}
+.grid-bg{position:absolute;inset:0;z-index:0;opacity:.18;pointer-events:none}
+.cover>*{position:relative;z-index:1}
+
+/* Puente Florence */
+.bridge{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:56px}
+.bridge .card{font-size:30px;line-height:1.4}
+.bridge .card h3{margin:0 0 16px;font-size:22px;letter-spacing:3px;text-transform:uppercase;color:var(--brown)}
+.bridge .card.t h3{color:var(--teal)}
+.chain{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
+.chain span{font-size:24px;font-weight:700;padding:10px 20px;border-radius:30px;background:var(--teal-s);color:var(--teal)}
+
+/* Tablas tipo hoja de cálculo */
+.sheet{border-collapse:separate;border-spacing:0;font-size:21px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 22px rgba(80,60,40,.10);width:100%}
+.sheet th{background:#EFE8DD;color:var(--muted);font-weight:700;text-align:left;padding:12px 14px;font-size:18px;white-space:nowrap;transition:background .5s,color .5s}
+.sheet td{padding:10px 14px;border-top:1px solid #F0E9DF;white-space:nowrap;transition:background .5s,color .5s}
+.sheet td.n{text-align:right;font-variant-numeric:tabular-nums}
+.sheet .pk{font-family:'JetBrains Mono',monospace;font-size:19px}
+section.rep .sheet td.d,section.rep .sheet th.d{background:var(--red-s);color:var(--red)}
+section.rep .sheet td.d.typo{background:#B9473A;color:#fff;font-weight:700}
+.qs{display:flex;gap:26px;margin-top:34px}
+.qs .card{flex:1;font-size:28px;line-height:1.35;border-left:10px solid var(--teal)}
+.qs .card small{display:block;font-size:18px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:8px}
+
+/* Anomalías */
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:50px}
+.anom{background:#fff;border-radius:24px;padding:34px 34px 30px;box-shadow:0 6px 22px rgba(80,60,40,.10);border-top:12px solid var(--red);min-height:520px;box-sizing:border-box}
+.anom .ico{font-size:66px;line-height:1}
+.anom h3{font-size:36px;margin:18px 0 12px;font-weight:800}
+.anom p{font-size:27px;line-height:1.38;color:#3A342F}
+.anom .ej{margin-top:22px!important;font-size:23px;color:var(--red);font-weight:600;background:var(--red-s);padding:14px 18px;border-radius:14px}
+
+/* Frase ancla */
+.anchor{display:flex;flex-direction:column;justify-content:center;height:100%;text-align:center;align-items:center}
+.anchor .q{font-family:'Playfair Display',serif;font-size:130px;line-height:1.05;color:#F3EADF}
+.anchor .q em{color:var(--gold);font-style:italic}
+.anchor .s{font-size:34px;color:#CDBFB0;margin-top:40px!important;max-width:1300px;line-height:1.4}
+
+/* Conceptos */
+.concept{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;margin-top:44px;align-items:start}
+.concept .def{font-size:34px;line-height:1.4}
+.concept .def p+p{margin-top:26px}
+.concept .def .tag{display:inline-block;font-size:20px;letter-spacing:3px;text-transform:uppercase;font-weight:800;color:#fff;background:var(--teal);padding:6px 16px;border-radius:8px;margin-bottom:16px}
+.ents{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ent{background:#fff;border-radius:18px;box-shadow:0 6px 18px rgba(80,60,40,.10);overflow:hidden;border:3px solid var(--c)}
+.ent .t{background:var(--c);color:#fff;font-weight:800;font-size:28px;padding:12px 20px}
+.ent .a{padding:12px 20px 16px;font-size:23px;line-height:1.6;color:#3A342F}
+.ent .a .k{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c)}
+.examples{display:flex;flex-direction:column;gap:16px}
+.ex{display:flex;align-items:center;gap:22px;background:#fff;border-radius:16px;padding:18px 24px;box-shadow:0 4px 14px rgba(80,60,40,.08);font-size:27px}
+.ex b{font-family:'JetBrains Mono',monospace;color:var(--teal);font-size:24px;min-width:230px}
+.ex span{color:var(--muted)}
+.warn{margin-top:30px;background:var(--red-s);color:var(--red);border-radius:16px;padding:20px 26px;font-size:26px;line-height:1.35;font-weight:600}
+
+/* Cardinalidad */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:46px}
+.card3{background:#fff;border-radius:24px;padding:30px;box-shadow:0 6px 22px rgba(80,60,40,.10);text-align:center}
+.card3 .r{font:800 72px/1 'Inter';color:var(--teal)}
+.card3 .n{font-size:22px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:700;margin:10px 0 18px}
+.card3 svg{width:100%;height:150px}
+.card3 p{font-size:25px;line-height:1.38;color:#3A342F;text-align:left}
+.card3.bridgecard{border:4px dashed var(--teal)}
+
+/* Diagrama ER (SVG generado) */
+.er{width:100%;display:block}
+.er .box{fill:#fff;stroke:var(--c);stroke-width:3}
+.er .hd{fill:var(--c)}
+.er .tt{fill:#fff;font:800 26px 'Inter'}
+.er .at{fill:#3A342F;font:500 21px 'Inter'}
+.er .ky{font:700 16px 'JetBrains Mono';fill:var(--c)}
+.er .ln{stroke:#6A5F55;stroke-width:3;fill:none}
+.er .lb{font:800 26px 'Inter';fill:var(--ink)}
+.er .lbbg{fill:var(--paper)}
+.legend{display:flex;gap:40px;justify-content:center;font-size:22px;color:var(--muted);margin-top:6px}
+.legend b{font-family:'JetBrains Mono';color:var(--teal)}
+
+/* Sábana que se parte */
+.split-wrap{position:relative;margin-top:30px;height:760px}
+.groups{display:flex;gap:0;transition:gap .9s cubic-bezier(.2,.8,.2,1)}
+section.split .groups{gap:18px 40px;flex-wrap:wrap}
+section.split .grp .sheet{font-size:17px}
+section.split .grp .sheet td,section.split .grp .sheet th{padding:6px 12px}
+.grp{flex:none;transition:transform .9s}
+.grp .sheet{border-radius:0;box-shadow:none;font-size:19px}
+.grp:first-child .sheet{border-radius:14px 0 0 14px}.grp:last-child .sheet{border-radius:0 14px 14px 0}
+section.split .grp .sheet{border-radius:14px;box-shadow:0 8px 24px rgba(80,60,40,.14)}
+.grp .sheet th{background:var(--cs);color:var(--c)}
+.grp .gname{font-size:24px;font-weight:800;color:var(--c);height:0;opacity:0;overflow:hidden;transition:all .6s}
+section.split .grp .gname{height:40px;opacity:1}
+.grp tr.dup td{transition:all .7s}
+section.split .grp tr.dup td{padding-top:0;padding-bottom:0;font-size:0;border-top-width:0;line-height:0}
+.grp .fk{display:none}
+section.split .grp .fk{display:table-cell;background:var(--teal-s);color:var(--teal);font-family:'JetBrains Mono';font-weight:700}
+.split-note{position:absolute;left:0;right:0;bottom:0;display:flex;gap:26px}
+.split-note .card{flex:1;font-size:23px;line-height:1.3;padding:16px 24px}
+.split-note .card b{font-size:38px;display:block;color:var(--teal);font-variant-numeric:tabular-nums}
+
+/* Formas normales */
+.fn{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px}
+.fnrule{font-family:'Playfair Display',serif;font-size:54px;line-height:1.15;color:var(--teal);margin-top:14px!important}
+.fnbadge{display:inline-flex;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;background:var(--dark);color:var(--gold);font:800 44px 'Inter';float:left;margin-right:34px}
+.fnhead{overflow:hidden}
+.lab{font-size:20px;letter-spacing:3px;text-transform:uppercase;font-weight:800;margin-bottom:12px}
+.lab.bad{color:var(--red)}.lab.good{color:var(--teal)}
+.fn .sheet{font-size:22px}
+.fn .bad-cell{background:var(--red-s)!important;color:var(--red);font-weight:700}
+.fn .good-cell{background:var(--teal-s)!important;color:var(--teal);font-weight:700}
+.reveal .why{margin-top:22px;font-size:27px;line-height:1.4;color:#3A342F}
+.mini{display:flex;flex-direction:column;gap:18px}
+.ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px}
+.step{background:#fff;border-radius:24px;padding:34px;box-shadow:0 6px 22px rgba(80,60,40,.10);position:relative;border-top:12px solid var(--teal)}
+.step .num{font:800 30px 'Inter';color:var(--teal);letter-spacing:2px}
+.step h3{font-family:'Playfair Display',serif;font-size:46px;line-height:1.1;margin:14px 0 18px;font-weight:600}
+.step p{font-size:26px;line-height:1.4;color:var(--muted)}
+.step .q{margin-top:20px!important;font-size:24px;font-weight:700;color:var(--ink);background:var(--teal-s);padding:14px 18px;border-radius:14px}
+
+/* Equipos */
+.teams{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:44px}
+.team{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 6px 22px rgba(80,60,40,.10);display:flex;flex-direction:column;border-top:12px solid var(--c)}
+.team .h{padding:24px 24px 6px}
+.team .h small{font-size:18px;letter-spacing:3px;text-transform:uppercase;font-weight:800;color:var(--c)}
+.team .h h3{font-size:31px;line-height:1.15;margin:8px 0 0;font-weight:800}
+.team .who{padding:6px 24px 14px;font-size:20px;color:var(--muted);line-height:1.4}
+.team .tbls{margin-top:auto;background:var(--cs);padding:18px 24px;display:flex;flex-wrap:wrap;gap:8px}
+.team .tbls span{font-size:18px;font-weight:700;background:#fff;color:var(--c);padding:6px 12px;border-radius:20px}
+.team .tbls span.q{background:transparent;border:2px dashed var(--c)}
+.tasks{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:40px}
+.task{display:flex;gap:26px;align-items:flex-start;background:#fff;border-radius:22px;padding:28px 32px;box-shadow:0 6px 22px rgba(80,60,40,.10)}
+.task b{flex:0 0 70px;height:70px;border-radius:50%;background:var(--dark);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:34px}
+.task h3{margin:4px 0 8px;font-size:32px;font-weight:800}
+.task p{font-size:25px;line-height:1.38;color:var(--muted)}
+
+/* Cronómetro */
+.timer{display:flex;gap:60px;align-items:center;margin-top:30px}
+.ring{position:relative;width:720px;height:720px;flex:0 0 720px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.rbg{fill:none;stroke:#EDE5D9;stroke-width:38}
+.rfg{fill:none;stroke:var(--teal);stroke-width:38;stroke-linecap:round;stroke-dasharray:1759.3;stroke-dashoffset:0;transition:stroke-dashoffset .25s linear,stroke .3s}
+.ring.warn .rfg{stroke:#D0902A}.ring.over .rfg{stroke:#C0392B}
+.rin{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.t-clock{font:800 190px/1 'Inter';letter-spacing:-5px;font-variant-numeric:tabular-nums}
+.ring.warn .t-clock{color:#D0902A}.ring.over .t-clock{color:#C0392B;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.t-lbl{font-size:24px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:10px}
+.tside{flex:1}
+.tside .chk{font-size:32px;line-height:1.7}
+.tside .chk span{display:inline-block;width:44px;color:var(--teal);font-weight:800}
+.t-ctrl{display:flex;gap:14px;margin-top:44px;flex-wrap:wrap}
+.t-ctrl button{font:700 26px 'Inter';padding:18px 30px;border-radius:16px;border:none;background:#EDE5D9;color:var(--ink);cursor:pointer}
+.t-ctrl #t-play{background:var(--dark);color:var(--gold)}
+.t-ctrl .mins button{padding:18px 22px}
+.t-ctrl .mins button.on{background:var(--teal);color:#fff}
+
+/* Power BI */
+.pbi{display:grid;grid-template-columns:1.25fr .75fr;gap:46px;margin-top:30px;align-items:start}
+.pbi-frame{background:#fff;border-radius:18px;box-shadow:0 8px 28px rgba(80,60,40,.14);overflow:hidden}
+.pbi-bar{background:#F3F2F1;border-bottom:1px solid #E1DFDD;padding:12px 20px;display:flex;gap:16px;align-items:center;font:600 18px 'Inter';color:#605E5C}
+.pbi-bar i{width:14px;height:14px;border-radius:50%;background:#E1DFDD;display:inline-block}
+.pbi-bar .tab{margin-left:auto;background:#fff;border:1px solid #E1DFDD;border-radius:8px;padding:6px 14px;color:#252423}
+.pbi-frame .er .box{stroke:#C8C6C4;stroke-width:2}
+.pbi-frame .er .hd{fill:#F3F2F1}
+.pbi-frame .er .tt{fill:#252423;font-size:22px}
+.pbi-frame .er .at{font-size:18px}
+.pbi-frame .er .ln{stroke:#8A8886;stroke-width:2.5}
+.steps{display:flex;flex-direction:column;gap:16px}
+.steps>div{display:flex;gap:20px;align-items:flex-start;font-size:27px;line-height:1.35}
+.steps>div>b{flex:0 0 52px;height:52px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px}
+
+/* Estrella */
+.star{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:30px}
+.star h3{font-size:22px;letter-spacing:3px;text-transform:uppercase;margin:0 0 10px;font-weight:800}
+.star .p{font-size:27px;line-height:1.4;color:var(--muted);margin-top:14px!important}
+.vs{display:flex;gap:26px;margin-top:30px}
+.vs .card{flex:1;font-size:26px;line-height:1.4}
+.vs .card .vt{display:block;font-size:22px;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+
+/* Errores */
+.errs{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:46px}
+.err{background:#fff;border-radius:24px;padding:32px;box-shadow:0 6px 22px rgba(80,60,40,.10);border-left:12px solid var(--red)}
+.err .x{font:800 26px 'Inter';color:var(--red);letter-spacing:2px}
+.err h3{font-size:34px;line-height:1.15;margin:12px 0 16px;font-weight:800}
+.err p{font-size:25px;line-height:1.4;color:#3A342F}
+.err .fix{margin-top:18px!important;color:var(--teal);font-weight:700}
+
+/* Cierre */
+.closing{display:flex;flex-direction:column;justify-content:center;height:100%}
+.closing .l{font-family:'Playfair Display',serif;font-size:84px;line-height:1.25;color:#F3EADF}
+.closing .l em{color:var(--gold);font-style:italic}
+.closing .s{font-size:32px;color:#CDBFB0;margin-top:50px!important;max-width:1400px;line-height:1.4}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="back-btn" href="../../dashboard.html">← Volver</a>
+<div class="reveal"><div class="slides">
+
+<!-- 1 · Portada -->
+<section class="dark" id="s-cover">
+ <svg class="grid-bg" id="cover-grid" viewBox="0 0 1920 1080" preserveAspectRatio="none"></svg>
+ <div class="cover">
+  <div class="kicker">Sesión 2 · Fase 2 del DDDM</div>
+  <div class="big">De la <em>sábana</em><br>al modelo</div>
+  <p class="lead">Cómo se relaciona la información para que los datos puedan cruzarse y contestar preguntas de negocio.</p>
+  <p class="meta">Inteligencia de Negocios · MDE · UADY</p>
+ </div>
+</section>
+
+<!-- 2 · Puente con Florence -->
+<section>
+ <div class="kicker">Lo que vimos con Florence</div>
+ <h1>Nadie le entregó una sola tabla</h1>
+ <div class="bridge">
+  <div class="card"><h3>Lo que tenía</h3>Registros de hospitales, partes de regimientos, actas de defunción y listas de suministros. Seis fuentes que no coincidían y que nombraban lo mismo de formas distintas.</div>
+  <div class="card t fragment fade-up"><h3>Lo que tuvo que hacer</h3>Reconocer que eran <b>cosas distintas que se tocan</b>: un soldado ingresa a un hospital por una causa. Para responder cuántos murieron por causas prevenibles tuvo que cruzarlas.
+   <div class="chain"><span>Soldado</span><span>→ Ingreso ←</span><span>Hospital</span><span>Causa</span></div></div>
+ </div>
+ <p class="sub fragment fade-up" style="margin-top:44px!important">Hoy Power BI hace ese cruce en segundos, pero solo si los datos están bien organizados. Eso es lo que vamos a aprender.</p>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 3 · La sábana -->
+<section id="s-sabana">
+ <div class="kicker">Así llegan los datos</div>
+ <h1>La sábana de Scutari</h1>
+ <p class="sub">Un Excel, una sola tabla, todo junto. ¿Qué se repite?</p>
+ <div style="margin-top:30px" id="sabana-host"></div>
+ <div class="qs">
+  <div class="card fragment fade-up"><small>Pregunta 1</small>¿Cuántos soldados <b>distintos</b> hay aquí?</div>
+  <div class="card fragment fade-up"><small>Pregunta 2</small>Si el hospital cambia de director, ¿cuántas filas hay que corregir?</div>
+  <div class="card fragment fade-up"><small>Pregunta 3</small>¿«Disenteria» y «Disentería» son la misma causa?</div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 4 · Anomalías -->
+<section>
+ <div class="kicker">Por qué duele la sábana</div>
+ <h1>Tres problemas que todos hemos vivido</h1>
+ <div class="three">
+  <div class="anom"><div class="ico">✏️</div><h3>Al actualizar</h3><p>El mismo dato vive en cien filas. Se corrige en noventa y ocho y quedan dos versiones de la verdad.</p><p class="ej">El director del hospital aparece con dos nombres distintos.</p></div>
+  <div class="anom fragment fade-up"><div class="ico">➕</div><h3>Al dar de alta</h3><p>No se puede registrar algo hasta que ocurre otra cosa.</p><p class="ej">Un hospital nuevo no existe en la sábana hasta que ingresa su primer paciente.</p></div>
+  <div class="anom fragment fade-up"><div class="ico">🗑️</div><h3>Al borrar</h3><p>Se borra un hecho y se pierde, sin querer, información que no tenía que ver.</p><p class="ej">Si se elimina el único ingreso de Balaklava, el hospital desaparece de los registros.</p></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 5 · Frase ancla -->
+<section class="dark">
+ <div class="anchor">
+  <div class="q">Una tabla,<br><em>un tema.</em></div>
+  <p class="s">Cada dato debe vivir en un solo lugar. Lo demás se consigue <b style="color:#F3EADF">relacionando</b>.</p>
+ </div>
+</section>
+
+<!-- 6 · Entidad y atributo -->
+<section>
+ <div class="kicker">Concepto 1</div>
+ <h1>Entidades y atributos</h1>
+ <div class="concept">
+  <div class="def">
+   <span class="tag">Entidad</span>
+   <p>Una <b>cosa</b> de la que queremos guardar información: una persona, un lugar, un objeto o un evento.</p>
+   <p class="fragment fade-up"><span class="tag">Atributo</span><br>Cada <b>dato</b> que describe a la entidad: nombre, ciudad, fecha.</p>
+   <p class="fragment fade-up" style="font-size:28px;color:var(--muted)">Truco: las entidades suelen ser los <b>sustantivos</b> de la pregunta de negocio. «¿Cuántos <u>soldados</u> murieron en cada <u>hospital</u> por cada <u>causa</u>?»</p>
+  </div>
+  <div class="ents">
+   <div class="ent fragment fade-up" style="--c:var(--e1)"><div class="t">Soldado</div><div class="a">Nombre<br>Regimiento</div></div>
+   <div class="ent fragment fade-up" style="--c:var(--e3)"><div class="t">Hospital</div><div class="a">Nombre<br>Ciudad<br>Director</div></div>
+   <div class="ent fragment fade-up" style="--c:var(--e5)"><div class="t">Causa</div><div class="a">Causa<br>Tipo (prevenible o no)</div></div>
+   <div class="ent fragment fade-up" style="--c:var(--e4)"><div class="t">Ingreso <span style="font-weight:500;font-size:20px">(evento)</span></div><div class="a">Fecha<br>Desenlace</div></div>
+  </div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 7 · Llave primaria -->
+<section>
+ <div class="kicker">Concepto 2</div>
+ <h1>La llave primaria: la cédula de cada fila</h1>
+ <div class="concept">
+  <div class="def">
+   <p>Un atributo que <b>identifica sin ambigüedad</b> a cada registro. No se repite y nunca está vacío.</p>
+   <p class="fragment fade-up">¿Por qué no usar el nombre? Porque en Scutari había muchos <b>John Smith</b>, y en Yucatán muchos <b>José Pech Chan</b>.</p>
+   <div class="warn fragment fade-up">Un nombre describe. Una llave identifica.</div>
+  </div>
+  <div class="examples">
+   <div class="ex fragment fade-up"><b>NSS</b><span>al trabajador ante el IMSS</span></div>
+   <div class="ex fragment fade-up"><b>RFC</b><span>al contribuyente ante el SAT</span></div>
+   <div class="ex fragment fade-up"><b>CURP</b><span>a la persona ante el gobierno</span></div>
+   <div class="ex fragment fade-up"><b>Matrícula</b><span>al alumno ante la universidad</span></div>
+   <div class="ex fragment fade-up"><b>Núm. de póliza</b><span>al contrato ante la aseguradora</span></div>
+   <div class="ex fragment fade-up"><b>SKU</b><span>al producto en el inventario</span></div>
+  </div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 8 · Llave foránea -->
+<section>
+ <div class="kicker">Concepto 3</div>
+ <h1>La llave foránea: el puente entre tablas</h1>
+ <p class="sub">En lugar de copiar todos los datos del hospital en cada ingreso, el ingreso solo guarda <b>la llave del hospital</b>.</p>
+ <svg class="er" id="er-fk" viewBox="0 0 1750 560" style="margin-top:30px;height:560px"></svg>
+ <p class="sub fragment fade-up" style="text-align:center;margin-top:0!important">Si el director cambia, se corrige <b class="hl">una sola fila</b> en Hospitales y todos los ingresos «se enteran».</p>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 9 · Cardinalidad -->
+<section>
+ <div class="kicker">Concepto 4</div>
+ <h1>¿Cuántos de un lado, cuántos del otro?</h1>
+ <div class="cards3">
+  <div class="card3"><div class="r">1 : 1</div><div class="n">Uno a uno</div><svg viewBox="0 0 400 150" id="c11"></svg><p>Un empleado tiene <b>un</b> expediente; cada expediente es de <b>un</b> empleado. Es poco común: casi siempre se juntan en una tabla.</p></div>
+  <div class="card3 fragment fade-up"><div class="r">1 : N</div><div class="n">Uno a muchos</div><svg viewBox="0 0 400 150" id="c1n"></svg><p>Un hospital recibe <b>muchos</b> ingresos; cada ingreso es de <b>un</b> hospital. Es la relación que más usará en Power BI.</p></div>
+  <div class="card3 bridgecard fragment fade-up"><div class="r">N : M</div><div class="n">Muchos a muchos</div><svg viewBox="0 0 400 150" id="cnm"></svg><p>Un alumno cursa <b>muchas</b> materias y una materia tiene <b>muchos</b> alumnos. Se resuelve con una <b>tabla puente</b>: Inscripciones.</p></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 10 · Diagrama ER completo -->
+<section id="s-er">
+ <div class="kicker">Juntando todo</div>
+ <h1>El diagrama entidad-relación de Scutari</h1>
+ <svg class="er" id="er-full" viewBox="0 0 1750 720" style="margin-top:14px;height:720px"></svg>
+ <div class="legend"><span><b>PK</b> llave primaria</span><span><b>FK</b> llave foránea</span><span>│ uno &nbsp;·&nbsp; ⋔ muchos</span></div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 11 · Formas normales: escalera -->
+<section>
+ <div class="kicker">Formas normales</div>
+ <h1>Tres reglas para que cada dato viva en un solo lugar</h1>
+ <div class="ladder">
+  <div class="step"><div class="num">1FN</div><h3>Una celda, un dato</h3><p>Nada de listas dentro de una celda ni columnas «Teléfono 1, Teléfono 2, Teléfono 3».</p><p class="q">¿Hay celdas con comas o punto y coma?</p></div>
+  <div class="step fragment fade-up"><div class="num">2FN</div><h3>Todo depende de la llave completa</h3><p>Si la llave tiene dos partes, ningún dato puede depender solo de una de ellas.</p><p class="q">¿Este dato se repite cada vez que se repite una parte de la llave?</p></div>
+  <div class="step fragment fade-up"><div class="num">3FN</div><h3>Nada depende de otro dato</h3><p>Ningún atributo puede depender de otro atributo que no sea la llave.</p><p class="q">¿Si sé A, ya sé B? Entonces B va en la tabla de A.</p></div>
+ </div>
+ <p class="sub fragment fade-up" style="margin-top:44px!important">Cada forma normal incluye a la anterior. En la práctica, con llegar a <b>3FN</b> basta.</p>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 12 · 1FN -->
+<section>
+ <div class="fnhead"><span class="fnbadge">1FN</span><div class="kicker">Primera forma normal</div><div class="fnrule">Una celda, un dato</div></div>
+ <div class="fn">
+  <div><div class="lab bad">✗ Así viene</div>
+   <table class="sheet"><tr><th>Beneficiario</th><th>Teléfonos</th></tr>
+    <tr><td>María Pech Canul</td><td class="bad-cell">9991234567, 9997654321</td></tr>
+    <tr><td>José May Chan</td><td>9993456789</td></tr>
+    <tr><td>Ana Dzib Uc</td><td class="bad-cell">9995551122, 9998887766</td></tr></table>
+   <p class="why">¿Cómo cuento cuántos beneficiarios tienen celular registrado? ¿Cómo busco un número?</p></div>
+  <div class="fragment fade-up"><div class="lab good">✓ Así debe quedar</div>
+   <table class="sheet"><tr><th>BeneficiarioID</th><th>Teléfono</th></tr>
+    <tr><td class="pk">B0001</td><td class="good-cell">9991234567</td></tr>
+    <tr><td class="pk">B0001</td><td class="good-cell">9997654321</td></tr>
+    <tr><td class="pk">B0002</td><td>9993456789</td></tr>
+    <tr><td class="pk">B0003</td><td class="good-cell">9995551122</td></tr>
+    <tr><td class="pk">B0003</td><td class="good-cell">9998887766</td></tr></table>
+   <p class="why">Cada teléfono en su fila, en una tabla propia ligada al beneficiario por su llave.</p></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 13 · 2FN -->
+<section>
+ <div class="fnhead"><span class="fnbadge">2FN</span><div class="kicker">Segunda forma normal</div><div class="fnrule">Todo depende de la llave completa</div></div>
+ <div class="fn">
+  <div><div class="lab bad">✗ Detalle de ticket · llave = Ticket + Producto</div>
+   <table class="sheet"><tr><th>Ticket</th><th>Producto</th><th>Cant.</th><th>Fecha</th><th>Nombre del producto</th></tr>
+    <tr><td class="pk">V001</td><td class="pk">PR04</td><td class="n">2</td><td class="bad-cell">03/09</td><td class="bad-cell">Refresco cola 2 L</td></tr>
+    <tr><td class="pk">V001</td><td class="pk">PR12</td><td class="n">1</td><td class="bad-cell">03/09</td><td>Papas sal 45 g</td></tr>
+    <tr><td class="pk">V002</td><td class="pk">PR04</td><td class="n">3</td><td>04/09</td><td class="bad-cell">Refresco cola 2 L</td></tr></table>
+   <p class="why">La <b>fecha</b> depende solo del ticket; el <b>nombre</b> depende solo del producto. Por eso se repiten.</p></div>
+  <div class="fragment fade-up"><div class="lab good">✓ Tres tablas</div>
+   <div class="mini">
+    <table class="sheet"><tr><th>Ticket</th><th>Fecha</th></tr><tr><td class="pk">V001</td><td class="good-cell">03/09</td></tr><tr><td class="pk">V002</td><td>04/09</td></tr></table>
+    <table class="sheet"><tr><th>Producto</th><th>Nombre</th></tr><tr><td class="pk">PR04</td><td class="good-cell">Refresco cola 2 L</td></tr><tr><td class="pk">PR12</td><td>Papas sal 45 g</td></tr></table>
+    <table class="sheet"><tr><th>Ticket</th><th>Producto</th><th>Cant.</th></tr><tr><td class="pk">V001</td><td class="pk">PR04</td><td class="n">2</td></tr><tr><td class="pk">V001</td><td class="pk">PR12</td><td class="n">1</td></tr><tr><td class="pk">V002</td><td class="pk">PR04</td><td class="n">3</td></tr></table>
+   </div></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 14 · 3FN -->
+<section>
+ <div class="fnhead"><span class="fnbadge">3FN</span><div class="kicker">Tercera forma normal</div><div class="fnrule">Nada depende de otro dato que no sea la llave</div></div>
+ <div class="fn">
+  <div><div class="lab bad">✗ Beneficiarios</div>
+   <table class="sheet"><tr><th>ID</th><th>Beneficiario</th><th>Municipio</th><th>Región</th></tr>
+    <tr><td class="pk">B0001</td><td>María Pech</td><td>Mérida</td><td class="bad-cell">Noroeste</td></tr>
+    <tr><td class="pk">B0002</td><td>José May</td><td>Tizimín</td><td class="bad-cell">Oriente</td></tr>
+    <tr><td class="pk">B0003</td><td>Ana Dzib</td><td>Mérida</td><td class="bad-cell">Noroeste</td></tr></table>
+   <p class="why">La región no depende de la persona: depende del <b>municipio</b>. Si sé el municipio, ya sé la región.</p></div>
+  <div class="fragment fade-up"><div class="lab good">✓ Municipios aparte</div>
+   <div class="mini">
+    <table class="sheet"><tr><th>ID</th><th>Beneficiario</th><th>MunicipioID</th></tr><tr><td class="pk">B0001</td><td>María Pech</td><td class="pk good-cell">M01</td></tr><tr><td class="pk">B0002</td><td>José May</td><td class="pk good-cell">M06</td></tr><tr><td class="pk">B0003</td><td>Ana Dzib</td><td class="pk good-cell">M01</td></tr></table>
+    <table class="sheet"><tr><th>MunicipioID</th><th>Municipio</th><th>Región</th></tr><tr><td class="pk">M01</td><td>Mérida</td><td>Noroeste</td></tr><tr><td class="pk">M06</td><td>Tizimín</td><td>Oriente</td></tr></table>
+   </div>
+   <p class="why">Bonus: ahora se puede dar de alta un municipio <b>aunque todavía no tenga beneficiarios</b>.</p></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 15 · La sábana se parte -->
+<section id="s-split">
+ <div class="kicker">Antes y después</div>
+ <h1>La sábana de Scutari, normalizada</h1>
+ <div class="split-wrap">
+  <div class="groups" id="split-groups"></div>
+  <div class="split-note">
+   <div class="card fragment fade-up"><b id="n-dir">220 → 4</b>veces que se escribe el nombre de un director</div>
+   <div class="card fragment fade-up"><b>1 tabla → 4</b>tablas: Soldados, Hospitales, Causas e Ingresos</div>
+   <div class="card fragment fade-up"><b>0</b>dudas sobre si «Disenteria» y «Disentería» son lo mismo</div>
+  </div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 16 · Casos por equipo -->
+<section>
+ <div class="kicker">Actividad por equipos</div>
+ <h1>Cinco sábanas, cinco organizaciones</h1>
+ <div class="teams">
+  <div class="team" style="--c:var(--e1);--cs:var(--e1s)"><div class="h"><small>Equipo 1</small><h3>Programa estatal de apoyos sociales</h3></div><div class="who">Carlos · Monika · Claudia C.</div><div class="tbls"><span class="q">237 entregas</span><span class="q">11 columnas</span></div></div>
+  <div class="team" style="--c:var(--e2);--cs:var(--e2s)"><div class="h"><small>Equipo 2</small><h3>Auditoría de cuotas obrero-patronales</h3></div><div class="who">Yesli · Freddy · Claudia R.</div><div class="tbls"><span class="q">249 cuotas</span><span class="q">12 columnas</span></div></div>
+  <div class="team" style="--c:var(--e3);--cs:var(--e3s)"><div class="h"><small>Equipo 3</small><h3>Cadena de tiendas de conveniencia</h3></div><div class="who">Alejandra · David</div><div class="tbls"><span class="q">223 renglones</span><span class="q">13 columnas</span></div></div>
+  <div class="team" style="--c:var(--e4);--cs:var(--e4s)"><div class="h"><small>Equipo 4</small><h3>Aseguradora: pólizas y campañas</h3></div><div class="who">Mónica · Patricia · Didier</div><div class="tbls"><span class="q">125 pólizas</span><span class="q">13 columnas</span></div></div>
+  <div class="team" style="--c:var(--e5);--cs:var(--e5s)"><div class="h"><small>Equipo 5</small><h3>Universidad: inscripciones y deserción</h3></div><div class="who">Eric · Lázaro · Nora</div><div class="tbls"><span class="q">228 inscripciones</span><span class="q">12 columnas</span></div></div>
+ </div>
+ <p class="sub" style="margin-top:40px!important">Cada sábana esconde de cuatro a cinco tablas, varias violaciones a las formas normales y al menos un error de captura.</p>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 17 · Tareas -->
+<section>
+ <div class="kicker">Actividad por equipos</div>
+ <h1>Lo que entrega cada equipo</h1>
+ <div class="tasks">
+  <div class="task"><b>1</b><div><h3>Encontrar los temas</h3><p>¿Qué entidades se esconden en la sábana? Agrupen las columnas por tema.</p></div></div>
+  <div class="task"><b>2</b><div><h3>Elegir las llaves</h3><p>Una llave primaria por tabla. ¿Qué columna identifica cada fila sin ambigüedad?</p></div></div>
+  <div class="task"><b>3</b><div><h3>Dibujar el diagrama</h3><p>Entidades, atributos, llaves y relaciones con su cardinalidad (1 y muchos), en el rotafolio.</p></div></div>
+  <div class="task"><b>4</b><div><h3>Señalar las violaciones</h3><p>Un ejemplo de 1FN, uno de 2FN o 3FN, y el error de captura que delata la redundancia.</p></div></div>
+ </div>
+ <p class="sub" style="margin-top:40px!important">Después, 5 minutos por equipo para explicar su modelo al grupo.</p>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 18 · Cronómetro -->
+<section id="s-timer">
+ <div class="kicker">Actividad por equipos</div>
+ <h1>Manos a la obra</h1>
+ <div class="timer">
+  <div class="ring" id="ring"><svg viewBox="0 0 620 620"><circle cx="310" cy="310" r="280" class="rbg"/><circle cx="310" cy="310" r="280" class="rfg" id="t-ring"/></svg>
+   <div class="rin"><div id="t-clock" class="t-clock">30:00</div><div class="t-lbl">minutos</div></div></div>
+  <div class="tside">
+   <div class="chk"><span>1</span>Temas<br><span>2</span>Llaves<br><span>3</span>Diagrama<br><span>4</span>Violaciones</div>
+   <div class="t-ctrl"><button id="t-play">▶ Iniciar</button><button id="t-reset">↺</button>
+    <span class="mins"><button data-m="20">20</button> <button data-m="30" class="on">30</button> <button data-m="40">40</button></span></div>
+  </div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 19 · Power BI -->
+<section>
+ <div class="kicker">De vuelta a Power BI</div>
+ <h1>La vista de Modelo es un diagrama ER</h1>
+ <div class="pbi">
+  <div class="pbi-frame"><div class="pbi-bar"><i></i><i></i><i></i>Scutari.pbix<span class="tab">Vista de modelo</span></div>
+   <svg class="er" id="er-pbi" viewBox="0 0 1100 640" style="height:640px"></svg></div>
+  <div class="steps">
+   <div class="fragment fade-up"><b>1</b><span>Obtener datos → Excel → marcar las cuatro tablas del Modelo.</span></div>
+   <div class="fragment fade-up"><b>2</b><span>Abrir la vista de Modelo y revisar las relaciones que Power BI detectó solo.</span></div>
+   <div class="fragment fade-up"><b>3</b><span>Arrastrar la llave de la tabla de hechos sobre la llave de la dimensión: <span class="mono hl">HospitalID → HospitalID</span>.</span></div>
+   <div class="fragment fade-up"><b>4</b><span>Revisar la cardinalidad: <b>muchos a uno (*:1)</b>.</span></div>
+   <div class="fragment fade-up"><b>5</b><span>Una matriz: Hospital en filas, Tipo de causa en columnas, conteo de Ingresos.</span></div>
+  </div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 20 · Estrella -->
+<section>
+ <div class="kicker">Un matiz importante</div>
+ <h1>Para analizar, el modelo estrella</h1>
+ <div class="star">
+  <div><svg class="er" id="er-star" viewBox="0 0 900 620" style="height:620px"></svg></div>
+  <div>
+   <h3 class="hl">Hechos al centro</h3><p class="p" style="margin-top:0!important">Los eventos que se cuentan y se suman: ingresos, ventas, entregas, pólizas. Muchas filas, casi puras llaves y números.</p>
+   <h3 style="color:var(--e3);margin-top:34px">Dimensiones alrededor</h3><p class="p" style="margin-top:0!important">Las preguntas «por qué»: por hospital, por causa, por región, por mes. Pocas filas, mucho texto.</p>
+   <div class="vs fragment fade-up">
+    <div class="card"><span class="vt hl">3FN</span>Para <b>capturar</b> sin errores: cada dato en un solo lugar.</div>
+    <div class="card"><span class="vt" style="color:var(--e3)">Estrella</span>Para <b>analizar</b> rápido: se juntan catálogos pequeños (municipio y región) en una sola dimensión.</div>
+   </div>
+  </div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 21 · Errores -->
+<section>
+ <div class="kicker">Al relacionar en Power BI</div>
+ <h1>Los tres errores que más cuestan</h1>
+ <div class="errs">
+  <div class="err"><div class="x">ERROR 1</div><h3>Relacionar por nombre</h3><p>«Mérida» y «Merida» no se unen. La relación deja filas huérfanas y los totales no cuadran.</p><p class="fix">→ Relacionar siempre por la llave (ID).</p></div>
+  <div class="err fragment fade-up"><div class="x">ERROR 2</div><h3>Sumar lo que se repite</h3><p>El presupuesto de una campaña copiado en cada póliza: al sumarlo se multiplica por el número de pólizas.</p><p class="fix">→ El presupuesto vive en la tabla de campañas.</p></div>
+  <div class="err fragment fade-up"><div class="x">ERROR 3</div><h3>Muchos a muchos directo</h3><p>Unir alumnos con programas sin tabla puente duplica conteos y confunde los filtros.</p><p class="fix">→ Siempre a través de la tabla puente.</p></div>
+ </div>
+ <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
+</section>
+
+<!-- 22 · Cierre -->
+<section class="dark">
+ <div class="closing">
+  <div class="kicker">Para llevar</div>
+  <div class="l">Una tabla, <em>un tema.</em><br>Cada dato, <em>en un solo lugar.</em><br>La llave es <em>la cédula.</em></div>
+  <p class="s">Florence pasó meses cruzando registros a mano. Hoy la relación se dibuja en un minuto, pero alguien tiene que entender qué se está relacionando. Ese alguien es quien dirige.</p>
+ </div>
+</section>
+
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+const C = {e1:'#1E5A8A', e2:'#147A72', e3:'#B8860B', e4:'#D0602A', e5:'#7A4A9A', gray:'#8A8886'};
+
+/* ═════ Diagramas ER ═════
+   ents: {id, x, y, w, title, color, attrs:[[nombre, 'PK'|'FK'|'']], frag}
+   rels: {from: hija (lado muchos), to: padre (lado uno), style: 'crow'|'pbi', frag}  */
+function drawER(svg, ents, rels, opt = {}){
+  const HD = opt.hd || 52, RH = opt.rh || 36, box = {};
+  const gL = el('g', {}, svg), gE = el('g', {}, svg);
+  ents.forEach(e => {
+    const w = e.w || 300, h = HD + RH * e.attrs.length + 14;
+    box[e.id] = {x: e.x, y: e.y, w, h};
+    const g = el('g', {style: `--c:${e.color}`}, gE);
+    if (e.frag) g.setAttribute('class', 'fragment' + (e.idx != null ? '' : ''));
+    if (e.idx != null) g.setAttribute('data-fragment-index', e.idx);
+    el('rect', {x: e.x, y: e.y, width: w, height: h, rx: 14, class: 'box'}, g);
+    el('path', {d: `M${e.x} ${e.y + HD}V${e.y + 14}q0-14 14-14h${w - 28}q14 0 14 14V${e.y + HD}Z`, class: 'hd'}, g);
+    const t = el('text', {x: e.x + 20, y: e.y + HD / 2 + 9, class: 'tt'}, g); t.textContent = e.title;
+    e.attrs.forEach(([n, k], i) => {
+      const y = e.y + HD + 10 + RH * i + RH / 2 + 7;
+      if (k){ const kt = el('text', {x: e.x + 20, y, class: 'ky'}, g); kt.textContent = k; }
+      const at = el('text', {x: e.x + (k ? 66 : 20), y, class: 'at'}, g); at.textContent = n;
+      if (k === 'PK') at.setAttribute('font-weight', '700');
+    });
+  });
+  rels.forEach(r => {
+    const a = box[r.from], b = box[r.to];
+    const acx = a.x + a.w / 2, acy = a.y + a.h / 2, bcx = b.x + b.w / 2, bcy = b.y + b.h / 2;
+    let p1, p2, dir;
+    const horiz = r.side ? r.side === 'h' : Math.abs(acx - bcx) > (a.w + b.w) / 2;
+    if (horiz){
+      const sgn = bcx > acx ? 1 : -1;
+      const yy = r.y != null ? r.y : Math.max(Math.max(a.y, b.y) + 30, Math.min(a.y + a.h, b.y + b.h) - 30, (acy + bcy) / 2 > 0 ? 0 : 0);
+      const y1 = r.y1 != null ? r.y1 : (r.y != null ? r.y : Math.min(Math.max(bcy, a.y + 40), a.y + a.h - 20));
+      const y2 = r.y2 != null ? r.y2 : (r.y != null ? r.y : Math.min(Math.max(acy, b.y + 40), b.y + b.h - 20));
+      p1 = [sgn > 0 ? a.x + a.w : a.x, y1]; p2 = [sgn > 0 ? b.x : b.x + b.w, y2]; dir = [sgn, 0];
+    } else {
+      const sgn = bcy > acy ? 1 : -1;
+      const x1 = r.x1 != null ? r.x1 : Math.min(Math.max(bcx, a.x + 40), a.x + a.w - 40);
+      const x2 = r.x2 != null ? r.x2 : Math.min(Math.max(acx, b.x + 40), b.x + b.w - 40);
+      p1 = [x1, sgn > 0 ? a.y + a.h : a.y]; p2 = [x2, sgn > 0 ? b.y : b.y + b.h]; dir = [0, sgn];
+    }
+    const g = el('g', {}, gL);
+    if (r.frag) g.setAttribute('class', 'fragment');
+    if (r.idx != null) g.setAttribute('data-fragment-index', r.idx);
+    let d;
+    if (dir[0]) { const mx = (p1[0] + p2[0]) / 2; d = `M${p1[0]} ${p1[1]}H${mx}V${p2[1]}H${p2[0]}`; }
+    else { const my = (p1[1] + p2[1]) / 2; d = `M${p1[0]} ${p1[1]}V${my}H${p2[0]}V${p2[1]}`; }
+    el('path', {d, class: 'ln'}, g);
+    const L = 26;
+    if (r.style === 'pbi'){
+      lab(g, p1[0] + dir[0] * 22, p1[1] + dir[1] * 24, '*'); lab(g, p2[0] - dir[0] * 22, p2[1] - dir[1] * 24, '1');
+    } else {
+      // pata de gallo en el lado "muchos" (p1), barra doble en el lado "uno" (p2)
+      const [dx, dy] = dir, bx = p1[0] + dx * L, by = p1[1] + dy * L;
+      const px = -dy, py = dx; // perpendicular
+      el('path', {d: `M${bx} ${by}L${p1[0] + px * 14} ${p1[1] + py * 14}M${bx} ${by}L${p1[0]} ${p1[1]}M${bx} ${by}L${p1[0] - px * 14} ${p1[1] - py * 14}`, class: 'ln'}, g);
+      const cx = p2[0] - dx * 14, cy = p2[1] - dy * 14, cx2 = p2[0] - dx * 24, cy2 = p2[1] - dy * 24;
+      el('path', {d: `M${cx + px * 13} ${cy + py * 13}L${cx - px * 13} ${cy - py * 13}M${cx2 + px * 13} ${cy2 + py * 13}L${cx2 - px * 13} ${cy2 - py * 13}`, class: 'ln'}, g);
+    }
+  });
+  function lab(g, x, y, t){ el('circle', {cx: x, cy: y - 8, r: 17, class: 'lbbg'}, g); const tx = el('text', {x, y: y + 2, class: 'lb', 'text-anchor': 'middle'}, g); tx.textContent = t; }
+}
+
+/* Diagrama: llave foránea */
+drawER(document.getElementById('er-fk'), [
+  {id:'i', x:60, y:40, w:430, title:'Ingresos', color:C.e4, attrs:[['IngresoID','PK'],['Fecha',''],['Desenlace',''],['HospitalID','FK']]},
+  {id:'h', x:1240, y:40, w:450, title:'Hospitales', color:C.e3, attrs:[['HospitalID','PK'],['Hospital',''],['Ciudad',''],['Director','']]}
+], [{from:'i', to:'h', style:'crow', y1: 40+52+10+36*3+18, y2: 40+52+10+18}]);
+(function(){ // ejemplo de valores debajo
+  const s = document.getElementById('er-fk');
+  const rows = [['I0001','12/11/1854','Falleció','H1'],['I0002','12/11/1854','Recuperado','H1'],['I0003','13/11/1854','Falleció','H3']];
+  const hs = [['H1','Hospital de los Cuarteles','Scutari','Dr. John Hall'],['H3','Hospital de Koulali','Koulali','Dr. Robert Lawson']];
+  const g = el('g', {class:'fragment'}, s);
+  rows.forEach((r, i) => { const t = el('text', {x:60, y:340 + i * 46, class:'at', 'font-size':'22'}, g);
+    t.innerHTML = `<tspan font-family="JetBrains Mono" font-weight="700">${r[0]}</tspan>  ·  ${r[1]}  ·  ${r[2]}  ·  <tspan fill="#147A72" font-weight="800" font-family="JetBrains Mono">${r[3]}</tspan>`; });
+  hs.forEach((r, i) => { const t = el('text', {x:1240, y:340 + i * 46, class:'at', 'font-size':'22'}, g);
+    t.innerHTML = `<tspan fill="#147A72" font-weight="800" font-family="JetBrains Mono">${r[0]}</tspan>  ·  ${r[1]}  ·  ${r[3]}`; });
+  const a = el('path', {d:'M520 395 C 800 470, 950 470, 1220 365', fill:'none', stroke:'#147A72', 'stroke-width':4, 'stroke-dasharray':'10 8', 'marker-end':'url(#arr)'}, g);
+  const defs = el('defs', {}, s); const m = el('marker', {id:'arr', viewBox:'0 0 10 10', refX:8, refY:5, markerWidth:8, markerHeight:8, orient:'auto'}, defs);
+  el('path', {d:'M0 0L10 5L0 10z', fill:'#147A72'}, m);
+  const lt = el('text', {x:870, y:500, 'text-anchor':'middle', class:'at', fill:'#147A72', 'font-weight':'700'}, g); lt.textContent = '«H1» apunta a una sola fila de Hospitales';
+})();
+
+/* Cardinalidad: mini dibujos */
+function mini(id, l, r, lines){
+  const s = document.getElementById(id);
+  const L = l.map((t, i) => [70, 30 + i * (90 / Math.max(1, l.length - 1 || 1))]), R = r.map((t, i) => [330, 30 + i * (90 / Math.max(1, r.length - 1 || 1))]);
+  if (l.length === 1) L[0][1] = 75; if (r.length === 1) R[0][1] = 75;
+  lines.forEach(([a, b]) => el('line', {x1: L[a][0] + 26, y1: L[a][1], x2: R[b][0] - 26, y2: R[b][1], stroke:'#147A72', 'stroke-width':3}, s));
+  L.forEach((p, i) => { el('circle', {cx:p[0], cy:p[1], r:24, fill:'#1E5A8A'}, s); const t = el('text', {x:p[0], y:p[1] + 8, 'text-anchor':'middle', fill:'#fff', 'font-size':'22', 'font-weight':'700'}, s); t.textContent = l[i]; });
+  R.forEach((p, i) => { el('circle', {cx:p[0], cy:p[1], r:24, fill:'#B8860B'}, s); const t = el('text', {x:p[0], y:p[1] + 8, 'text-anchor':'middle', fill:'#fff', 'font-size':'22', 'font-weight':'700'}, s); t.textContent = r[i]; });
+}
+mini('c11', ['E'], ['X'], [[0, 0]]);
+mini('c1n', ['H'], ['1', '2', '3', '4'], [[0, 0], [0, 1], [0, 2], [0, 3]]);
+mini('cnm', ['A', 'B', 'C'], ['M1', 'M2', 'M3'], [[0, 0], [0, 1], [1, 1], [1, 2], [2, 0], [2, 2]]);
+
+/* ER completo */
+drawER(document.getElementById('er-full'), [
+  {id:'s', x:40, y:40, w:340, title:'Soldados', color:C.e1, attrs:[['SoldadoID','PK'],['Soldado',''],['Regimiento','']]},
+  {id:'i', x:700, y:200, w:360, title:'Ingresos', color:C.e4, attrs:[['IngresoID','PK'],['SoldadoID','FK'],['HospitalID','FK'],['CausaID','FK'],['FechaIngreso',''],['Desenlace','']], frag:true, idx:1},
+  {id:'h', x:1370, y:40, w:340, title:'Hospitales', color:C.e3, attrs:[['HospitalID','PK'],['Hospital',''],['Ciudad',''],['Director','']]},
+  {id:'c', x:1370, y:430, w:340, title:'Causas', color:C.e5, attrs:[['CausaID','PK'],['Causa',''],['TipoCausa','']]},
+], [
+  {from:'i', to:'s', style:'crow', frag:true, idx:2, y1:200+52+10+36+18, y2:40+52+10+18},
+  {from:'i', to:'h', style:'crow', frag:true, idx:3, y1:200+52+10+72+18, y2:40+52+10+18},
+  {from:'i', to:'c', style:'crow', frag:true, idx:4, y1:200+52+10+108+18, y2:430+52+10+18},
+]);
+
+/* Power BI */
+drawER(document.getElementById('er-pbi'), [
+  {id:'s', x:30, y:30, w:270, title:'Soldados', color:C.gray, attrs:[['SoldadoID',''],['Soldado',''],['Regimiento','']]},
+  {id:'i', x:420, y:200, w:270, title:'Ingresos', color:C.gray, attrs:[['IngresoID',''],['SoldadoID',''],['HospitalID',''],['CausaID',''],['FechaIngreso',''],['Desenlace','']]},
+  {id:'h', x:800, y:30, w:270, title:'Hospitales', color:C.gray, attrs:[['HospitalID',''],['Hospital',''],['Ciudad',''],['Director','']]},
+  {id:'c', x:800, y:410, w:270, title:'Causas', color:C.gray, attrs:[['CausaID',''],['Causa',''],['TipoCausa','']]},
+], [
+  {from:'i', to:'s', style:'pbi', y1:300, y2:120},
+  {from:'i', to:'h', style:'pbi', y1:340, y2:120},
+  {from:'i', to:'c', style:'pbi', y1:380, y2:500},
+], {hd:46, rh:32});
+
+/* Estrella */
+drawER(document.getElementById('er-star'), [
+  {id:'f', x:310, y:210, w:280, title:'Ingresos', color:C.e2, attrs:[['SoldadoID','FK'],['HospitalID','FK'],['CausaID','FK'],['Fecha','FK']]},
+  {id:'s', x:10, y:20, w:230, title:'Soldado', color:C.e3, attrs:[['SoldadoID','PK'],['Regimiento','']]},
+  {id:'h', x:660, y:20, w:230, title:'Hospital', color:C.e3, attrs:[['HospitalID','PK'],['Ciudad','']]},
+  {id:'c', x:10, y:440, w:230, title:'Causa', color:C.e3, attrs:[['CausaID','PK'],['Tipo','']]},
+  {id:'d', x:660, y:440, w:230, title:'Calendario', color:C.e3, attrs:[['Fecha','PK'],['Mes · Año','']]},
+], [
+  {from:'f', to:'s', style:'pbi', side:'h', y1:300, y2:120}, {from:'f', to:'h', style:'pbi', side:'h', y1:300, y2:120},
+  {from:'f', to:'c', style:'pbi', side:'h', y1:370, y2:530}, {from:'f', to:'d', style:'pbi', side:'h', y1:370, y2:530},
+], {hd:48, rh:34});
+
+/* ═════ Sábana (lámina 3) y sábana que se parte (lámina 15) ═════ */
+const S = [ // Folio, Fecha, Soldado, Regimiento, Hospital, Ciudad, Director, Causa, Tipo, Desenlace
+ ['I0001','12/11/1854','John Smith','33.º de Infantería','H. de los Cuarteles','Scutari','Dr. John Hall','Disentería','Prevenible','Falleció'],
+ ['I0002','12/11/1854','William Brown','Brigada Ligera','H. de los Cuarteles','Scutari','Dr. John Hall','Herida de bala','Combate','Recuperado'],
+ ['I0003','13/11/1854','John Smith','Guardia de Granaderos','H. de Koulali','Koulali','Dr. Robert Lawson','Cólera','Prevenible','Falleció'],
+ ['I0004','15/11/1854','James Wilson','33.º de Infantería','H. de los Cuarteles','Scutari','Dr. John Hall','Disenteria','Prevenible','Recuperado'],
+ ['I0005','15/11/1854','William Brown','Brigada Ligera','H. General','Scutari','Dr. Duncan Menzies','Fiebre','Prevenible','Evacuado'],
+ ['I0006','18/11/1854','George Taylor','Highlanders 93','H. de los Cuarteles','Scutari','Dr. J. Hall','Cólera','Prevenible','Falleció'],
+ ['I0007','19/11/1854','James Wilson','33.º de Infantería','H. de Koulali','Koulali','Dr. Robert Lawson','Fiebre','Prevenible','Recuperado'],
+];
+const COLS = ['Folio','Fecha','Soldado','Regimiento','Hospital','Ciudad','Director','Causa','Tipo','Desenlace'];
+// celdas repetidas (para marcar) y erratas
+const DUPCOL = {3:1, 4:1, 5:1, 6:1, 8:1};
+const TYPO = {'3,7':1, '5,6':1};
+(function(){
+  let h = '<table class="sheet"><tr>' + COLS.map(c => `<th>${c}</th>`).join('') + '</tr>';
+  const seen = {};
+  S.forEach((r, i) => { h += '<tr>' + r.map((v, j) => {
+    const k = j + '|' + v; const dup = DUPCOL[j] && seen[k]; seen[k] = 1;
+    const cls = [dup ? 'd' : '', TYPO[i + ',' + j] ? 'd typo' : ''].join(' ');
+    return `<td class="${cls}${j === 0 ? ' pk' : ''}">${v}</td>`; }).join('') + '</tr>'; });
+  document.getElementById('sabana-host').innerHTML = h + '</table>';
+})();
+(function(){
+  // grupos: [nombre, color, colorSuave, columnas, columnaID, prefijo de ID]
+  const G = [
+    ['Ingresos', '#D0602A', '#F8E3D7', [0, 1, 9], null],
+    ['Soldados', '#1E5A8A', '#E3EDF6', [2, 3], 'SoldadoID'],
+    ['Hospitales', '#B8860B', '#F6EBD0', [4, 5, 6], 'HospitalID'],
+    ['Causas', '#7A4A9A', '#ECE2F2', [7, 8], 'CausaID'],
+  ];
+  // llave por grupo: el texto normalizado de sus columnas
+  const norm = v => v.replace('Disenteria', 'Disentería').replace('Dr. J. Hall', 'Dr. John Hall');
+  const keyOf = (r, cols) => cols.map(c => norm(r[c])).join('|');
+  const ids = G.map(() => ({}));
+  const host = document.getElementById('split-groups');
+  G.forEach(([name, c, cs, cols, idName], gi) => {
+    let h = `<div class="grp" style="--c:${c};--cs:${cs}"><div class="gname">${name}</div><table class="sheet"><tr>`;
+    if (idName) h += `<th class="fk">${idName}</th>`;
+    if (gi === 0) G.slice(1).forEach(g => h += `<th class="fk">${g[4]}</th>`);
+    h += cols.map(j => `<th>${COLS[j]}</th>`).join('') + '</tr>';
+    const seen = {};
+    S.forEach(r => {
+      const k = keyOf(r, cols);
+      const dup = gi > 0 && seen[k]; seen[k] = 1;
+      if (!ids[gi][k]) ids[gi][k] = name[0] + (Object.keys(ids[gi]).length + 1);
+      h += `<tr class="${dup ? 'dup' : ''}">`;
+      if (idName) h += `<td class="fk">${ids[gi][k]}</td>`;
+      if (gi === 0) G.slice(1).forEach((g, gj) => { const kk = keyOf(r, g[3]); ids[gj + 1][kk] = ids[gj + 1][kk] || g[0][0] + (Object.keys(ids[gj + 1]).length + 1); h += `<td class="fk">${ids[gj + 1][kk]}</td>`; });
+      h += cols.map(j => `<td>${gi > 0 ? norm(r[j]) : r[j]}</td>`).join('') + '</tr>';
+    });
+    host.insertAdjacentHTML('beforeend', h + '</table></div>');
+  });
+})();
+
+/* Portada: retícula de "tablas" */
+(function(){
+  const s = document.getElementById('cover-grid');
+  for (let i = 0; i < 9; i++){ const x = 1100 + (i % 3) * 270, y = 120 + Math.floor(i / 3) * 290;
+    el('rect', {x, y, width:220, height:200, rx:14, fill:'none', stroke:'#E7C9A8', 'stroke-width':3}, s);
+    el('rect', {x, y, width:220, height:44, rx:14, fill:'#E7C9A8'}, s);
+    for (let k = 1; k < 4; k++) el('line', {x1:x + 20, y1:y + 44 + k * 38, x2:x + 200, y2:y + 44 + k * 38, stroke:'#E7C9A8', 'stroke-width':2}, s); }
+  [[1320,220,1370,220],[1590,220,1640,220],[1210,320,1210,410],[1480,610,1480,700],[1750,320,1750,410]].forEach(([a,b,c,d]) => el('line', {x1:a, y1:b, x2:c, y2:d, stroke:'#E7C9A8', 'stroke-width':4}, s));
+})();
+
+/* ═════ Cronómetro ═════ */
+(function(){
+  const CIRC = 1759.3; let total = 1800, left = 1800, running = false, last = 0, timer = null;
+  const $ = id => document.getElementById(id), ring = $('ring');
+  function beep(){ try{ const a = new (window.AudioContext||window.webkitAudioContext)(), o = a.createOscillator(), g = a.createGain();
+    o.frequency.value = 880; o.connect(g); g.connect(a.destination); g.gain.setValueAtTime(.2, a.currentTime); o.start(); o.stop(a.currentTime + .7);}catch(e){} }
+  function draw(){ const c = Math.ceil(left), a = Math.abs(c);
+    $('t-clock').textContent = (c < 0 ? '−' : '') + String(Math.floor(a / 60)).padStart(2, '0') + ':' + String(a % 60).padStart(2, '0');
+    ring.classList.toggle('warn', left <= 300 && left > 0); ring.classList.toggle('over', left <= 0);
+    $('t-ring').style.strokeDashoffset = CIRC * (1 - Math.max(0, left) / total);
+    $('t-play').textContent = running ? '⏸ Pausar' : '▶ Iniciar'; }
+  function tick(){ const now = performance.now(), prev = left; left -= (now - last) / 1000; last = now; if (prev > 0 && left <= 0) beep(); draw(); }
+  $('t-play').onclick = () => { running = !running; if (running){ last = performance.now(); timer = setInterval(tick, 200); } else clearInterval(timer); draw(); };
+  $('t-reset').onclick = () => { clearInterval(timer); running = false; left = total; draw(); };
+  document.querySelectorAll('.mins button').forEach(b => b.onclick = () => { document.querySelectorAll('.mins button').forEach(x => x.classList.toggle('on', x === b)); total = left = +b.dataset.m * 60; clearInterval(timer); running = false; draw(); });
+  draw();
+})();
+
+const STATIC = location.search.includes('static');
+Reveal.initialize({width:1920, height:1080, margin:0.03, minScale:0.1, maxScale:2.0, hash:true,
+  transition:'fade', transitionSpeed:'fast', controls:true, progress:true, center:false, slideNumber:'c/t'});
+
+/* Estados que dependen del fragmento visible */
+function syncStates(){
+  const sab = document.getElementById('s-sabana');
+  sab.classList.toggle('rep', STATIC || sab.querySelectorAll('.fragment.visible').length > 0);
+  const sp = document.getElementById('s-split');
+  sp.classList.toggle('split', STATIC || sp.querySelectorAll('.fragment.visible').length > 0);
+}
+Reveal.on('fragmentshown', syncStates); Reveal.on('fragmenthidden', syncStates); Reveal.on('slidechanged', syncStates);
+Reveal.on('ready', () => { if (STATIC) document.querySelectorAll('.fragment').forEach(f => f.classList.add('visible')); syncStates(); });
+</script>
+</body>
+</html>
