@@ -197,7 +197,8 @@ section.split .grp .fk{display:table-cell;background:var(--teal-s);color:var(--t
 .t-ctrl .mins button{padding:18px 22px}
 .t-ctrl .mins button.on{background:var(--teal);color:#fff}
 
-/* Power BI */
+/* Herramienta de BI */
+.reveal .tools{margin-top:10px;font-size:23px;line-height:1.4;color:var(--muted);font-style:italic;border-top:2px solid var(--line);padding-top:16px}
 .pbi{display:grid;grid-template-columns:1.25fr .75fr;gap:46px;margin-top:30px;align-items:start}
 .pbi-frame{background:#fff;border-radius:18px;box-shadow:0 8px 28px rgba(80,60,40,.14);overflow:hidden}
 .pbi-bar{background:#F3F2F1;border-bottom:1px solid #E1DFDD;padding:12px 20px;display:flex;gap:16px;align-items:center;font:600 18px 'Inter';color:#605E5C}
@@ -285,7 +286,7 @@ section.split .grp .fk{display:table-cell;background:var(--teal-s);color:var(--t
   <div class="card t fragment fade-up"><h3>Lo que tuvo que hacer</h3>Reconocer que eran <b>cosas distintas que se tocan</b>: un soldado ingresa a un hospital por una causa. Para responder cuántos murieron por causas prevenibles tuvo que cruzarlas.
    <div class="chain"><span>Soldado</span><span>→ Ingreso ←</span><span>Hospital</span><span>Causa</span></div></div>
  </div>
- <p class="sub fragment fade-up" style="margin-top:44px!important">Hoy Power BI hace ese cruce en segundos, pero solo si los datos están bien organizados. Eso es lo que vamos a aprender.</p>
+ <p class="sub fragment fade-up" style="margin-top:44px!important">Hoy cualquier herramienta de BI hace ese cruce en segundos, pero solo si los datos están bien organizados. Eso es lo que vamos a aprender.</p>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
 </section>
 
@@ -361,7 +362,7 @@ section.split .grp .fk{display:table-cell;background:var(--teal-s);color:var(--t
    <div class="rs fragment fade-up"><b>1</b><div><h3>Un idioma común</h3><p>El director y el programador leen el mismo diagrama. Se discute el negocio, no el código.</p></div></div>
    <div class="rs fragment fade-up"><b>2</b><div><h3>Hace visibles las reglas del negocio</h3><p>¿Un alumno puede estar en dos programas? ¿Una póliza tiene un solo agente? Dibujar la relación obliga a contestarlo.</p></div></div>
    <div class="rs fragment fade-up"><b>3</b><div><h3>Una sola versión de la verdad</h3><p>Cada dato vive en un lugar y se consulta desde todos los demás. Se acaban las cifras que no cuadran entre áreas.</p></div></div>
-   <div class="rs fragment fade-up"><b>4</b><div><h3>Es lo que Power BI necesita</h3><p>La vista de Modelo es un diagrama entidad-relación. Si el modelo está mal, el tablero se ve bien y miente.</p></div></div>
+   <div class="rs fragment fade-up"><b>4</b><div><h3>Es lo que toda herramienta de BI necesita</h3><p>Detrás de cada tablero hay un diagrama entidad-relación. Si el modelo está mal, el tablero se ve bien y miente.</p></div></div>
   </div>
  </div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
@@ -426,7 +427,7 @@ section.split .grp .fk{display:table-cell;background:var(--teal-s);color:var(--t
  <h1>¿Cuántos de un lado, cuántos del otro?</h1>
  <div class="cards3">
   <div class="card3"><div class="r">1 : 1</div><div class="n">Uno a uno</div><svg viewBox="0 0 400 150" id="c11"></svg><p>Un empleado tiene <b>un</b> expediente; cada expediente es de <b>un</b> empleado. Es poco común: casi siempre se juntan en una tabla.</p></div>
-  <div class="card3 fragment fade-up"><div class="r">1 : N</div><div class="n">Uno a muchos</div><svg viewBox="0 0 400 150" id="c1n"></svg><p>Un hospital recibe <b>muchos</b> ingresos; cada ingreso es de <b>un</b> hospital. Es la relación que más usará en Power BI.</p></div>
+  <div class="card3 fragment fade-up"><div class="r">1 : N</div><div class="n">Uno a muchos</div><svg viewBox="0 0 400 150" id="c1n"></svg><p>Un hospital recibe <b>muchos</b> ingresos; cada ingreso es de <b>un</b> hospital. Es la relación que más usará en cualquier tablero.</p></div>
   <div class="card3 bridgecard fragment fade-up"><div class="r">N : M</div><div class="n">Muchos a muchos</div><svg viewBox="0 0 400 150" id="cnm"></svg><p>Un alumno cursa <b>muchas</b> materias y una materia tiene <b>muchos</b> alumnos. Se resuelve con una <b>tabla puente</b>: Inscripciones.</p></div>
  </div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
@@ -578,17 +579,18 @@ section.split .grp .fk{display:table-cell;background:var(--teal-s);color:var(--t
 
 <!-- 19 · Power BI -->
 <section>
- <div class="kicker">De vuelta a Power BI</div>
- <h1>La vista de Modelo es un diagrama ER</h1>
+ <div class="kicker">De vuelta a la herramienta de BI</div>
+ <h1>Toda herramienta de BI dibuja un diagrama ER</h1>
  <div class="pbi">
-  <div class="pbi-frame"><div class="pbi-bar"><i></i><i></i><i></i>Scutari.pbix<span class="tab">Vista de modelo</span></div>
+  <div class="pbi-frame"><div class="pbi-bar"><i></i><i></i><i></i>Scutari<span class="tab">Modelo de datos</span></div>
    <svg class="er" id="er-pbi" viewBox="0 0 1100 640" style="height:640px"></svg></div>
   <div class="steps">
-   <div class="fragment fade-up"><b>1</b><span>Obtener datos → Excel → marcar las cuatro tablas del Modelo.</span></div>
-   <div class="fragment fade-up"><b>2</b><span>Abrir la vista de Modelo y revisar las relaciones que Power BI detectó solo.</span></div>
-   <div class="fragment fade-up"><b>3</b><span>Arrastrar la llave de la tabla de hechos sobre la llave de la dimensión: <span class="mono hl">HospitalID → HospitalID</span>.</span></div>
-   <div class="fragment fade-up"><b>4</b><span>Revisar la cardinalidad: <b>muchos a uno (*:1)</b>.</span></div>
-   <div class="fragment fade-up"><b>5</b><span>Una matriz: Hospital en filas, Tipo de causa en columnas, conteo de Ingresos.</span></div>
+   <div class="fragment fade-up"><b>1</b><span>Conectar la herramienta al archivo Modelo.xlsx y cargar las cuatro tablas.</span></div>
+   <div class="fragment fade-up"><b>2</b><span>Abrir la vista de modelo o de relaciones. Cada herramienta le da otro nombre, pero es el mismo diagrama.</span></div>
+   <div class="fragment fade-up"><b>3</b><span>Unir la llave foránea de la tabla de hechos con la llave primaria del catálogo: <span class="mono hl">HospitalID → HospitalID</span>.</span></div>
+   <div class="fragment fade-up"><b>4</b><span>Revisar la cardinalidad: <b>muchos a uno</b>.</span></div>
+   <div class="fragment fade-up"><b>5</b><span>Preguntar: muertes por hospital y por tipo de causa.</span></div>
+   <p class="tools fragment fade-up">Power BI, Tableau, Qlik, Looker Studio o Excel: cambia el nombre del botón, no la idea.</p>
   </div>
  </div>
  <div class="foot"><span>Inteligencia de Negocios · MDE · UADY</span><span>Mtro. Marco A. Cervera Piña</span></div>
@@ -614,7 +616,7 @@ section.split .grp .fk{display:table-cell;background:var(--teal-s);color:var(--t
 
 <!-- 21 · Errores -->
 <section>
- <div class="kicker">Al relacionar en Power BI</div>
+ <div class="kicker">Al relacionar tablas en un tablero</div>
  <h1>Los tres errores que más cuestan</h1>
  <div class="errs">
   <div class="err"><div class="x">ERROR 1</div><h3>Relacionar por nombre</h3><p>«Mérida» y «Merida» no se unen. La relación deja filas huérfanas y los totales no cuadran.</p><p class="fix">→ Relacionar siempre por la llave (ID).</p></div>
